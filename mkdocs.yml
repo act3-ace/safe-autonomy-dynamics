@@ -105,8 +105,8 @@ handlers:
       - https://docs.python-requests.org/en/master/objects.inv
 
 nav:
-#  - "Introduction": index.md
-#  - "Install": install.md
+  - "Introduction": index.md
+  - "Install": install.md
 ##  - "Changelog": change_log.md
 ##  - "License": license.md
 #  - "API":
