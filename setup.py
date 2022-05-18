@@ -23,6 +23,7 @@ def parse_requirements(filename: str):
     lineiter = (line.strip() for line in open(filename))
     return [line for line in lineiter if line and not line.startswith("#")]
 
+
 reqs = parse_requirements("requirements.txt")
 
 
@@ -55,14 +56,14 @@ if __name__ == '__main__':
     docs_require = parse_requirements("mkdocs-requirements.txt")
 
     setup(
-        name="safe-autonomy-sims",
+        name="safe-autonomy-dynamics",
         author="ACT3",
-        description="ACT3 Safe Autonomy RL Benchmarks",
+        description="ACT3 Safe Autonomy Dynamics Models",
 
         long_description=Path("README.md").read_text(),
         long_description_content_type="text/markdown",
 
-        url="https://github.com/act3-ace/rta/safe-autonomy-sims",
+        url="https://github.com/act3-ace/rta/safe-autonomy-dynamics",
 
         license="",
 
@@ -77,7 +78,7 @@ if __name__ == '__main__':
         # add in package_data
         include_package_data=True,
         package_data={
-            'saferl': ['*.yml', '*.yaml']
+            'safe_autonomy_dynamics': ['*.yml', '*.yaml']
         },
 
         packages=find_packages(),
