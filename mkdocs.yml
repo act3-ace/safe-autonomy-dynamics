@@ -109,6 +109,10 @@ nav:
   - "Install": install.md
 ##  - "Changelog": change_log.md
 ##  - "License": license.md
-#  - "API":
-##      - reference/SUMMARY.md  # API "Table of Contents"
+  - "API":
+      - api/index.md
+      - reference/base_models.md
+      - reference/cwh.md
+      - reference/dubins.md
+#      - reference/SUMMARY.md  # API "Table of Contents"
 
