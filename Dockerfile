@@ -36,7 +36,8 @@ ENV SA_DYNAMICS_ROOT=/opt/libsa-dynamics
 WORKDIR /opt/project
 COPY . .
 
-RUN python setup.py bdist_wheel -d ${SA_DYNAMICS_ROOT}
+RUN python setup.py bdist_wheel -d ${SA_DYNAMICS_ROOT} && \
+    python -m pip install --no-cache-dir .
 
 
 #########################################################################################
