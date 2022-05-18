@@ -24,10 +24,7 @@ echo "deb-src ${APT_MIRROR_URL} stable main contrib non-free" >> /etc/apt/source
 # install SA dynamics requirements
 # hadolint ignore=DL3013
 RUN python --version && \
-    python -m pip install --no-cache-dir --upgrade pip && \
-    python -m pip install --no-cache-dir \
-        /opt/libcorl/corl-${CORL_TAG}-py3-none-any.whl && \
-    python -m pip install --no-cache-dir run-time-assurance/
+    python -m pip install --no-cache-dir --upgrade pip
 
 #########################################################################################
 # build stage packages the source code
