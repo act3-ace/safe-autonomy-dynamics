@@ -111,8 +111,8 @@ nav:
 ##  - "License": license.md
   - "API":
       - api/index.md
-      - reference/base_models.md
-      - reference/cwh.md
-      - reference/dubins.md
+      - "base models": reference/base_models.md
+      - "cwh": reference/cwh.md
+      - "dubins": reference/dubins.md
 #      - reference/SUMMARY.md  # API "Table of Contents"
 
