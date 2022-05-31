@@ -322,9 +322,16 @@ class BaseODESolverDynamics(BaseDynamics):
         return next_state, state_dot
 
 
-class BaseLinearODESolverDynamics(BaseODESolverDynamics):
+class BaseVectorizedODESolverDynamics(BaseODESolverDynamics):
     """
-    State transition implementation for generic Linear Ordinary Differential Equation dynamics models of the form dx/dt = Ax+Bu.
+    State transition implementation for generic Ordinary Differential Equation dynamics models of the form
+        dx/dt = f(x)x + g(x)u.
+
+    At Each point in the numerical integration processes, f(x) and g(x) are computed at the integration point to find
+        A = f(x)
+        B = g(x)
+        To construct the matrix product dx/dt = Ax + Bu
+
     Computes next state through numerical integration of differential equation.
 
     Parameters
@@ -334,36 +341,62 @@ class BaseLinearODESolverDynamics(BaseODESolverDynamics):
     """
 
     def __init__(self, **kwargs):
-        self.A, self.B = self._gen_dynamics_matrices()
         super().__init__(**kwargs)
 
     @abc.abstractmethod
-    def _gen_dynamics_matrices(self) -> Tuple[np.ndarray, np.ndarray]:
+    def _gen_dynamics_matrices(self, state) -> Tuple[np.ndarray, np.ndarray]:
         """
-        Initializes the linear ODE matrices A, B.
-
-        Returns
-        -------
-        Tuple[np.ndarray, np.ndarray]
-            Tuple of the system's dynamics matrices A, B.
-        """
-        raise NotImplementedError
-
-    def _update_dynamics_matrices(self, state):
-        """
-        Updates the linear ODE matrices A, B with current system state before computing derivative.
+        Computes the vectorized ODE matrices A, B with current system state before computing derivative.
         Allows non-linear dynamics models to be linearized at each numerical integration interval.
-        Directly modifies self.A, self.B.
-
-        Default implementation is a no-op.
+        Directly modifies self.A,
 
         Parameters
         ----------
         state : np.ndarray
             Current state vector of the system.
+
+        Returns
+        -------
+        np.ndarray
+            A of dx/dt = Ax + Bu
+        np.ndarray
+            B of dx/dt = Ax + Bu
         """
+        raise NotImplementedError
 
     def _compute_state_dot(self, t: float, state: np.ndarray, control: np.ndarray):
-        self._update_dynamics_matrices(state)
-        state_dot = np.matmul(self.A, state) + np.matmul(self.B, control)
+        A, B = self._gen_dynamics_matrices(state)
+        state_dot = np.matmul(A, state) + np.matmul(B, control)
         return state_dot
+
+
+class BaseLinearODESolverDynamics(BaseVectorizedODESolverDynamics):
+    """
+    State transition implementation for generic Linear Ordinary Differential Equation dynamics models of the form dx/dt = Ax+Bu.
+    Computes next state through numerical integration of differential equation.
+
+    Parameters
+    ----------
+    A : np.ndarray
+        State transition matrix. A of dx/dt = Ax + Bu. Should be dimension len(n) x len(n)
+    B : npndarray
+        Control input matrix. B of dx/dt = Ax + Bu. Should be dimension len(n) x len(u)
+    kwargs
+        Additional keyword arguments passed to parent BaseVectorizedODESolverDynamics constructor.
+    """
+
+    def __init__(self, A: np.ndarray, B: np.ndarray, **kwargs):
+        assert len(A.shape) == 2, f"A must be square matrix. Instead got shape {A.shape}"
+        assert len(B.shape) == 2, f"A must be square matrix. Instead got shape {B.shape}"
+        assert A.shape[0] == A.shape[1], f"A must be a square matrix, not dimension {A.shape}"
+        assert A.shape[1] == B.shape[0], (
+            "number of columns in A must match the number of rows in B." + f" However, got shapes {A.shape} for A and {B.shape} for B"
+        )
+
+        self.A = np.copy(A)
+        self.B = np.copy(B)
+
+        super().__init__(**kwargs)
+
+    def _gen_dynamics_matrices(self, state) -> Tuple[np.ndarray, np.ndarray]:
+        return self.A, self.B
