@@ -7,7 +7,6 @@ include:
 variables:
   KANIKO_ARGS: --cache=true --skip-unused-stages --registry-mirror=$KANIKO_REGISTRY_MIRROR --cache-repo=$CI_REGISTRY_IMAGE/cache --build-arg IMAGE_REPO_BASE=$IMAGE_REPO_BASE --build-arg PIP_INDEX_URL=$PIP_INDEX_URL --build-arg APT_MIRROR_URL=$APT_MIRROR_URL
   APT_MIRROR_URL: http://10.1.3.235:3142/ftp.debian.org/debian
-  DO_RELEASE: "true"
   KANIKO_REGISTRY_MIRROR: reg-cache.act3-ace.ai
   PIP_INDEX_URL: https://pypi.org/simple/
   SRC_DIR: safe_autonomy_dynamics
@@ -15,6 +14,8 @@ variables:
 
 mkdocs:
   allow_failure: true
+  variables:
+    ENABLE_PDF_EXPORT: 1
   script:
     - pip install -r mkdocs-requirements.txt
     - python -m mkdocs build
@@ -39,6 +40,9 @@ pages:
     # if htmlcov exits (made by the pytest-cov) then move the directory htmlcov to inside directory public (eg. public/htmlcov)
     - if [ -e htmlcov ]; then mv htmlcov/ public/; fi
 
+semantic release:
+  variables:
+    DO_RELEASE: "true"
 
 # image specifications
 build image:
