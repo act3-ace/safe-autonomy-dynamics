@@ -17,7 +17,6 @@ mkdocs:
   image:
     name: $CI_REGISTRY_IMAGE/cicd:ci-$CI_PIPELINE_ID
     entrypoint: ['']
-  allow_failure: true
   variables:
     ENABLE_PDF_EXPORT: 1
   script:
