@@ -12,8 +12,8 @@ limitation or restriction. See accompanying README and LICENSE for details.
 This module implements 1d, 2d, and 3d point mass integrators.
 """
 
-from typing import Tuple
 import abc
+from typing import Tuple
 
 import numpy as np
 
@@ -125,9 +125,7 @@ class Integrator1d(BaseIntegrator):
         return False
 
     def _build_state(self):
-        state = np.array(
-            [self.config.x, self.config.xdot], dtype=np.float32
-        )
+        state = np.array([self.config.x, self.config.xdot], dtype=np.float32)
 
         return state
 
@@ -219,9 +217,7 @@ class Integrator2d(BaseIntegrator):
         return False
 
     def _build_state(self):
-        state = np.array(
-            [self.config.x, self.config.y] + [self.config.xdot, self.config.ydot], dtype=np.float32
-        )
+        state = np.array([self.config.x, self.config.y] + [self.config.xdot, self.config.ydot], dtype=np.float32)
 
         return state
 
