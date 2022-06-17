@@ -181,6 +181,90 @@ class BaseEntity(abc.ABC):
         raise NotImplementedError
 
 
+class BaseRotationEntity(BaseEntity):
+    """
+    Base implementation of a base entity with rotational states within the saferl sim.
+
+    Parameters
+    ----------
+    dynamics : BaseDynamics
+        Dynamics object for computing state transitions
+    control_default: np.ndarray
+        Default control vector used when no action is passed to step(). Typically 0 or neutral for each actuator.
+    control_min: np.ndarray
+        Optional minimum allowable control vector values. Control vectors that exceed this limit are clipped.
+    control_max: np.ndarray
+        Optional maximum allowable control vector values. Control vectors that exceed this limit are clipped.
+    control_map: dict
+        Optional mapping for actuator names to their indices in the state vector.
+        Allows dictionary action inputs in step().
+    """
+
+    def __init__(self, dynamics, control_default, control_min=-np.inf, control_max=np.inf, control_map=None, **kwargs):
+        super().__init__(
+            dynamics=dynamics,
+            control_default=control_default,
+            control_min=control_min,
+            control_max=control_max,
+            control_map=control_map,
+            **kwargs
+        )
+
+    @property
+    @abc.abstractmethod
+    def q1(self):
+        """get first element of quaternion"""
+        raise NotImplementedError
+
+    @property
+    @abc.abstractmethod
+    def q2(self):
+        """get second element of quaternion"""
+        raise NotImplementedError
+
+    @property
+    @abc.abstractmethod
+    def q3(self):
+        """get third element of quaternion"""
+        raise NotImplementedError
+
+    @property
+    @abc.abstractmethod
+    def q4(self):
+        """get fourth element of quaternion (scalar)"""
+        raise NotImplementedError
+
+    @property
+    @abc.abstractmethod
+    def quaternion(self) -> np.ndarray:
+        """get 4d quaternion"""
+        raise NotImplementedError
+
+    @property
+    @abc.abstractmethod
+    def wx(self):
+        """get wx"""
+        raise NotImplementedError
+
+    @property
+    @abc.abstractmethod
+    def wy(self):
+        """get wy"""
+        raise NotImplementedError
+
+    @property
+    @abc.abstractmethod
+    def wz(self):
+        """get wz"""
+        raise NotImplementedError
+
+    @property
+    @abc.abstractmethod
+    def angular_velocity(self) -> np.ndarray:
+        """get 3d angular velocity vector"""
+        raise NotImplementedError
+
+
 class BaseDynamics(abc.ABC):
     """
     State transition implementation for a physics dynamics model. Used by entities to compute their next state when

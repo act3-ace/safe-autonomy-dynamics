@@ -47,12 +47,22 @@ def solve_cwh_traj(x0, u, t):
 #    sol = solve_ivp(cwh_derivative, (0, t), state0, args=(u,))
     y = sol.y
     position_str = ', '.join([str(x) for x in y[0:2, -1]])
-    theta_str = ', '.join([str(x) for x in y[2:3, -1]])
+    # wrap the theta angle about 0
+    wrapped_theta = wrap_angle(y[2],0)
+    theta_str = ', '.join([str(wrapped_theta[len(wrapped_theta)-1])])
     velocity_str = ', '.join([str(x) for x in y[3:5, -1]])
     theta_dot_str = ', '.join([str(x) for x in y[5:, -1]])
 
     print(f"- position == `[{position_str}]`\n- theta == `[{theta_str}]`")
     print(f"- velocity == `[{velocity_str}]`\n- thetadot == `[{theta_dot_str}]`")
+
+def wrap_angle(angle,center):
+    """
+    Wrap the angle about the requested center point
+    input in radians
+    """
+    wrapped_angle = ((angle + np.pi) % (2 * np.pi)) - np.pi + center
+    return wrapped_angle
 
 def cwh_closed_form_solution(position, velocity, t):
     r_0 = np.array(position, dtype=float)
