@@ -131,34 +131,32 @@ class Integrator1d(BaseIntegrator):
 
     @property
     def x(self):
+        """get x"""
         return self._state[0]
-
-    @x.setter
-    def x(self, value):
-        self._state[0] = value
 
     @property
     def y(self):
+        """get y"""
         return 0
 
     @property
     def z(self):
+        """get z"""
         return 0
 
     @property
     def x_dot(self):
+        """get x_dot, the velocity component in the x direction"""
         return self._state[1]
-
-    @x_dot.setter
-    def x_dot(self, value):
-        self._state[1] = value
 
     @property
     def y_dot(self):
+        """get y_dot, the velocity component in the y direction"""
         return 0
 
     @property
     def z_dot(self):
+        """get z_dot, the velocity component in the z direction"""
         return 0
 
     @property
@@ -223,42 +221,32 @@ class Integrator2d(BaseIntegrator):
 
     @property
     def x(self):
+        """get x"""
         return self._state[0]
-
-    @x.setter
-    def x(self, value):
-        self._state[0] = value
 
     @property
     def y(self):
+        """get y"""
         return self._state[1]
-
-    @y.setter
-    def y(self, value):
-        self._state[1] = value
 
     @property
     def z(self):
+        """get z"""
         return 0
 
     @property
     def x_dot(self):
+        """get x_dot, the velocity component in the x direction"""
         return self._state[2]
-
-    @x_dot.setter
-    def x_dot(self, value):
-        self._state[2] = value
 
     @property
     def y_dot(self):
+        """get y_dot, the velocity component in the y direction"""
         return self._state[3]
-
-    @y_dot.setter
-    def y_dot(self, value):
-        self._state[3] = value
 
     @property
     def z_dot(self):
+        """get z_dot, the velocity component in the z direction"""
         return 0
 
     @property
@@ -330,51 +318,33 @@ class Integrator3d(BaseIntegrator):
 
     @property
     def x(self):
+        """get x"""
         return self._state[0]
-
-    @x.setter
-    def x(self, value):
-        self._state[0] = value
 
     @property
     def y(self):
+        """get y"""
         return self._state[1]
-
-    @y.setter
-    def y(self, value):
-        self._state[1] = value
 
     @property
     def z(self):
+        """get z"""
         return self._state[2]
-
-    @z.setter
-    def z(self, value):
-        self._state[2] = value
 
     @property
     def x_dot(self):
+        """get x_dot, the velocity component in the x direction"""
         return self._state[3]
-
-    @x_dot.setter
-    def x_dot(self, value):
-        self._state[3] = value
 
     @property
     def y_dot(self):
+        """get y_dot, the velocity component in the y direction"""
         return self._state[4]
-
-    @y_dot.setter
-    def y_dot(self, value):
-        self._state[4] = value
 
     @property
     def z_dot(self):
+        """get z_dot, the velocity component in the z direction"""
         return self._state[5]
-
-    @z_dot.setter
-    def z_dot(self, value):
-        self._state[5] = value
 
     @property
     def position(self):
