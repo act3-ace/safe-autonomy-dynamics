@@ -106,7 +106,7 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics.
     kwargs:
-        Additional keyword arguments passed to parent class BaseCWHRotatoinSpacecraft.
+        Additional keyword arguments passed to parent class BaseRotationEntity.
     """
 
     def __init__(
@@ -212,7 +212,7 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
 
     @property
     def q4(self):
-        """get first element of quaternion (scalar)"""
+        """get fourth element of quaternion (scalar)"""
         return self.quaternion[3]
 
     @property
@@ -302,7 +302,7 @@ class CWHRotation2dDynamics(BaseODESolverDynamics):
     n: float
         Orbital mean motion of Hill's reference frame's circular orbit in rad/s, by default 0.001027
     kwargs:
-        Additional keyword arguments passed to parent class BaseLinearODESolverDynamics constructor
+        Additional keyword arguments passed to parent class BaseODESolverDynamics constructor
     """
 
     def __init__(
