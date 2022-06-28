@@ -100,7 +100,7 @@ class Integrator1d(BaseIntegrator):
     Parameters
     ----------
     m: float
-        Mass of spacecraft in kilograms, by default 1.
+        Mass of integrator, by default 1.
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics.
     kwargs:
@@ -189,7 +189,7 @@ class Integrator2d(BaseIntegrator):
     Parameters
     ----------
     m: float
-        Mass of spacecraft in kilograms, by default 1.
+        Mass of integrator, by default 1.
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics.
     kwargs:
@@ -283,7 +283,7 @@ class Integrator3d(BaseIntegrator):
     Parameters
     ----------
     m: float
-        Mass of spacecraft in kilograms, by default 1.
+        Mass of integrator, by default 1.
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics.
     kwargs:
@@ -383,7 +383,7 @@ def generate_dynamics_matrices(m: float, mode: str = '1d') -> Tuple[np.ndarray, 
     Parameters
     ----------
     m : float
-        mass in kg of object
+        mass of object
     mode : str, optional
         dimensionality of dynamics matrices. '1d', '2d', or '3d', by default '1d'
 
