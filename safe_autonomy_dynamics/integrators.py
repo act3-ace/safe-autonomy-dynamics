@@ -20,6 +20,7 @@ import numpy as np
 from safe_autonomy_dynamics.base_models import BaseEntity, BaseEntityValidator, BaseLinearODESolverDynamics
 
 M_DEFAULT = 1
+DAMPING_DEFAULT = 0
 
 
 class BaseIntegratorValidator(BaseEntityValidator):
@@ -107,8 +108,8 @@ class Integrator1d(BaseIntegrator):
         Additional keyword arguments passed to BaseIntegrator.
     """
 
-    def __init__(self, m=M_DEFAULT, integration_method="RK45", **kwargs):
-        dynamics = IntegratorDynamics(mode='1d', m=m, integration_method=integration_method)
+    def __init__(self, m=M_DEFAULT, damping=DAMPING_DEFAULT, integration_method="RK45", **kwargs):
+        dynamics = IntegratorDynamics(m=m, damping=damping, mode='1d', integration_method=integration_method)
         self._state = np.array([])
 
         control_map = {
@@ -196,8 +197,8 @@ class Integrator2d(BaseIntegrator):
         Additional keyword arguments passed to BaseIntegrator.
     """
 
-    def __init__(self, m=M_DEFAULT, integration_method="RK45", **kwargs):
-        dynamics = IntegratorDynamics(mode='2d', m=m, integration_method=integration_method)
+    def __init__(self, m=M_DEFAULT, damping=DAMPING_DEFAULT, integration_method="RK45", **kwargs):
+        dynamics = IntegratorDynamics(m=m, damping=damping, mode='2d', integration_method=integration_method)
         self._state = np.array([])
 
         control_map = {
@@ -290,8 +291,8 @@ class Integrator3d(BaseIntegrator):
         Additional keyword arguments passed to BaseIntegrator.
     """
 
-    def __init__(self, m=M_DEFAULT, integration_method="RK45", **kwargs):
-        dynamics = IntegratorDynamics(mode='3d', m=m, integration_method=integration_method)
+    def __init__(self, m=M_DEFAULT, damping=DAMPING_DEFAULT, integration_method="RK45", **kwargs):
+        dynamics = IntegratorDynamics(m=m, damping=damping, mode='3d', integration_method=integration_method)
         self._state = np.array([])
 
         control_map = {
@@ -365,25 +366,32 @@ class IntegratorDynamics(BaseLinearODESolverDynamics):
     ----------
     m: float
         Mass of object, by default 1
+    damping: float
+        linear velocity damper. Default is zero
+    mode : str, optional
+        dimensionality of dynamics matrices. '1d', '2d', or '3d', by default '1d'
     kwargs:
         Additional keyword arguments passed to parent class BaseLinearODESolverDynamics constructor
     """
 
-    def __init__(self, mode='1d', m=M_DEFAULT, **kwargs):
-        self.m = m  # kg
+    def __init__(self, m=M_DEFAULT, damping=DAMPING_DEFAULT, mode='1d', **kwargs):
+        self.m = m
+        self.damping = damping
 
-        A, B = generate_dynamics_matrices(self.m, mode)
+        A, B = generate_dynamics_matrices(self.m, self.damping, mode)
 
         super().__init__(A=A, B=B, **kwargs)
 
 
-def generate_dynamics_matrices(m: float, mode: str = '1d') -> Tuple[np.ndarray, np.ndarray]:
+def generate_dynamics_matrices(m: float, damping: float = 0, mode: str = '1d') -> Tuple[np.ndarray, np.ndarray]:
     """Generates A and B Matrices for linearized dynamics of dx/dt = Ax + Bu
 
     Parameters
     ----------
     m : float
         mass of object
+    damping : float, optional
+        linear velocity damper. Default is zero
     mode : str, optional
         dimensionality of dynamics matrices. '1d', '2d', or '3d', by default '1d'
 
@@ -398,7 +406,7 @@ def generate_dynamics_matrices(m: float, mode: str = '1d') -> Tuple[np.ndarray, 
     if mode == '1d':
         A = np.array([
             [0, 1],
-            [0, 0],
+            [0, -damping],
         ], dtype=np.float64)
 
         B = np.array([
@@ -409,8 +417,8 @@ def generate_dynamics_matrices(m: float, mode: str = '1d') -> Tuple[np.ndarray, 
         A = np.array([
             [0, 0, 1, 0],
             [0, 0, 0, 1],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
+            [0, 0, -damping, 0],
+            [0, 0, 0, -damping],
         ], dtype=np.float64)
 
         B = np.array([
@@ -425,9 +433,9 @@ def generate_dynamics_matrices(m: float, mode: str = '1d') -> Tuple[np.ndarray, 
                 [0, 0, 0, 1, 0, 0],
                 [0, 0, 0, 0, 1, 0],
                 [0, 0, 0, 0, 0, 1],
-                [0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, -damping, 0, 0],
+                [0, 0, 0, 0, -damping, 0],
+                [0, 0, 0, 0, 0, -damping],
             ],
             dtype=np.float64
         )
