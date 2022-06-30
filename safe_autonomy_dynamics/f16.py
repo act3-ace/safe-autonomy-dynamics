@@ -224,7 +224,6 @@ class AeroBenchF16(BaseEntity):
         return self.state[AeroBenchF16StateVariables.ROLL_RATE]
 
     @property
-    @abc.abstractmethod
     def heading(self):
         """
         Get heading, the angle of velocity relative to the x-axis projected to the xy-plane.
@@ -242,7 +241,6 @@ class AeroBenchF16(BaseEntity):
         return self.pitch - self.attack
 
     @property
-    @abc.abstractmethod
     def acceleration(self):
         """Get 3d acceleration vector"""
         acc = self.state_dot[AeroBenchF16StateVariables.V]
