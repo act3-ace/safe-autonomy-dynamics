@@ -180,7 +180,7 @@ class AeroBenchF16(BaseEntity):
 
     @property
     def position(self):
-        position = [self.x, self.y, self.z]
+        position = np.array([self.x, self.y, self.z])
         return position
 
     @property
@@ -300,4 +300,7 @@ class AeroBenchF16Dynamics(BaseODESolverDynamics):
 
         # compute state derivative
         xd = controlled_f16(t, s, control, self.llc, self.model_str, self.v2_integrators)[0]
+
+        # remove integral error states from state vector
+        xd = xd[:-self.llc.get_num_integrators()]
         return xd
