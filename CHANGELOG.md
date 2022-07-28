@@ -1,3 +1,11 @@
+## [0.0.1003](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.0.1002...v0.0.1003) (2022-07-28)
+
+
+### Bug Fixes
+
+* change to 0.1.0 ([d2bbe5f](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/d2bbe5f7107f9a1f99fd3f5d243aff775a33275e))
+* change version to the realistic number ([ed61a77](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/ed61a77f9bf4802c94bf03cd9e29f56c6dc79a10))
+
 ## [0.0.1002](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.0.1001...v0.0.1002) (2022-07-18)
 
 
