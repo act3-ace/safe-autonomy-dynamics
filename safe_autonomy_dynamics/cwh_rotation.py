@@ -15,6 +15,7 @@ motion and rotation about the z axis. 3D scenario is pending.
 """
 
 import math
+from typing import Union
 
 import numpy as np
 from scipy.spatial.transform import Rotation
@@ -39,17 +40,17 @@ class CWHRotation2dSpacecraftValidator(BaseEntityValidator):
     Parameters
     ----------
     x: [float]
-       Length 1, x position value
+       Length 1, x position value. m
     y: [float]
-       Length 1, y position value
+       Length 1, y position value. m
     theta: [float]
-       Length 1, rotation angle value
+       Length 1, rotation angle value. rad
     x_dot: [float]
-       Length 1, x velocity value
+       Length 1, x velocity value. m/s
     y_dot: [float]
-       Length 1, y velocity value
+       Length 1, y velocity value. m/s
     theta_dot: [float]
-       Length 1, rotation rate value
+       Length 1, rotation rate value. rad/s
 
     Raises
     ------
@@ -123,7 +124,6 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
         **kwargs
     ):
         self._state = np.array([])
-        angle_wrap_centers = np.array([None, None, 0, None, None, None], dtype=np.float32)
 
         self.m = m  # kg
         self.inertia = inertia  # kg*m^2
@@ -137,22 +137,17 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
         ang_acc_limit = min(self.ang_acc_limit, self.inertia_wheel * self.acc_limit_wheel / self.inertia)
         ang_vel_limit = min(self.ang_vel_limit, self.inertia_wheel * self.vel_limit_wheel / self.inertia)
 
-        control_default = np.zeros((2, ))
-        control_min = np.array([-1, -ang_acc_limit * self.inertia])
-        control_max = np.array([1, ang_acc_limit * self.inertia])
+        control_default = np.zeros((3, ))
+        control_min = np.array([-1, -1, -ang_acc_limit * self.inertia])
+        control_max = np.array([1, 1, ang_acc_limit * self.inertia])
         control_map = {
             'thrust_x': 0,
-            'moment_z': 1,
+            'thrust_y': 1,
+            'moment_z': 2,
         }
         """ Create instance of dynamics class """
         dynamics = CWHRotation2dDynamics(
-            m=m,
-            inertia=inertia,
-            ang_acc_limit=ang_acc_limit,
-            ang_vel_limit=ang_vel_limit,
-            n=n,
-            angle_wrap_centers=angle_wrap_centers,
-            integration_method=integration_method
+            m=m, inertia=inertia, ang_acc_limit=ang_acc_limit, ang_vel_limit=ang_vel_limit, n=n, integration_method=integration_method
         )
 
         super().__init__(
@@ -312,6 +307,9 @@ class CWHRotation2dDynamics(BaseODESolverDynamics):
         ang_acc_limit=ANG_ACC_LIMIT_DEFAULT,
         ang_vel_limit=ANG_VEL_LIMIT_DEFAULT,
         n=N_DEFAULT,
+        state_max: Union[float, np.ndarray] = None,
+        state_min: Union[float, np.ndarray] = None,
+        angle_wrap_centers: np.ndarray = None,
         **kwargs
     ):
         self.m = m  # kg
@@ -331,7 +329,17 @@ class CWHRotation2dDynamics(BaseODESolverDynamics):
 
         self.A = np.copy(A)
         self.B = np.copy(B)
-        super().__init__(**kwargs)
+
+        if state_min is None:
+            state_min = np.array([-np.inf, -np.inf, -np.inf, -np.inf, -np.inf, -self.ang_vel_limit])
+
+        if state_max is None:
+            state_max = np.array([np.inf, np.inf, np.inf, np.inf, np.inf, self.ang_vel_limit])
+
+        if angle_wrap_centers is None:
+            angle_wrap_centers = np.array([None, None, 0, None, None, None], dtype=float)
+
+        super().__init__(state_min=state_min, state_max=state_max, angle_wrap_centers=angle_wrap_centers, **kwargs)
 
     def _compute_state_dot(self, t: float, state: np.ndarray, control: np.ndarray) -> np.ndarray:
 
@@ -339,10 +347,12 @@ class CWHRotation2dDynamics(BaseODESolverDynamics):
         # Form separate state vector for translational state
         pos_vel_state_vec = np.array([x, y, x_dot, y_dot], dtype=np.float64)
         # Compute the rotated thrust vector
-        thrust_vector = control[0] * np.array([math.cos(theta), math.sin(theta)])
+        thrust_vector = (
+            control[0] * np.array([math.cos(theta), math.sin(theta)]) + control[1] * np.array([-math.sin(theta), math.cos(theta)])
+        )
         # Compute derivatives
         pos_vel_derivative = np.matmul(self.A, pos_vel_state_vec) + np.matmul(self.B, thrust_vector)
-        theta_dot_dot = control[1] / self.inertia
+        theta_dot_dot = control[2] / self.inertia
         # check angular velocity limit
         if theta_dot >= self.ang_vel_limit:
             theta_dot_dot = min(0, theta_dot_dot)
