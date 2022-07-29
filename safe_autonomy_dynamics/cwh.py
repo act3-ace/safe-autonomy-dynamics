@@ -30,22 +30,30 @@ class CWHSpacecraftValidator(BaseEntityValidator):
 
     Parameters
     ----------
-    position : list[float]
-        Length 3 list of x, y, z position values.
-    velocity : list[float]
-        Length 3 list of x, y, z velocity values.
+    x: [float]
+        Length 1, x position value
+    y: [float]
+        Length 1, y position value
+    z: [float]
+        Length 1, z position value
+    x_dot: [float]
+        Length 1, x velocity value
+    y_dot: [float]
+        Length 1, y velocity value
+    z_dot: [float]
+        Length 1, z velocity value
 
     Raises
     ------
     ValueError
-        Improper list lengths for parameters 'position', 'velocity'
+        Improper list lengths for parameters 'x', 'y', 'z', 'x_dot', 'y_dot', 'z_dot'
     """
     x: float = 0
     y: float = 0
     z: float = 0
-    xdot: float = 0
-    ydot: float = 0
-    zdot: float = 0
+    x_dot: float = 0
+    y_dot: float = 0
+    z_dot: float = 0
 
 
 class CWHSpacecraft(BaseEntity):
@@ -106,7 +114,7 @@ class CWHSpacecraft(BaseEntity):
 
     def _build_state(self):
         state = np.array(
-            [self.config.x, self.config.y, self.config.z] + [self.config.xdot, self.config.ydot, self.config.zdot], dtype=np.float32
+            [self.config.x, self.config.y, self.config.z] + [self.config.x_dot, self.config.y_dot, self.config.z_dot], dtype=np.float32
         )
 
         return state
