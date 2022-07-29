@@ -17,7 +17,7 @@ Author: John McCarroll, Andy Barth
 import pytest
 import os
 
-from safe_autonomy_dynamics.cwh_rotation import CWHRotation2dSpacecraft
+from safe_autonomy_dynamics.cwh import CWHRotation2dSpacecraft
 from tests.test_simulators.test_entities.conftest import evaluate
 from tests.conftest import read_test_cases, delimiter
 
