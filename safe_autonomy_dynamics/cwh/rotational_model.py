@@ -21,7 +21,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 
 from safe_autonomy_dynamics.base_models import BaseEntityValidator, BaseODESolverDynamics, BaseRotationEntity
-from safe_autonomy_dynamics.cwh import generate_cwh_matrices
+from safe_autonomy_dynamics.cwh.point_model import generate_cwh_matrices
 
 M_DEFAULT = 12
 INERTIA_DEFAULT = 0.0573
