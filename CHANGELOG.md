@@ -1,3 +1,10 @@
+# [0.2.0](https://git.act3-ace.com/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.1.0...v0.2.0) (2022-08-01)
+
+
+### Features
+
+* **version:** updates for semantic release ([806db51](https://git.act3-ace.com/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/806db5111ff710c1744a45746959ac5f634aeb72))
+
 ## [0.0.1003](https://git.act3-ace.com/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.0.1002...v0.0.1003) (2022-07-28)
 
 
