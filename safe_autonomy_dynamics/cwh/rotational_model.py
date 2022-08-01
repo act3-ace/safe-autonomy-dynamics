@@ -124,6 +124,7 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
         **kwargs
     ):
         self._state = np.array([])
+        self.partner = {}
 
         self.m = m  # kg
         self.inertia = inertia  # kg*m^2
@@ -166,6 +167,21 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
             eq = eq and (self.angular_velocity == other.angular_velocity).all()
             return eq
         return False
+
+    def register_partner(self, partner: BaseRotationEntity):
+        """
+        Register another entity as this entity's partner. Defines line of communication between entities.
+
+        Parameters
+        ----------
+        partner: BaseEntity
+            Entity with line of communication to this entity.
+
+        Returns
+        -------
+        None
+        """
+        self.partner[partner.name] = partner
 
     def _build_state(self):
         """form state vector"""
