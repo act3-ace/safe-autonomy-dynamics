@@ -17,11 +17,11 @@ or [conda](https://docs.conda.io/projects/conda/en/latest/index.html) environmen
 Clone a copy of the safe-autonomy-dynamics source code 
 onto your local machine via SSH:
 ```shell
-git clone git@git.act3-ace.com:rta/safe-autonomy-stack/safe-autonomy-dynamics.git
+git clone git@github.com:act3-ace/safe-autonomy-dynamics.git
 ```
 or HTTPS:
 ```shell
-git clone https://git.act3-ace.com/rta/safe-autonomy-stack/safe-autonomy-dynamics.git
+git clone https://github.com/act3-ace/safe-autonomy-dynamics.git
 ```
 
 Install the safe-autonomy-dynamics module into your 
