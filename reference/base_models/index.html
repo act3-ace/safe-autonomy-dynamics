@@ -1,0 +1,2288 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The following python project provides various dynamics models in the air and space domain.">
+      
+      
+        <meta name="author" content="Safe Autonomy Team">
+      
+      
+        <link rel="canonical" href="https://git.act3-ace.com/reference/base_models/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>base models - Safe Autonomy Dynamics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../css/style.css">
+    
+      <link rel="stylesheet" href="../../css/material.css">
+    
+      <link rel="stylesheet" href="../../css/mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#safe_autonomy_dynamics.base_models" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Safe Autonomy Dynamics" class="md-header__button md-logo" aria-label="Safe Autonomy Dynamics" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.41 3 3 4.41 5.69 7.1A7.924 7.924 0 0 0 4 12c0 1.85.63 3.55 1.69 4.9L3 19.59 4.41 21l2.69-2.69A7.924 7.924 0 0 0 12 20c1.85 0 3.55-.63 4.9-1.69L19.59 21 21 19.59l-2.69-2.69A7.924 7.924 0 0 0 20 12c0-1.85-.63-3.55-1.69-4.9L21 4.41 19.59 3 16.9 5.69A7.924 7.924 0 0 0 12 4c-1.85 0-3.55.63-4.9 1.69L4.41 3M12 6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6 2.69-6 6-6Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Safe Autonomy Dynamics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              base models
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://git.act3-ace.com/rta/safe-autonomy-dynamics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Git
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Introduction
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../install/" class="md-tabs__link">
+      Install
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../api/" class="md-tabs__link md-tabs__link--active">
+      API
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Safe Autonomy Dynamics" class="md-nav__button md-logo" aria-label="Safe Autonomy Dynamics" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.41 3 3 4.41 5.69 7.1A7.924 7.924 0 0 0 4 12c0 1.85.63 3.55 1.69 4.9L3 19.59 4.41 21l2.69-2.69A7.924 7.924 0 0 0 12 20c1.85 0 3.55-.63 4.9-1.69L19.59 21 21 19.59l-2.69-2.69A7.924 7.924 0 0 0 20 12c0-1.85-.63-3.55-1.69-4.9L21 4.41 19.59 3 16.9 5.69A7.924 7.924 0 0 0 12 4c-1.85 0-3.55.63-4.9 1.69L4.41 3M12 6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6 2.69-6 6-6Z"/></svg>
+
+    </a>
+    Safe Autonomy Dynamics
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://git.act3-ace.com/rta/safe-autonomy-dynamics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Git
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/" class="md-nav__link">
+        Install
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../api/">API</a>
+          
+            <label for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          base models
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        base models
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models" class="md-nav__link">
+    safe_autonomy_dynamics.base_models
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseDynamics" class="md-nav__link">
+    BaseDynamics
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseDynamics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseDynamics.step" class="md-nav__link">
+    step()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity" class="md-nav__link">
+    BaseEntity
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseEntity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.orientation" class="md-nav__link">
+    orientation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.position" class="md-nav__link">
+    position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.state" class="md-nav__link">
+    state
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.velocity" class="md-nav__link">
+    velocity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.x" class="md-nav__link">
+    x
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.y" class="md-nav__link">
+    y
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.z" class="md-nav__link">
+    z
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.step" class="md-nav__link">
+    step()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntityValidator" class="md-nav__link">
+    BaseEntityValidator
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseLinearODESolverDynamics" class="md-nav__link">
+    BaseLinearODESolverDynamics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseODESolverDynamics" class="md-nav__link">
+    BaseODESolverDynamics
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseODESolverDynamics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseODESolverDynamics.compute_state_dot" class="md-nav__link">
+    compute_state_dot()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity" class="md-nav__link">
+    BaseRotationEntity
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseRotationEntity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.angular_velocity" class="md-nav__link">
+    angular_velocity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.q1" class="md-nav__link">
+    q1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.q2" class="md-nav__link">
+    q2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.q3" class="md-nav__link">
+    q3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.q4" class="md-nav__link">
+    q4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.quaternion" class="md-nav__link">
+    quaternion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.wx" class="md-nav__link">
+    wx
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.wy" class="md-nav__link">
+    wy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.wz" class="md-nav__link">
+    wz
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseVectorizedODESolverDynamics" class="md-nav__link">
+    BaseVectorizedODESolverDynamics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cwh.md" class="md-nav__link">
+        cwh
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dubins/" class="md-nav__link">
+        dubins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models" class="md-nav__link">
+    safe_autonomy_dynamics.base_models
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseDynamics" class="md-nav__link">
+    BaseDynamics
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseDynamics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseDynamics.step" class="md-nav__link">
+    step()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity" class="md-nav__link">
+    BaseEntity
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseEntity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.orientation" class="md-nav__link">
+    orientation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.position" class="md-nav__link">
+    position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.state" class="md-nav__link">
+    state
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.velocity" class="md-nav__link">
+    velocity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.x" class="md-nav__link">
+    x
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.y" class="md-nav__link">
+    y
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.z" class="md-nav__link">
+    z
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntity.step" class="md-nav__link">
+    step()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseEntityValidator" class="md-nav__link">
+    BaseEntityValidator
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseLinearODESolverDynamics" class="md-nav__link">
+    BaseLinearODESolverDynamics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseODESolverDynamics" class="md-nav__link">
+    BaseODESolverDynamics
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseODESolverDynamics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseODESolverDynamics.compute_state_dot" class="md-nav__link">
+    compute_state_dot()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity" class="md-nav__link">
+    BaseRotationEntity
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseRotationEntity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.angular_velocity" class="md-nav__link">
+    angular_velocity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.q1" class="md-nav__link">
+    q1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.q2" class="md-nav__link">
+    q2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.q3" class="md-nav__link">
+    q3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.q4" class="md-nav__link">
+    q4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.quaternion" class="md-nav__link">
+    quaternion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.wx" class="md-nav__link">
+    wx
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.wy" class="md-nav__link">
+    wy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.wz" class="md-nav__link">
+    wz
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.base_models.BaseVectorizedODESolverDynamics" class="md-nav__link">
+    BaseVectorizedODESolverDynamics
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://git.act3-ace.com/rta/safe-autonomy-dynamics/blob/main/docs/safe_autonomy_dynamics/base_models.py" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>base models</h1>
+
+<div class="doc doc-object doc-module">
+
+<a id="safe_autonomy_dynamics.base_models"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="safe_autonomy_dynamics.base_models.BaseDynamics" class="doc doc-heading">
+        <code>
+BaseDynamics            (<span title="abc.ABC">ABC</span>)
+        </code>
+
+
+
+<a href="#safe_autonomy_dynamics.base_models.BaseDynamics" class="headerlink" title="Permanent link">¤</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>safe_autonomy_dynamics/base_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseDynamics</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    State transition implementation for a physics dynamics model. Used by entities to compute their next state when</span>
+<span class="sd">    their step() method is called.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    state_min : float or np.ndarray</span>
+<span class="sd">        Minimum allowable value for the next state. State values that exceed this are clipped.</span>
+<span class="sd">        When a float, represents single limit applied to entire state vector.</span>
+<span class="sd">        When an ndarray, each element represents the limit to the corresponding state vector element.</span>
+<span class="sd">    state_max : float or np.ndarray</span>
+<span class="sd">        Maximum allowable value for the next state. State values that exceed this are clipped.</span>
+<span class="sd">        When a float, represents single limit applied to entire state vector.</span>
+<span class="sd">        When an ndarray, each element represents the limit to the corresponding state vector element.</span>
+<span class="sd">    angle_wrap_centers: np.ndarray</span>
+<span class="sd">        Enables circular wrapping of angles. Defines the center of circular wrap such that angles are within [center+pi, center-pi].</span>
+<span class="sd">        When None, no angle wrapping applied.</span>
+<span class="sd">        When ndarray, each element defines the angle wrap center of the corresponding state element.</span>
+<span class="sd">        Wrapping not applied when element is NaN.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">state_min</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+        <span class="n">state_max</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+        <span class="n">angle_wrap_centers</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_min</span> <span class="o">=</span> <span class="n">state_min</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_max</span> <span class="o">=</span> <span class="n">state_max</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">angle_wrap_centers</span> <span class="o">=</span> <span class="n">angle_wrap_centers</span>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step_size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">control</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the dynamics state transition from the current state and control input.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        step_size : float</span>
+<span class="sd">            Duration of the simulation step in seconds.</span>
+<span class="sd">        state : np.ndarray</span>
+<span class="sd">            Current state of the system at the beginning of the simulation step.</span>
+<span class="sd">        control : np.ndarray</span>
+<span class="sd">            Control vector of the dynamics model.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Tuple[np.ndarray, np.ndarray]</span>
+<span class="sd">            Tuple of the system&#39;s next state and the state&#39;s instantaneous time derivative at the end of the step</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">next_state</span><span class="p">,</span> <span class="n">state_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step</span><span class="p">(</span><span class="n">step_size</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+        <span class="n">next_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">next_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_max</span><span class="p">)</span>
+        <span class="n">next_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrap_angles</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">state_dot</span>
+
+    <span class="k">def</span> <span class="nf">_wrap_angles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="n">wrapped_state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle_wrap_centers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">wrap_idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angle_wrap_centers</span><span class="p">))</span>
+
+            <span class="n">wrapped_state</span><span class="p">[</span><span class="n">wrap_idxs</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="p">((</span><span class="n">wrapped_state</span><span class="p">[</span><span class="n">wrap_idxs</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle_wrap_centers</span><span class="p">[</span><span class="n">wrap_idxs</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">wrapped_state</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step_size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">control</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseDynamics.step" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span></code>
+
+
+<a href="#safe_autonomy_dynamics.base_models.BaseDynamics.step" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>safe_autonomy_dynamics/base_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step_size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">control</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes the dynamics state transition from the current state and control input.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    step_size : float</span>
+<span class="sd">        Duration of the simulation step in seconds.</span>
+<span class="sd">    state : np.ndarray</span>
+<span class="sd">        Current state of the system at the beginning of the simulation step.</span>
+<span class="sd">    control : np.ndarray</span>
+<span class="sd">        Control vector of the dynamics model.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Tuple[np.ndarray, np.ndarray]</span>
+<span class="sd">        Tuple of the system&#39;s next state and the state&#39;s instantaneous time derivative at the end of the step</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">next_state</span><span class="p">,</span> <span class="n">state_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step</span><span class="p">(</span><span class="n">step_size</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+    <span class="n">next_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">next_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_max</span><span class="p">)</span>
+    <span class="n">next_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrap_angles</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">state_dot</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="safe_autonomy_dynamics.base_models.BaseEntity" class="doc doc-heading">
+        <code>
+BaseEntity            (<span title="abc.ABC">ABC</span>)
+        </code>
+
+
+
+<a href="#safe_autonomy_dynamics.base_models.BaseEntity" class="headerlink" title="Permanent link">¤</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>safe_autonomy_dynamics/base_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseEntity</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base implementation of a dynamics controlled entity within the saferl sim.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dynamics : BaseDynamics</span>
+<span class="sd">        Dynamics object for computing state transitions</span>
+<span class="sd">    control_default: np.ndarray</span>
+<span class="sd">        Default control vector used when no action is passed to step(). Typically 0 or neutral for each actuator.</span>
+<span class="sd">    control_min: np.ndarray</span>
+<span class="sd">        Optional minimum allowable control vector values. Control vectors that exceed this limit are clipped.</span>
+<span class="sd">    control_max: np.ndarray</span>
+<span class="sd">        Optional maximum allowable control vector values. Control vectors that exceed this limit are clipped.</span>
+<span class="sd">    control_map: dict</span>
+<span class="sd">        Optional mapping for actuator names to their indices in the state vector.</span>
+<span class="sd">        Allows dictionary action inputs in step().</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">,</span> <span class="n">control_default</span><span class="p">,</span> <span class="n">control_min</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">control_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">control_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_config_validator</span><span class="p">()(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span> <span class="o">=</span> <span class="n">dynamics</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_default</span> <span class="o">=</span> <span class="n">control_default</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_min</span> <span class="o">=</span> <span class="n">control_min</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_max</span> <span class="o">=</span> <span class="n">control_max</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_map</span> <span class="o">=</span> <span class="n">control_map</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_state</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_dot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_config_validator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">BaseEntityValidator</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_build_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Executes a state transition simulation step for the entity.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        step_size : float</span>
+<span class="sd">            Duration of simulation step in seconds</span>
+<span class="sd">        action : Union(dict, list, np.ndarray), optional</span>
+<span class="sd">            Control action taken by entity, by default None resulting in a control of control_default</span>
+<span class="sd">            When list or ndarray, directly used and control vector for dynamics model</span>
+<span class="sd">            When dict, unpacked into control vector. Requires control_map to be defined.</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        KeyError</span>
+<span class="sd">            Raised when action dict key not found in control map</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Raised when action is not one of the required types</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">action</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_default</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_map</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Cannot use dict-type action without a control_map (see BaseEntity __init__())&quot;</span>
+                <span class="n">control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_default</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">action_value</span> <span class="ow">in</span> <span class="n">action</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">action_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_map</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;action &#39;</span><span class="si">{</span><span class="n">action_name</span><span class="si">}</span><span class="s2">&#39; not found in entity&#39;s control_map, &quot;</span>
+                            <span class="sa">f</span><span class="s2">&quot;please use one of: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">control_map</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+                        <span class="p">)</span>
+
+                    <span class="n">control</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">control_map</span><span class="p">[</span><span class="n">action_name</span><span class="p">]]</span> <span class="o">=</span> <span class="n">action_value</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">control</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="n">control</span> <span class="o">=</span> <span class="n">action</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;action must be type dict, list, or np.ndarray&quot;</span><span class="p">)</span>
+
+        <span class="c1"># enforce control bounds</span>
+        <span class="n">control</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_max</span><span class="p">)</span>
+
+        <span class="c1"># compute new state if dynamics were applied</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">step_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns copy of entity&#39;s state vector.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            copy of state vector</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@state</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;get x&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;get y&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">z</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;get z&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;get 3d position vector&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">scipy</span><span class="o">.</span><span class="n">spatial</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">Rotation</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get orientation of entity.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        scipy.spatial.transform.Rotation</span>
+<span class="sd">            Rotation transformation of the entity&#39;s local reference frame basis vectors in the global reference frame.</span>
+<span class="sd">            i.e. applying this rotation to [1, 0, 0] yields the entity&#39;s local x-axis in the global frame.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">velocity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get 3d velocity vector&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseEntity.orientation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">orientation</span><span class="p">:</span> <span class="n">Rotation</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseEntity.orientation" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseEntity.position" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">position</span><span class="p">:</span> <span class="n">ndarray</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseEntity.position" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseEntity.state" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">state</span><span class="p">:</span> <span class="n">ndarray</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseEntity.state" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseEntity.velocity" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">velocity</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseEntity.velocity" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseEntity.x" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">x</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseEntity.x" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseEntity.y" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">y</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseEntity.y" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseEntity.z" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">z</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseEntity.z" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseEntity.step" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+
+<a href="#safe_autonomy_dynamics.base_models.BaseEntity.step" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>safe_autonomy_dynamics/base_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Executes a state transition simulation step for the entity.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    step_size : float</span>
+<span class="sd">        Duration of simulation step in seconds</span>
+<span class="sd">    action : Union(dict, list, np.ndarray), optional</span>
+<span class="sd">        Control action taken by entity, by default None resulting in a control of control_default</span>
+<span class="sd">        When list or ndarray, directly used and control vector for dynamics model</span>
+<span class="sd">        When dict, unpacked into control vector. Requires control_map to be defined.</span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    KeyError</span>
+<span class="sd">        Raised when action dict key not found in control map</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        Raised when action is not one of the required types</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">action</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_default</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_map</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Cannot use dict-type action without a control_map (see BaseEntity __init__())&quot;</span>
+            <span class="n">control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_default</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">action_value</span> <span class="ow">in</span> <span class="n">action</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">action_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_map</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;action &#39;</span><span class="si">{</span><span class="n">action_name</span><span class="si">}</span><span class="s2">&#39; not found in entity&#39;s control_map, &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;please use one of: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">control_map</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+
+                <span class="n">control</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">control_map</span><span class="p">[</span><span class="n">action_name</span><span class="p">]]</span> <span class="o">=</span> <span class="n">action_value</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">control</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">control</span> <span class="o">=</span> <span class="n">action</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;action must be type dict, list, or np.ndarray&quot;</span><span class="p">)</span>
+
+    <span class="c1"># enforce control bounds</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_max</span><span class="p">)</span>
+
+    <span class="c1"># compute new state if dynamics were applied</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">step_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="safe_autonomy_dynamics.base_models.BaseEntityValidator" class="doc doc-heading">
+        <code>
+BaseEntityValidator            (<span title="pydantic.main.BaseModel">BaseModel</span>)
+        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseEntityValidator" class="headerlink" title="Permanent link">¤</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>safe_autonomy_dynamics/base_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseEntityValidator</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validator for BaseEntity&#39;s config member.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Name of entity</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="safe_autonomy_dynamics.base_models.BaseLinearODESolverDynamics" class="doc doc-heading">
+        <code>
+BaseLinearODESolverDynamics            (<a class="autorefs autorefs-internal" title="safe_autonomy_dynamics.base_models.BaseVectorizedODESolverDynamics" href="#safe_autonomy_dynamics.base_models.BaseVectorizedODESolverDynamics">BaseVectorizedODESolverDynamics</a>)
+        </code>
+
+
+
+<a href="#safe_autonomy_dynamics.base_models.BaseLinearODESolverDynamics" class="headerlink" title="Permanent link">¤</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>safe_autonomy_dynamics/base_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseLinearODESolverDynamics</span><span class="p">(</span><span class="n">BaseVectorizedODESolverDynamics</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    State transition implementation for generic Linear Ordinary Differential Equation dynamics models of the form dx/dt = Ax+Bu.</span>
+<span class="sd">    Computes next state through numerical integration of differential equation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : np.ndarray</span>
+<span class="sd">        State transition matrix. A of dx/dt = Ax + Bu. Should be dimension len(n) x len(n)</span>
+<span class="sd">    B : npndarray</span>
+<span class="sd">        Control input matrix. B of dx/dt = Ax + Bu. Should be dimension len(n) x len(u)</span>
+<span class="sd">    kwargs</span>
+<span class="sd">        Additional keyword arguments passed to parent BaseVectorizedODESolverDynamics constructor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;A must be square matrix. Instead got shape </span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;A must be square matrix. Instead got shape </span><span class="si">{</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">assert</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;A must be a square matrix, not dimension </span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">assert</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span>
+            <span class="s2">&quot;number of columns in A must match the number of rows in B.&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; However, got shapes </span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> for A and </span><span class="si">{</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> for B&quot;</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_gen_dynamics_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="safe_autonomy_dynamics.base_models.BaseODESolverDynamics" class="doc doc-heading">
+        <code>
+BaseODESolverDynamics            (<a class="autorefs autorefs-internal" title="safe_autonomy_dynamics.base_models.BaseDynamics" href="#safe_autonomy_dynamics.base_models.BaseDynamics">BaseDynamics</a>)
+        </code>
+
+
+
+<a href="#safe_autonomy_dynamics.base_models.BaseODESolverDynamics" class="headerlink" title="Permanent link">¤</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>safe_autonomy_dynamics/base_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseODESolverDynamics</span><span class="p">(</span><span class="n">BaseDynamics</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    State transition implementation for generic Ordinary Differential Equation dynamics models.</span>
+<span class="sd">    Computes next state through numerical integration of differential equation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    integration_method : string</span>
+<span class="sd">        Numerical integration method used by dynamics solver. One of [&#39;RK45&#39;, &#39;Euler&#39;].</span>
+<span class="sd">        &#39;RK45&#39; is slow but very accurate.</span>
+<span class="sd">        &#39;Euler&#39; is fast but very inaccurate.</span>
+<span class="sd">    kwargs</span>
+<span class="sd">        Additional keyword arguments passed to parent BaseDynamics constructor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">integration_method</span><span class="o">=</span><span class="s2">&quot;RK45&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">integration_method</span> <span class="o">=</span> <span class="n">integration_method</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">compute_state_dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">control</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the instantaneous time derivative of the state vector</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        t : float</span>
+<span class="sd">            Time in seconds since the beginning of the simulation step.</span>
+<span class="sd">            Note, this is NOT the total simulation time but the time within the individual step.</span>
+<span class="sd">        state : np.ndarray</span>
+<span class="sd">            Current state vector at time t.</span>
+<span class="sd">        control : np.ndarray</span>
+<span class="sd">            Control vector.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            Instantaneous time derivative of the state vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">state_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_state_dot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+        <span class="n">state_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clip_state_dot_by_state_limits</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_dot</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">state_dot</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_compute_state_dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">control</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">_clip_state_dot_by_state_limits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_dot</span><span class="p">):</span>
+        <span class="n">lower_bounded_states</span> <span class="o">=</span> <span class="n">state</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_min</span>
+        <span class="n">upper_bounded_state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_max</span>
+
+        <span class="n">state_dot</span><span class="p">[</span><span class="n">lower_bounded_states</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">state_dot</span><span class="p">[</span><span class="n">lower_bounded_states</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+        <span class="n">state_dot</span><span class="p">[</span><span class="n">upper_bounded_state</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">state_dot</span><span class="p">[</span><span class="n">upper_bounded_state</span><span class="p">],</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">state_dot</span>
+
+    <span class="k">def</span> <span class="nf">_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step_size</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">integration_method</span> <span class="o">==</span> <span class="s2">&quot;RK45&quot;</span><span class="p">:</span>
+            <span class="n">sol</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">solve_ivp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">compute_state_dot</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">step_size</span><span class="p">),</span> <span class="n">state</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="p">))</span>
+
+            <span class="n">next_state</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># save last timestep of integration solution</span>
+            <span class="n">state_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_state_dot</span><span class="p">(</span><span class="n">step_size</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">integration_method</span> <span class="o">==</span> <span class="s2">&quot;Euler&quot;</span><span class="p">:</span>
+            <span class="n">state_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_state_dot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+            <span class="n">next_state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">+</span> <span class="n">step_size</span> <span class="o">*</span> <span class="n">state_dot</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid integration method &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">integration_method</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">state_dot</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseODESolverDynamics.compute_state_dot" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">compute_state_dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span></code>
+
+
+<a href="#safe_autonomy_dynamics.base_models.BaseODESolverDynamics.compute_state_dot" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>safe_autonomy_dynamics/base_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_state_dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">control</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes the instantaneous time derivative of the state vector</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : float</span>
+<span class="sd">        Time in seconds since the beginning of the simulation step.</span>
+<span class="sd">        Note, this is NOT the total simulation time but the time within the individual step.</span>
+<span class="sd">    state : np.ndarray</span>
+<span class="sd">        Current state vector at time t.</span>
+<span class="sd">    control : np.ndarray</span>
+<span class="sd">        Control vector.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.ndarray</span>
+<span class="sd">        Instantaneous time derivative of the state vector.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">state_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_state_dot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+    <span class="n">state_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clip_state_dot_by_state_limits</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state_dot</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">state_dot</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="safe_autonomy_dynamics.base_models.BaseRotationEntity" class="doc doc-heading">
+        <code>
+BaseRotationEntity            (<a class="autorefs autorefs-internal" title="safe_autonomy_dynamics.base_models.BaseEntity" href="#safe_autonomy_dynamics.base_models.BaseEntity">BaseEntity</a>)
+        </code>
+
+
+
+<a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity" class="headerlink" title="Permanent link">¤</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>safe_autonomy_dynamics/base_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseRotationEntity</span><span class="p">(</span><span class="n">BaseEntity</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base implementation of a base entity with rotational states within the saferl sim.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dynamics : BaseDynamics</span>
+<span class="sd">        Dynamics object for computing state transitions</span>
+<span class="sd">    control_default: np.ndarray</span>
+<span class="sd">        Default control vector used when no action is passed to step(). Typically 0 or neutral for each actuator.</span>
+<span class="sd">    control_min: np.ndarray</span>
+<span class="sd">        Optional minimum allowable control vector values. Control vectors that exceed this limit are clipped.</span>
+<span class="sd">    control_max: np.ndarray</span>
+<span class="sd">        Optional maximum allowable control vector values. Control vectors that exceed this limit are clipped.</span>
+<span class="sd">    control_map: dict</span>
+<span class="sd">        Optional mapping for actuator names to their indices in the state vector.</span>
+<span class="sd">        Allows dictionary action inputs in step().</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">,</span> <span class="n">control_default</span><span class="p">,</span> <span class="n">control_min</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">control_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">control_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span>
+            <span class="n">control_default</span><span class="o">=</span><span class="n">control_default</span><span class="p">,</span>
+            <span class="n">control_min</span><span class="o">=</span><span class="n">control_min</span><span class="p">,</span>
+            <span class="n">control_max</span><span class="o">=</span><span class="n">control_max</span><span class="p">,</span>
+            <span class="n">control_map</span><span class="o">=</span><span class="n">control_map</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">q1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;get first element of quaternion&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">q2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;get second element of quaternion&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">q3</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;get third element of quaternion&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">q4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;get fourth element of quaternion (scalar)&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">quaternion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;get 4d quaternion&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">wx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;get wx&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">wy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;get wy&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">wz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;get wz&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">angular_velocity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;get 3d angular velocity vector&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseRotationEntity.angular_velocity" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">angular_velocity</span><span class="p">:</span> <span class="n">ndarray</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.angular_velocity" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseRotationEntity.q1" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">q1</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.q1" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseRotationEntity.q2" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">q2</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.q2" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseRotationEntity.q3" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">q3</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.q3" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseRotationEntity.q4" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">q4</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.q4" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseRotationEntity.quaternion" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">quaternion</span><span class="p">:</span> <span class="n">ndarray</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.quaternion" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseRotationEntity.wx" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">wx</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.wx" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseRotationEntity.wy" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">wy</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.wy" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="safe_autonomy_dynamics.base_models.BaseRotationEntity.wz" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">wz</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a href="#safe_autonomy_dynamics.base_models.BaseRotationEntity.wz" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="safe_autonomy_dynamics.base_models.BaseVectorizedODESolverDynamics" class="doc doc-heading">
+        <code>
+BaseVectorizedODESolverDynamics            (<a class="autorefs autorefs-internal" title="safe_autonomy_dynamics.base_models.BaseODESolverDynamics" href="#safe_autonomy_dynamics.base_models.BaseODESolverDynamics">BaseODESolverDynamics</a>)
+        </code>
+
+
+
+<a href="#safe_autonomy_dynamics.base_models.BaseVectorizedODESolverDynamics" class="headerlink" title="Permanent link">¤</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>safe_autonomy_dynamics/base_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseVectorizedODESolverDynamics</span><span class="p">(</span><span class="n">BaseODESolverDynamics</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    State transition implementation for generic Ordinary Differential Equation dynamics models of the form</span>
+<span class="sd">        dx/dt = f(x)x + g(x)u.</span>
+
+<span class="sd">    At Each point in the numerical integration processes, f(x) and g(x) are computed at the integration point to find</span>
+<span class="sd">        A = f(x)</span>
+<span class="sd">        B = g(x)</span>
+<span class="sd">        To construct the matrix product dx/dt = Ax + Bu</span>
+
+<span class="sd">    Computes next state through numerical integration of differential equation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    kwargs</span>
+<span class="sd">        Additional keyword arguments passed to parent BaseODESolverDynamics constructor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_gen_dynamics_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the vectorized ODE matrices A, B with current system state before computing derivative.</span>
+<span class="sd">        Allows non-linear dynamics models to be linearized at each numerical integration interval.</span>
+<span class="sd">        Directly modifies self.A,</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : np.ndarray</span>
+<span class="sd">            Current state vector of the system.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            A of dx/dt = Ax + Bu</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            B of dx/dt = Ax + Bu</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">_compute_state_dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">control</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen_dynamics_matrices</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="n">state_dot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">state_dot</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../api/" class="md-footer__link md-footer__link--prev" aria-label="Previous: API" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              API
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../dubins/" class="md-footer__link md-footer__link--next" aria-label="Next: dubins" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              dubins
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@8.4.2/dist/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
