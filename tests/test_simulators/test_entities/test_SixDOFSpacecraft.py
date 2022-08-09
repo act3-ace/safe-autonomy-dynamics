@@ -17,7 +17,7 @@ Author: John McCarroll, Andy Barth
 import pytest
 import os
 
-from safe_autonomy_dynamics.cwh.sixdof_spacecraft import SixDOFSpacecraft
+from safe_autonomy_dynamics.cwh.sixdof_model import SixDOFSpacecraft
 from tests.test_simulators.test_entities.conftest import evaluate
 from tests.conftest import read_test_cases, delimiter
 
