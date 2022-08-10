@@ -21,16 +21,14 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 
 from safe_autonomy_dynamics.base_models import BaseEntityValidator, BaseODESolverDynamics, BaseRotationEntity
-from safe_autonomy_dynamics.cwh.point_model import generate_cwh_matrices
+from safe_autonomy_dynamics.cwh import M_DEFAULT, N_DEFAULT, generate_cwh_matrices
 
-M_DEFAULT = 12
 INERTIA_DEFAULT = 0.0573
 INERTIA_WHEEL_DEFAULT = 4.1e-5
 ANG_ACC_LIMIT_DEFAULT = 0.017453
 ANG_VEL_LIMIT_DEFAULT = 0.034907
 ACC_LIMIT_WHEEL_DEFAULT = 181.3
 VEL_LIMIT_WHEEL_DEFAULT = 576
-N_DEFAULT = 0.001027
 
 
 class CWHRotation2dSpacecraftValidator(BaseEntityValidator):
