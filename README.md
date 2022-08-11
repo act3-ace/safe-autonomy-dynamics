@@ -4,7 +4,7 @@
 The safe-autonomy-dynamics package provides an API for dynamic systems supported by a library of common functions used to access and update system dynamics. These dynamics are used to build simulated environments which behave like real-world systems for the purpose of safe autonomy research and development (though their use is not limited to the safety domain). The package also includes a zoo of air and space domain dynamics modules tailored for simulating aerospace systems. The team intends to grow the zoo as new dynamic systems are studied or simulation requirements change.
 
 ## Docs
-Library documentation and api reference located [here](https://rta.git.act3-ace.com/safe-autonomy-stack/safe-autonomy-dynamics).
+Library documentation and api reference located [here](https://act3-ace.github.io/safe-autonomy-dynamics/).
 
 ## Installation
 The following instructions detail how to install 
@@ -17,11 +17,11 @@ or [conda](https://docs.conda.io/projects/conda/en/latest/index.html) environmen
 Clone a copy of the safe-autonomy-dynamics source code 
 onto your local machine via SSH:
 ```shell
-git clone git@git.act3-ace.com:rta/safe-autonomy-stack/safe-autonomy-dynamics.git
+git clone git@github.com:act3-ace/safe-autonomy-dynamics.git
 ```
 or HTTPS:
 ```shell
-git clone https://git.act3-ace.com/rta/safe-autonomy-stack/safe-autonomy-dynamics.git
+git clone https://github.com/act3-ace/safe-autonomy-dynamics.git
 ```
 
 Install the safe-autonomy-dynamics module into your 
