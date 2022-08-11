@@ -30,6 +30,7 @@ ACC_LIMIT_WHEEL_DEFAULT = 181.3
 VEL_LIMIT_WHEEL_DEFAULT = 576
 THRUST_CONTROL_LIMIT_DEFAULT = 1.0
 N_DEFAULT = 0.001027
+BODY_FRAME_THRUST_DEFAULT = True
 
 
 class SixDOFSpacecraftValidator(BaseEntityValidator):
@@ -51,13 +52,14 @@ class SixDOFSpacecraftValidator(BaseEntityValidator):
     z_dot: [float]
        Length 1, z velocity value
     q1: [float]
-       Length 1, first element of quaternion value
+       Length 1, first element of quaternion - rotation from body to Hill frame
     q2: [float]
-       Length 1, second element of quaternion value
+       Length 1, second element of quaternion value - rotation from body to Hill frame
     q3: [float]
-       Length 1, third element of quaternion value
+       Length 1, third element of quaternion value - rotation from body to Hill frame
     q4: [float]
-       Length 1, fourth element of quaternion value (scalar)
+       Length 1, fourth element of quaternion value (scalar) - rotation from body to Hill frame
+       Placing the scalar as the 4th element matches the convention used by scipy
     wx: [float]
        Length 1, x axis angular rate value
     wy: [float]
@@ -133,6 +135,8 @@ class SixDOFSpacecraft(BaseRotationEntity):
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics.
     kwargs:
         Additional keyword arguments passed to parent class BaseRotationSpacecraft.
+        body_frame_thrust: bool
+            Flag indicating the reference frame for the control thrust vector: True- Body frame, False - Hill's frame
     """
 
     def __init__(
@@ -160,7 +164,12 @@ class SixDOFSpacecraft(BaseRotationEntity):
         self.acc_limit_wheel = acc_limit_wheel  # rad/s^2
         self.vel_limit_wheel = vel_limit_wheel  # rad/s
         self.n = n  # 1/s
-        """ Define limits for angular acceleration, angular velocity, and control inputs """
+        # Process keyword arguments
+        self.body_frame_thrust = BODY_FRAME_THRUST_DEFAULT
+        for key, val in kwargs.items():
+            if key == "body_frame_thrust":
+                self.body_frame_thrust = val
+        # Define limits for angular acceleration, angular velocity, and control inputs
         acc_limit = np.zeros((3, ))
         vel_limit = np.zeros((3, ))
         control_limit = np.zeros((6, ))
@@ -188,6 +197,7 @@ class SixDOFSpacecraft(BaseRotationEntity):
             ang_acc_limit=acc_limit,
             ang_vel_limit=vel_limit,
             n=n,
+            body_frame_thrust=self.body_frame_thrust,
             angle_wrap_centers=angle_wrap_centers,
             integration_method=integration_method
         )
@@ -332,6 +342,9 @@ class SixDOFSpacecraft(BaseRotationEntity):
         scipy.spatial.transform.Rotation
             Rotation transformation of the entity's local reference frame basis vectors in the global reference frame.
             i.e. applying this rotation to [1, 0, 0] yields the entity's local x-axis in the global frame.
+
+            In this implementation local frame is body, global frame is Hill's frame
+            Quaternion order (scalar in 4th element) matches scipy convention of [x,y,z,w]
         """
         return Rotation.from_quat([self.q1, self.q2, self.q3, self.q4])
 
@@ -369,6 +382,8 @@ class SixDOFDynamics(BaseODESolverDynamics):
         Thrust control limit in N
     n: float
         Orbital mean motion of Hill's reference frame's circular orbit in rad/s, by default 0.001027
+    body_frame_thrust: bool
+        Flag indicating the reference frame for the control thrust vector: True- Body frame, False - Hill's frame
     kwargs:
         Additional keyword arguments passed to parent class BaseLinearODESolverDynamics constructor
     """
@@ -380,6 +395,7 @@ class SixDOFDynamics(BaseODESolverDynamics):
         ang_acc_limit,
         ang_vel_limit,
         n,
+        body_frame_thrust=True,
         state_max: Union[float, np.ndarray] = None,
         state_min: Union[float, np.ndarray] = None,
         angle_wrap_centers: np.ndarray = None,
@@ -390,6 +406,8 @@ class SixDOFDynamics(BaseODESolverDynamics):
         self.ang_acc_limit = ang_acc_limit  # rad/s^2
         self.ang_vel_limit = ang_vel_limit  # rad/s
         self.n = n  # rads/s
+        self.body_frame_thrust = body_frame_thrust
+        self.control_thrust_Hill = np.zeros(3, )
 
         A, B = generate_cwh_matrices(self.m, self.n, '3d')
 
@@ -450,10 +468,17 @@ class SixDOFDynamics(BaseODESolverDynamics):
 
         x, y, z, q1, q2, q3, q4, x_dot, y_dot, z_dot, wx, wy, wz = state
 
+        # Convert the control thrust to Hill's frame prior to application in the CWH equations
+        if self.body_frame_thrust:
+            rotationObj = Rotation.from_quat([q1, q2, q3, q4])
+            self.control_thrust_Hill = rotationObj.apply(control[0:3])
+        else:
+            self.control_thrust_Hill = control[0:3]
+
         # Compute translational derivatives
         # Use Clohessey-Wiltshire A and B matrices
         pos_vel_state_vec = np.array([x, y, z, x_dot, y_dot, z_dot], dtype=np.float64)
-        pos_vel_derivative = np.matmul(self.A, pos_vel_state_vec) + np.matmul(self.B, control[0:3])
+        pos_vel_derivative = np.matmul(self.A, pos_vel_state_vec) + np.matmul(self.B, self.control_thrust_Hill)
 
         # Compute rotational derivatives
         q_derivative = np.zeros((4, ))

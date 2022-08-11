@@ -282,7 +282,9 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
 
     @property
     def quaternion(self):
-        """get 4d quaternion"""
+        """get 4d quaternion
+           Quaternion order (scalar in 4th element) matches scipy convention of [x,y,z,w]
+        """
         return self.orientation.as_quat()
 
     @property
