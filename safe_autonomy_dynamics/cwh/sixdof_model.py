@@ -30,7 +30,6 @@ ACC_LIMIT_WHEEL_DEFAULT = 181.3
 VEL_LIMIT_WHEEL_DEFAULT = 576
 THRUST_CONTROL_LIMIT_DEFAULT = 1.0
 N_DEFAULT = 0.001027
-BODY_FRAME_THRUST_DEFAULT = True
 
 
 class SixDOFSpacecraftValidator(BaseEntityValidator):
@@ -129,6 +128,9 @@ class SixDOFSpacecraft(BaseRotationEntity):
          Velocity limit of reaction wheel in rad/s
     thrust_control_limit: float
         Thrust control limit in N
+    body_frame_thrust: bool
+            Flag indicating the reference frame for the control thrust vector: True- Body frame, False - Hill's frame
+            by default, True
     n: float
         Orbital mean motion of Hill's reference frame's circular orbit in rad/s, by default 0.001027.
     integration_method: str
@@ -149,6 +151,7 @@ class SixDOFSpacecraft(BaseRotationEntity):
         acc_limit_wheel=ACC_LIMIT_WHEEL_DEFAULT,
         vel_limit_wheel=VEL_LIMIT_WHEEL_DEFAULT,
         thrust_control_limit=THRUST_CONTROL_LIMIT_DEFAULT,
+        body_frame_thrust=True,
         n=N_DEFAULT,
         integration_method="RK45",
         **kwargs
@@ -163,12 +166,9 @@ class SixDOFSpacecraft(BaseRotationEntity):
         self.inertia_wheel = inertia_wheel  # kg*m^2
         self.acc_limit_wheel = acc_limit_wheel  # rad/s^2
         self.vel_limit_wheel = vel_limit_wheel  # rad/s
+        self.body_frame_thrust = body_frame_thrust
+
         self.n = n  # 1/s
-        # Process keyword arguments
-        self.body_frame_thrust = BODY_FRAME_THRUST_DEFAULT
-        for key, val in kwargs.items():
-            if key == "body_frame_thrust":
-                self.body_frame_thrust = val
         # Define limits for angular acceleration, angular velocity, and control inputs
         acc_limit = np.zeros((3, ))
         vel_limit = np.zeros((3, ))
@@ -384,6 +384,7 @@ class SixDOFDynamics(BaseODESolverDynamics):
         Orbital mean motion of Hill's reference frame's circular orbit in rad/s, by default 0.001027
     body_frame_thrust: bool
         Flag indicating the reference frame for the control thrust vector: True- Body frame, False - Hill's frame
+        by default, True
     kwargs:
         Additional keyword arguments passed to parent class BaseLinearODESolverDynamics constructor
     """
