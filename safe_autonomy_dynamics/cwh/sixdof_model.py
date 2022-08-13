@@ -20,6 +20,7 @@ from scipy.spatial.transform import Rotation
 
 from safe_autonomy_dynamics.base_models import BaseEntityValidator, BaseODESolverDynamics, BaseRotationEntity
 from safe_autonomy_dynamics.cwh import generate_cwh_matrices
+from safe_autonomy_dynamics.utils import number_list_to_np
 
 M_DEFAULT = 12
 INERTIA_MATRIX_DEFAULT = np.matrix([[0.0573, 0.0, 0.0], [0.0, 0.0573, 0.0], [0.0, 0.0, 0.0573]])
@@ -123,14 +124,14 @@ class SixDOFSpacecraft(BaseRotationEntity):
     inertia_wheel: float
         Inertia of reaction wheel in kg*m^2
     acc_limit_wheel: float
-         Acceleration limit of reaction wheel in rad/s^2
+        Acceleration limit of reaction wheel in rad/s^2
     vel_limit_wheel: float
-         Velocity limit of reaction wheel in rad/s
+        Velocity limit of reaction wheel in rad/s
     thrust_control_limit: float
         Thrust control limit in N
     body_frame_thrust: bool
-            Flag indicating the reference frame for the control thrust vector: True- Body frame, False - Hill's frame
-            by default, True
+        Flag indicating the reference frame for the control thrust vector: True- Body frame, False - Hill's frame
+        by default, True
     n: float
         Orbital mean motion of Hill's reference frame's circular orbit in rad/s, by default 0.001027.
     integration_method: str
@@ -157,27 +158,19 @@ class SixDOFSpacecraft(BaseRotationEntity):
         **kwargs
     ):
         self._state = np.array([])
-        angle_wrap_centers = np.array([None, None, None, None, None, None, None, None, None, None, None, None, None], dtype=np.float32)
 
-        self.m = m  # kg
-        self.inertia_matrix = inertia_matrix  # kg*m^2
-        self.ang_acc_limit = np.array([ang_acc_limit, ang_acc_limit, ang_acc_limit])  # rad/s^2
-        self.ang_vel_limit = np.array([ang_vel_limit, ang_vel_limit, ang_vel_limit])  # rad/s
-        self.inertia_wheel = inertia_wheel  # kg*m^2
-        self.acc_limit_wheel = acc_limit_wheel  # rad/s^2
-        self.vel_limit_wheel = vel_limit_wheel  # rad/s
-        self.body_frame_thrust = body_frame_thrust
-
-        self.n = n  # 1/s
         # Define limits for angular acceleration, angular velocity, and control inputs
-        acc_limit = np.zeros((3, ))
-        vel_limit = np.zeros((3, ))
+        ang_acc_limit = number_list_to_np(ang_acc_limit, shape=(3,))  # rad/s^2
+        ang_vel_limit = number_list_to_np(ang_vel_limit, shape=(3,))  # rad/s
+        
+        acc_limit_combined = np.zeros((3, ))
+        vel_limit_combined = np.zeros((3, ))
         control_limit = np.zeros((6, ))
         for i in range(3):
-            acc_limit[i] = min(self.ang_acc_limit[i], self.inertia_wheel * self.acc_limit_wheel / self.inertia_matrix[i, i])
-            vel_limit[i] = min(self.ang_vel_limit[i], self.inertia_wheel * self.vel_limit_wheel / self.inertia_matrix[i, i])
+            acc_limit_combined[i] = min(ang_acc_limit[i], inertia_wheel * acc_limit_wheel / inertia_matrix[i, i])
+            vel_limit_combined[i] = min(ang_vel_limit[i], inertia_wheel * vel_limit_wheel / inertia_matrix[i, i])
             control_limit[i] = thrust_control_limit
-            control_limit[i + 3] = acc_limit[i] * self.inertia_matrix[i, i]
+            control_limit[i + 3] = acc_limit_combined[i] * inertia_matrix[i, i]
 
         control_default = np.zeros((6, ))
         control_min = -1 * control_limit
@@ -194,11 +187,10 @@ class SixDOFSpacecraft(BaseRotationEntity):
         dynamics = SixDOFDynamics(
             m=m,
             inertia_matrix=inertia_matrix,
-            ang_acc_limit=acc_limit,
-            ang_vel_limit=vel_limit,
+            ang_acc_limit=acc_limit_combined,
+            ang_vel_limit=vel_limit_combined,
             n=n,
-            body_frame_thrust=self.body_frame_thrust,
-            angle_wrap_centers=angle_wrap_centers,
+            body_frame_thrust=body_frame_thrust,
             integration_method=integration_method
         )
         self.lead = None
@@ -374,10 +366,10 @@ class SixDOFDynamics(BaseODESolverDynamics):
         Mass of spacecraft in kilograms, by default 12
     inertia_matrix: float
         Inertia matrix of spacecraft (3x3) in kg*m^2
-    ang_acc_limit: float
-         Angular acceleration limit in rad/s^2
-    ang_vel_limit: float
-         Angular velocity limit in rad/s
+    ang_acc_limit: float, list, np.ndarray
+        Angular acceleration limit in rad/s^2. If array_like, applied to x, y, z elementwise
+    ang_vel_limit: float, list, np.ndarray
+        Angular velocity limit in rad/s. If array_like, applied to x, y, z elementwise
     thrust_control_limit: float
         Thrust control limit in N
     n: float
@@ -404,11 +396,12 @@ class SixDOFDynamics(BaseODESolverDynamics):
     ):
         self.m = m  # kg
         self.inertia_matrix = inertia_matrix  # kg*m^2
-        self.ang_acc_limit = ang_acc_limit  # rad/s^2
-        self.ang_vel_limit = ang_vel_limit  # rad/s
         self.n = n  # rads/s
         self.body_frame_thrust = body_frame_thrust
         self.control_thrust_Hill = np.zeros(3, )
+
+        ang_acc_limit = number_list_to_np(ang_acc_limit, shape=(3,))  # rad/s^2
+        ang_vel_limit = number_list_to_np(ang_vel_limit, shape=(3,))  # rad/s
 
         A, B = generate_cwh_matrices(self.m, self.n, '3d')
 
@@ -435,9 +428,9 @@ class SixDOFDynamics(BaseODESolverDynamics):
                     -np.inf,
                     -np.inf,
                     -np.inf,
-                    -self.ang_vel_limit[0],
-                    -self.ang_vel_limit[1],
-                    -self.ang_vel_limit[2]
+                    -ang_vel_limit[0],
+                    -ang_vel_limit[1],
+                    -ang_vel_limit[2]
                 ]
             )
 
@@ -454,14 +447,11 @@ class SixDOFDynamics(BaseODESolverDynamics):
                     np.inf,
                     np.inf,
                     np.inf,
-                    self.ang_vel_limit[0],
-                    self.ang_vel_limit[0],
-                    self.ang_vel_limit[2]
+                    ang_vel_limit[0],
+                    ang_vel_limit[1],
+                    ang_vel_limit[2]
                 ]
             )
-
-        if angle_wrap_centers is None:
-            angle_wrap_centers = np.array([None, None, None, None, None, None, None, None, None, None, None, None, None, None], dtype=float)
 
         super().__init__(state_min=state_min, state_max=state_max, angle_wrap_centers=angle_wrap_centers, **kwargs)
 
@@ -492,11 +482,7 @@ class SixDOFDynamics(BaseODESolverDynamics):
         w_derivative[1] = 1 / self.inertia_matrix[1, 1] * ((self.inertia_matrix[2, 2] - self.inertia_matrix[0, 0]) * wx * wz + control[4])
         w_derivative[2] = 1 / self.inertia_matrix[2, 2] * ((self.inertia_matrix[0, 0] - self.inertia_matrix[1, 1]) * wx * wy + control[5])
         w = np.array([wx, wy, wz])
-        for i in range(3):
-            if w[i] >= self.ang_vel_limit[i]:
-                w_derivative[i] = min(0, w_derivative[i])
-            elif w[i] <= -self.ang_vel_limit[i]:
-                w_derivative[i] = max(0, w_derivative[i])
+
         # Form derivative array
         state_derivative = np.array(
             [

@@ -253,3 +253,14 @@
     velocity: [-0.8203079167643681, 0.12582554618361244, 0.0]
     angular_velocity: [0, 0, -0.03500]
   error_bound: 5e-4
+- ID: At_origin_min_x_trans_min_z_rot_control_long_hold
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  control: [-1, 0, 0, 0, 0, -0.001]
+  num_steps: 100
+  attr_targets:
+    angular_velocity: [0, 0, -0.03500]
+  error_bound: 5e-4
