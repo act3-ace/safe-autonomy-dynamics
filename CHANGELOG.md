@@ -1,3 +1,10 @@
+# [0.3.0](https://git.act3-ace.com/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.2.0...v0.3.0) (2022-08-13)
+
+
+### Features
+
+* **cwh:** 6dof model ([2d315ea](https://git.act3-ace.com/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/2d315ea35fde89d35ee3ccc78f9e0cf90203079f))
+
 # [0.2.0](https://git.act3-ace.com/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.1.0...v0.2.0) (2022-08-01)
 
 
