@@ -160,9 +160,9 @@ class SixDOFSpacecraft(BaseRotationEntity):
         self._state = np.array([])
 
         # Define limits for angular acceleration, angular velocity, and control inputs
-        ang_acc_limit = number_list_to_np(ang_acc_limit, shape=(3,))  # rad/s^2
-        ang_vel_limit = number_list_to_np(ang_vel_limit, shape=(3,))  # rad/s
-        
+        ang_acc_limit = number_list_to_np(ang_acc_limit, shape=(3, ))  # rad/s^2
+        ang_vel_limit = number_list_to_np(ang_vel_limit, shape=(3, ))  # rad/s
+
         acc_limit_combined = np.zeros((3, ))
         vel_limit_combined = np.zeros((3, ))
         control_limit = np.zeros((6, ))
@@ -400,8 +400,8 @@ class SixDOFDynamics(BaseODESolverDynamics):
         self.body_frame_thrust = body_frame_thrust
         self.control_thrust_Hill = np.zeros(3, )
 
-        ang_acc_limit = number_list_to_np(ang_acc_limit, shape=(3,))  # rad/s^2
-        ang_vel_limit = number_list_to_np(ang_vel_limit, shape=(3,))  # rad/s
+        ang_acc_limit = number_list_to_np(ang_acc_limit, shape=(3, ))  # rad/s^2
+        ang_vel_limit = number_list_to_np(ang_vel_limit, shape=(3, ))  # rad/s
 
         A, B = generate_cwh_matrices(self.m, self.n, '3d')
 
@@ -481,7 +481,6 @@ class SixDOFDynamics(BaseODESolverDynamics):
         w_derivative[0] = 1 / self.inertia_matrix[0, 0] * ((self.inertia_matrix[1, 1] - self.inertia_matrix[2, 2]) * wy * wz + control[3])
         w_derivative[1] = 1 / self.inertia_matrix[1, 1] * ((self.inertia_matrix[2, 2] - self.inertia_matrix[0, 0]) * wx * wz + control[4])
         w_derivative[2] = 1 / self.inertia_matrix[2, 2] * ((self.inertia_matrix[0, 0] - self.inertia_matrix[1, 1]) * wx * wy + control[5])
-        w = np.array([wx, wy, wz])
 
         # Form derivative array
         state_derivative = np.array(
