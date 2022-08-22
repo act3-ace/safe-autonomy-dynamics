@@ -12,14 +12,14 @@
         <meta name="author" content="Safe Autonomy Team">
       
       
-        <link rel="canonical" href="https://git.act3-ace.com/reference/cwh/rotational_model/">
+        <link rel="canonical" href="https://git.act3-ace.com/reference/cwh/sixdof_model/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
     
     
       
-        <title>Rotational model - Safe Autonomy Dynamics</title>
+        <title>Sixdof model - Safe Autonomy Dynamics</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#safe_autonomy_dynamics.cwh.rotational_model" class="md-skip">
+        <a href="#safe_autonomy_dynamics.cwh.sixdof_model" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Rotational model
+              Sixdof model
             
           </span>
         </div>
@@ -419,162 +419,162 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model" class="md-nav__link">
-    safe_autonomy_dynamics.cwh.rotational_model
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model" class="md-nav__link">
+    safe_autonomy_dynamics.cwh.sixdof_model
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dDynamics" class="md-nav__link">
-    CWHRotation2dDynamics
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFDynamics" class="md-nav__link">
+    SixDOFDynamics
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft" class="md-nav__link">
-    CWHRotation2dSpacecraft
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft" class="md-nav__link">
+    SixDOFSpacecraft
   </a>
   
-    <nav class="md-nav" aria-label="CWHRotation2dSpacecraft">
+    <nav class="md-nav" aria-label="SixDOFSpacecraft">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.angular_velocity" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.angular_velocity" class="md-nav__link">
     angular_velocity
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.orientation" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.orientation" class="md-nav__link">
     orientation
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.position" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.position" class="md-nav__link">
     position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.q1" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.q1" class="md-nav__link">
     q1
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.q2" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.q2" class="md-nav__link">
     q2
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.q3" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.q3" class="md-nav__link">
     q3
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.q4" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.q4" class="md-nav__link">
     q4
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.quaternion" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.quaternion" class="md-nav__link">
     quaternion
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.theta" class="md-nav__link">
-    theta
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.velocity" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.velocity" class="md-nav__link">
     velocity
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.wx" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.wx" class="md-nav__link">
     wx
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.wy" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.wy" class="md-nav__link">
     wy
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.wz" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.wz" class="md-nav__link">
     wz
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.x" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.x" class="md-nav__link">
     x
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.x_dot" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.x_dot" class="md-nav__link">
     x_dot
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.y" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.y" class="md-nav__link">
     y
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.y_dot" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.y_dot" class="md-nav__link">
     y_dot
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.z" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.z" class="md-nav__link">
     z
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.z_dot" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.z_dot" class="md-nav__link">
     z_dot
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.register_partner" class="md-nav__link">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.register_lead" class="md-nav__link">
+    register_lead()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.register_partner" class="md-nav__link">
     register_partner()
   </a>
   
@@ -586,8 +586,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraftValidator" class="md-nav__link">
-    CWHRotation2dSpacecraftValidator
+  <a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraftValidator" class="md-nav__link">
+    SixDOFSpacecraftValidator
   </a>
   
 </li>
@@ -604,17 +604,17 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://git.act3-ace.com/rta/safe-autonomy-dynamics/blob/main/docs/safe_autonomy_dynamics/cwh/rotational_model.py" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://git.act3-ace.com/rta/safe-autonomy-dynamics/blob/main/docs/safe_autonomy_dynamics/cwh/sixdof_model.py" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>Rotational model</h1>
+  <h1>Sixdof model</h1>
 
 <div class="doc doc-object doc-module">
 
-<a id="safe_autonomy_dynamics.cwh.rotational_model"></a>
+<a id="safe_autonomy_dynamics.cwh.sixdof_model"></a>
     <div class="doc doc-contents first">
 
 
@@ -634,63 +634,75 @@
 
 
 
+
+
+
   <div class="doc doc-object doc-class">
 
 
 
-<h2 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dDynamics" class="doc doc-heading">
+<h2 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFDynamics" class="doc doc-heading">
         <code>
-CWHRotation2dDynamics            (<a class="autorefs autorefs-internal" title="safe_autonomy_dynamics.base_models.BaseODESolverDynamics" href="../../base_models/#safe_autonomy_dynamics.base_models.BaseODESolverDynamics">BaseODESolverDynamics</a>)
+SixDOFDynamics            (<a class="autorefs autorefs-internal" title="safe_autonomy_dynamics.base_models.BaseODESolverDynamics" href="../../base_models/#safe_autonomy_dynamics.base_models.BaseODESolverDynamics">BaseODESolverDynamics</a>)
         </code>
 
 
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dDynamics" class="headerlink" title="Permanent link">¤</a></h2>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFDynamics" class="headerlink" title="Permanent link">¤</a></h2>
 
     <div class="doc doc-contents ">
 
 
         <details class="quote">
-          <summary>Source code in <code>safe_autonomy_dynamics/cwh/rotational_model.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">CWHRotation2dDynamics</span><span class="p">(</span><span class="n">BaseODESolverDynamics</span><span class="p">):</span>
+          <summary>Source code in <code>safe_autonomy_dynamics/cwh/sixdof_model.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SixDOFDynamics</span><span class="p">(</span><span class="n">BaseODESolverDynamics</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    State transition implementation of 3D Clohessy-Wiltshire dynamics model.</span>
+<span class="sd">    State transition implementation of 3D Clohessy-Wiltshire dynamics model and 3D rotational dynamics model.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    m: float</span>
 <span class="sd">        Mass of spacecraft in kilograms, by default 12</span>
-<span class="sd">    inertia: float</span>
-<span class="sd">        Inertia of spacecraft in kg*m^2</span>
-<span class="sd">    ang_acc_limit: float</span>
-<span class="sd">         Angular acceleration limit in rad/s^2</span>
-<span class="sd">    ang_vel_limit: float</span>
-<span class="sd">         Angular velocity limit in rad/s</span>
+<span class="sd">    inertia_matrix: float</span>
+<span class="sd">        Inertia matrix of spacecraft (3x3) in kg*m^2</span>
+<span class="sd">    ang_acc_limit: float, list, np.ndarray</span>
+<span class="sd">        Angular acceleration limit in rad/s^2. If array_like, applied to x, y, z elementwise</span>
+<span class="sd">    ang_vel_limit: float, list, np.ndarray</span>
+<span class="sd">        Angular velocity limit in rad/s. If array_like, applied to x, y, z elementwise</span>
+<span class="sd">    thrust_control_limit: float</span>
+<span class="sd">        Thrust control limit in N</span>
 <span class="sd">    n: float</span>
 <span class="sd">        Orbital mean motion of Hill&#39;s reference frame&#39;s circular orbit in rad/s, by default 0.001027</span>
+<span class="sd">    body_frame_thrust: bool</span>
+<span class="sd">        Flag indicating the reference frame for the control thrust vector: True- Body frame, False - Hill&#39;s frame</span>
+<span class="sd">        by default, True</span>
 <span class="sd">    kwargs:</span>
-<span class="sd">        Additional keyword arguments passed to parent class BaseODESolverDynamics constructor</span>
+<span class="sd">        Additional keyword arguments passed to parent class BaseLinearODESolverDynamics constructor</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">m</span><span class="o">=</span><span class="n">M_DEFAULT</span><span class="p">,</span>
-        <span class="n">inertia</span><span class="o">=</span><span class="n">INERTIA_DEFAULT</span><span class="p">,</span>
-        <span class="n">ang_acc_limit</span><span class="o">=</span><span class="n">ANG_ACC_LIMIT_DEFAULT</span><span class="p">,</span>
-        <span class="n">ang_vel_limit</span><span class="o">=</span><span class="n">ANG_VEL_LIMIT_DEFAULT</span><span class="p">,</span>
-        <span class="n">n</span><span class="o">=</span><span class="n">N_DEFAULT</span><span class="p">,</span>
+        <span class="n">m</span><span class="p">,</span>
+        <span class="n">inertia_matrix</span><span class="p">,</span>
+        <span class="n">ang_acc_limit</span><span class="p">,</span>
+        <span class="n">ang_vel_limit</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">,</span>
+        <span class="n">body_frame_thrust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">state_max</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">state_min</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">angle_wrap_centers</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span>  <span class="c1"># kg</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inertia</span> <span class="o">=</span> <span class="n">inertia</span>  <span class="c1"># kg*m^2</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ang_acc_limit</span> <span class="o">=</span> <span class="n">ang_acc_limit</span>  <span class="c1"># rad/s^2</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ang_vel_limit</span> <span class="o">=</span> <span class="n">ang_vel_limit</span>  <span class="c1"># rad/s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inertia_matrix</span> <span class="o">=</span> <span class="n">inertia_matrix</span>  <span class="c1"># kg*m^2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>  <span class="c1"># rads/s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">body_frame_thrust</span> <span class="o">=</span> <span class="n">body_frame_thrust</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_thrust_Hill</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">)</span>
 
-        <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">generate_cwh_matrices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;2d&#39;</span><span class="p">)</span>
+        <span class="n">ang_acc_limit</span> <span class="o">=</span> <span class="n">number_list_to_np</span><span class="p">(</span><span class="n">ang_acc_limit</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">))</span>  <span class="c1"># rad/s^2</span>
+        <span class="n">ang_vel_limit</span> <span class="o">=</span> <span class="n">number_list_to_np</span><span class="p">(</span><span class="n">ang_vel_limit</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">))</span>  <span class="c1"># rad/s</span>
+
+        <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">generate_cwh_matrices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;3d&#39;</span><span class="p">)</span>
 
         <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;A must be square matrix. Instead got shape </span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;A must be square matrix. Instead got shape </span><span class="si">{</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -703,38 +715,89 @@ CWHRotation2dDynamics            (<a class="autorefs autorefs-internal" title="s
         <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">state_min</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">state_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">ang_vel_limit</span><span class="p">])</span>
+            <span class="n">state_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="o">-</span><span class="n">ang_vel_limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="o">-</span><span class="n">ang_vel_limit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="o">-</span><span class="n">ang_vel_limit</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">state_max</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">state_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ang_vel_limit</span><span class="p">])</span>
-
-        <span class="k">if</span> <span class="n">angle_wrap_centers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">angle_wrap_centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+            <span class="n">state_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                    <span class="n">ang_vel_limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">ang_vel_limit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">ang_vel_limit</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">state_min</span><span class="o">=</span><span class="n">state_min</span><span class="p">,</span> <span class="n">state_max</span><span class="o">=</span><span class="n">state_max</span><span class="p">,</span> <span class="n">angle_wrap_centers</span><span class="o">=</span><span class="n">angle_wrap_centers</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_compute_state_dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">control</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 
-        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">x_dot</span><span class="p">,</span> <span class="n">y_dot</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">state</span>
-        <span class="c1"># Form separate state vector for translational state</span>
-        <span class="n">pos_vel_state_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x_dot</span><span class="p">,</span> <span class="n">y_dot</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-        <span class="c1"># Compute the rotated thrust vector</span>
-        <span class="n">thrust_vector</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)])</span> <span class="o">+</span> <span class="n">control</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)])</span>
-        <span class="p">)</span>
-        <span class="c1"># Compute derivatives</span>
-        <span class="n">pos_vel_derivative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">pos_vel_state_vec</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="n">thrust_vector</span><span class="p">)</span>
-        <span class="n">theta_dot_dot</span> <span class="o">=</span> <span class="n">control</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia</span>
-        <span class="c1"># check angular velocity limit</span>
-        <span class="k">if</span> <span class="n">theta_dot</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ang_vel_limit</span><span class="p">:</span>
-            <span class="n">theta_dot_dot</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta_dot_dot</span><span class="p">)</span>
-            <span class="n">theta_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ang_vel_limit</span>
-        <span class="k">elif</span> <span class="n">theta_dot</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">ang_vel_limit</span><span class="p">:</span>
-            <span class="n">theta_dot_dot</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta_dot_dot</span><span class="p">)</span>
-            <span class="n">theta_dot</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">ang_vel_limit</span>
-        <span class="c1"># Form array of state derivatives</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="n">q3</span><span class="p">,</span> <span class="n">q4</span><span class="p">,</span> <span class="n">x_dot</span><span class="p">,</span> <span class="n">y_dot</span><span class="p">,</span> <span class="n">z_dot</span><span class="p">,</span> <span class="n">wx</span><span class="p">,</span> <span class="n">wy</span><span class="p">,</span> <span class="n">wz</span> <span class="o">=</span> <span class="n">state</span>
+
+        <span class="c1"># Convert the control thrust to Hill&#39;s frame prior to application in the CWH equations</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">body_frame_thrust</span><span class="p">:</span>
+            <span class="n">rotationObj</span> <span class="o">=</span> <span class="n">Rotation</span><span class="o">.</span><span class="n">from_quat</span><span class="p">([</span><span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="n">q3</span><span class="p">,</span> <span class="n">q4</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">control_thrust_Hill</span> <span class="o">=</span> <span class="n">rotationObj</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">control_thrust_Hill</span> <span class="o">=</span> <span class="n">control</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+
+        <span class="c1"># Compute translational derivatives</span>
+        <span class="c1"># Use Clohessey-Wiltshire A and B matrices</span>
+        <span class="n">pos_vel_state_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">x_dot</span><span class="p">,</span> <span class="n">y_dot</span><span class="p">,</span> <span class="n">z_dot</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">pos_vel_derivative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">pos_vel_state_vec</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_thrust_Hill</span><span class="p">)</span>
+
+        <span class="c1"># Compute rotational derivatives</span>
+        <span class="n">q_derivative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="p">))</span>
+        <span class="n">w_derivative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="p">))</span>
+        <span class="n">q_derivative</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">q4</span> <span class="o">*</span> <span class="n">wx</span> <span class="o">-</span> <span class="n">q3</span> <span class="o">*</span> <span class="n">wy</span> <span class="o">+</span> <span class="n">q2</span> <span class="o">*</span> <span class="n">wz</span><span class="p">)</span>
+        <span class="n">q_derivative</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">q3</span> <span class="o">*</span> <span class="n">wx</span> <span class="o">+</span> <span class="n">q4</span> <span class="o">*</span> <span class="n">wy</span> <span class="o">-</span> <span class="n">q1</span> <span class="o">*</span> <span class="n">wz</span><span class="p">)</span>
+        <span class="n">q_derivative</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">q2</span> <span class="o">*</span> <span class="n">wx</span> <span class="o">+</span> <span class="n">q1</span> <span class="o">*</span> <span class="n">wy</span> <span class="o">+</span> <span class="n">q4</span> <span class="o">*</span> <span class="n">wz</span><span class="p">)</span>
+        <span class="n">q_derivative</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">q1</span> <span class="o">*</span> <span class="n">wx</span> <span class="o">-</span> <span class="n">q2</span> <span class="o">*</span> <span class="n">wy</span> <span class="o">-</span> <span class="n">q3</span> <span class="o">*</span> <span class="n">wz</span><span class="p">)</span>
+        <span class="n">w_derivative</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">inertia_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia_matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="n">wy</span> <span class="o">*</span> <span class="n">wz</span> <span class="o">+</span> <span class="n">control</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="n">w_derivative</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">inertia_matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">wx</span> <span class="o">*</span> <span class="n">wz</span> <span class="o">+</span> <span class="n">control</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+        <span class="n">w_derivative</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia_matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">inertia_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">wx</span> <span class="o">*</span> <span class="n">wy</span> <span class="o">+</span> <span class="n">control</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+
+        <span class="c1"># Form derivative array</span>
         <span class="n">state_derivative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">pos_vel_derivative</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos_vel_derivative</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_dot</span><span class="p">,</span> <span class="n">pos_vel_derivative</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">pos_vel_derivative</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">theta_dot_dot</span><span class="p">],</span>
+            <span class="p">[</span>
+                <span class="n">pos_vel_derivative</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">pos_vel_derivative</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">pos_vel_derivative</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">q_derivative</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">q_derivative</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">q_derivative</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">q_derivative</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">pos_vel_derivative</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                <span class="n">pos_vel_derivative</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="n">pos_vel_derivative</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+                <span class="n">w_derivative</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">w_derivative</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">w_derivative</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="p">],</span>
             <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span>
         <span class="p">)</span>
 
@@ -769,49 +832,50 @@ CWHRotation2dDynamics            (<a class="autorefs autorefs-internal" title="s
 
 
 
-<h2 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft" class="doc doc-heading">
+<h2 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft" class="doc doc-heading">
         <code>
-CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title="safe_autonomy_dynamics.base_models.BaseRotationEntity" href="../../base_models/#safe_autonomy_dynamics.base_models.BaseRotationEntity">BaseRotationEntity</a>)
+SixDOFSpacecraft            (<a class="autorefs autorefs-internal" title="safe_autonomy_dynamics.base_models.BaseRotationEntity" href="../../base_models/#safe_autonomy_dynamics.base_models.BaseRotationEntity">BaseRotationEntity</a>)
         </code>
 
 
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft" class="headerlink" title="Permanent link">¤</a></h2>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft" class="headerlink" title="Permanent link">¤</a></h2>
 
     <div class="doc doc-contents ">
 
 
         <details class="quote">
-          <summary>Source code in <code>safe_autonomy_dynamics/cwh/rotational_model.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">CWHRotation2dSpacecraft</span><span class="p">(</span><span class="n">BaseRotationEntity</span><span class="p">):</span>
+          <summary>Source code in <code>safe_autonomy_dynamics/cwh/sixdof_model.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SixDOFSpacecraft</span><span class="p">(</span><span class="n">BaseRotationEntity</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Spacecraft with 2D translational Clohessy-Wiltshire dynamics in Hill&#39;s reference frame.</span>
-<span class="sd">    In-plane motion (x,y) using +/- x thruster rotated to desired direction</span>
-
-<span class="sd">    1D rotational dynamics (about z) using a +/- z reaction wheel</span>
+<span class="sd">    Spacecraft with 3D Clohessy-Wiltshire translational dynamics, in Hill&#39;s frame and 3D rotational dynamics</span>
 
 <span class="sd">    States</span>
-<span class="sd">        x</span>
-<span class="sd">        y</span>
-<span class="sd">        theta</span>
-<span class="sd">        x_dot</span>
-<span class="sd">        y_dot</span>
-<span class="sd">        theta_dot</span>
+<span class="sd">        x, y, z</span>
+<span class="sd">        q1, q2, q3, q4</span>
+<span class="sd">        x_dot, y_dot, z_dot</span>
+<span class="sd">        wx, wy, wz</span>
 
 <span class="sd">    Controls</span>
 <span class="sd">        thrust_x</span>
 <span class="sd">            range = [-1, 1] Newtons</span>
 <span class="sd">        thrust_y</span>
 <span class="sd">            range = [-1, 1] Newtons</span>
+<span class="sd">        thrust_z</span>
+<span class="sd">            range = [-1, 1] Newtons</span>
+<span class="sd">        moment_x</span>
+<span class="sd">            range = [-0.001, 0.001] Newton-Meters</span>
+<span class="sd">        moment_y</span>
+<span class="sd">            range = [-0.001, 0.001] Newton-Meters</span>
 <span class="sd">        moment_z</span>
 <span class="sd">            range = [-0.001, 0.001] Newton-Meters</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    m: float</span>
-<span class="sd">        Mass of spacecraft in kilograms, by default 12.</span>
-<span class="sd">    inertia: float</span>
-<span class="sd">        Inertia of spacecraft in kg*m^2</span>
+<span class="sd">        Mass of spacecraft in kilograms, by default 12</span>
+<span class="sd">    inertia_matrix: float</span>
+<span class="sd">        Inertia matrix of spacecraft (3x3) in kg*m^2</span>
 <span class="sd">    ang_acc_limit: float</span>
 <span class="sd">        Angular acceleration limit in rad/s^2</span>
 <span class="sd">    ang_vel_limit: float</span>
@@ -819,57 +883,77 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 <span class="sd">    inertia_wheel: float</span>
 <span class="sd">        Inertia of reaction wheel in kg*m^2</span>
 <span class="sd">    acc_limit_wheel: float</span>
-<span class="sd">         Acceleration limit of reaction wheel in rad/s^2</span>
+<span class="sd">        Acceleration limit of reaction wheel in rad/s^2</span>
 <span class="sd">    vel_limit_wheel: float</span>
-<span class="sd">         Velocity limit of reaction wheel in rad/s</span>
+<span class="sd">        Velocity limit of reaction wheel in rad/s</span>
+<span class="sd">    thrust_control_limit: float</span>
+<span class="sd">        Thrust control limit in N</span>
+<span class="sd">    body_frame_thrust: bool</span>
+<span class="sd">        Flag indicating the reference frame for the control thrust vector: True- Body frame, False - Hill&#39;s frame</span>
+<span class="sd">        by default, True</span>
 <span class="sd">    n: float</span>
 <span class="sd">        Orbital mean motion of Hill&#39;s reference frame&#39;s circular orbit in rad/s, by default 0.001027.</span>
 <span class="sd">    integration_method: str</span>
 <span class="sd">        Numerical integration method passed to dynamics model. See BaseODESolverDynamics.</span>
 <span class="sd">    kwargs:</span>
-<span class="sd">        Additional keyword arguments passed to parent class BaseRotationEntity.</span>
+<span class="sd">        Additional keyword arguments passed to parent class BaseRotationSpacecraft.</span>
+<span class="sd">        body_frame_thrust: bool</span>
+<span class="sd">            Flag indicating the reference frame for the control thrust vector: True- Body frame, False - Hill&#39;s frame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">m</span><span class="o">=</span><span class="n">M_DEFAULT</span><span class="p">,</span>
-        <span class="n">inertia</span><span class="o">=</span><span class="n">INERTIA_DEFAULT</span><span class="p">,</span>
+        <span class="n">inertia_matrix</span><span class="o">=</span><span class="n">INERTIA_MATRIX_DEFAULT</span><span class="p">,</span>
         <span class="n">ang_acc_limit</span><span class="o">=</span><span class="n">ANG_ACC_LIMIT_DEFAULT</span><span class="p">,</span>
         <span class="n">ang_vel_limit</span><span class="o">=</span><span class="n">ANG_VEL_LIMIT_DEFAULT</span><span class="p">,</span>
         <span class="n">inertia_wheel</span><span class="o">=</span><span class="n">INERTIA_WHEEL_DEFAULT</span><span class="p">,</span>
         <span class="n">acc_limit_wheel</span><span class="o">=</span><span class="n">ACC_LIMIT_WHEEL_DEFAULT</span><span class="p">,</span>
         <span class="n">vel_limit_wheel</span><span class="o">=</span><span class="n">VEL_LIMIT_WHEEL_DEFAULT</span><span class="p">,</span>
+        <span class="n">thrust_control_limit</span><span class="o">=</span><span class="n">THRUST_CONTROL_LIMIT_DEFAULT</span><span class="p">,</span>
+        <span class="n">body_frame_thrust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">n</span><span class="o">=</span><span class="n">N_DEFAULT</span><span class="p">,</span>
         <span class="n">integration_method</span><span class="o">=</span><span class="s2">&quot;RK45&quot;</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">partner</span> <span class="o">=</span> <span class="p">{}</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span>  <span class="c1"># kg</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inertia</span> <span class="o">=</span> <span class="n">inertia</span>  <span class="c1"># kg*m^2</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ang_acc_limit</span> <span class="o">=</span> <span class="n">ang_acc_limit</span>  <span class="c1"># rad/s^2</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ang_vel_limit</span> <span class="o">=</span> <span class="n">ang_vel_limit</span>  <span class="c1"># rad/s</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inertia_wheel</span> <span class="o">=</span> <span class="n">inertia_wheel</span>  <span class="c1"># kg*m^2</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">acc_limit_wheel</span> <span class="o">=</span> <span class="n">acc_limit_wheel</span>  <span class="c1"># rad/s^2</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">vel_limit_wheel</span> <span class="o">=</span> <span class="n">vel_limit_wheel</span>  <span class="c1"># rad/s</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>  <span class="c1"># rads/s</span>
-        <span class="sd">&quot;&quot;&quot; Define limits for angular acceleration, angular velocity, and control inputs &quot;&quot;&quot;</span>
-        <span class="n">ang_acc_limit</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ang_acc_limit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia_wheel</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">acc_limit_wheel</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia</span><span class="p">)</span>
-        <span class="n">ang_vel_limit</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ang_vel_limit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia_wheel</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel_limit_wheel</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia</span><span class="p">)</span>
+        <span class="c1"># Define limits for angular acceleration, angular velocity, and control inputs</span>
+        <span class="n">ang_acc_limit</span> <span class="o">=</span> <span class="n">number_list_to_np</span><span class="p">(</span><span class="n">ang_acc_limit</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">))</span>  <span class="c1"># rad/s^2</span>
+        <span class="n">ang_vel_limit</span> <span class="o">=</span> <span class="n">number_list_to_np</span><span class="p">(</span><span class="n">ang_vel_limit</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">))</span>  <span class="c1"># rad/s</span>
 
-        <span class="n">control_default</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="p">))</span>
-        <span class="n">control_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">ang_acc_limit</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia</span><span class="p">])</span>
-        <span class="n">control_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ang_acc_limit</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia</span><span class="p">])</span>
+        <span class="n">acc_limit_combined</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="p">))</span>
+        <span class="n">vel_limit_combined</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="p">))</span>
+        <span class="n">control_limit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">acc_limit_combined</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ang_acc_limit</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">inertia_wheel</span> <span class="o">*</span> <span class="n">acc_limit_wheel</span> <span class="o">/</span> <span class="n">inertia_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+            <span class="n">vel_limit_combined</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ang_vel_limit</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">inertia_wheel</span> <span class="o">*</span> <span class="n">vel_limit_wheel</span> <span class="o">/</span> <span class="n">inertia_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+            <span class="n">control_limit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">thrust_control_limit</span>
+            <span class="n">control_limit</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">acc_limit_combined</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">inertia_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+
+        <span class="n">control_default</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="p">))</span>
+        <span class="n">control_min</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">control_limit</span>
+        <span class="n">control_max</span> <span class="o">=</span> <span class="n">control_limit</span>
         <span class="n">control_map</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;thrust_x&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="s1">&#39;thrust_y&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s1">&#39;moment_z&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s1">&#39;thrust_z&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s1">&#39;moment_x&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s1">&#39;moment_y&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s1">&#39;moment_z&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="sd">&quot;&quot;&quot; Create instance of dynamics class &quot;&quot;&quot;</span>
-        <span class="n">dynamics</span> <span class="o">=</span> <span class="n">CWHRotation2dDynamics</span><span class="p">(</span>
-            <span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">inertia</span><span class="o">=</span><span class="n">inertia</span><span class="p">,</span> <span class="n">ang_acc_limit</span><span class="o">=</span><span class="n">ang_acc_limit</span><span class="p">,</span> <span class="n">ang_vel_limit</span><span class="o">=</span><span class="n">ang_vel_limit</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">integration_method</span><span class="o">=</span><span class="n">integration_method</span>
+        <span class="n">dynamics</span> <span class="o">=</span> <span class="n">SixDOFDynamics</span><span class="p">(</span>
+            <span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span>
+            <span class="n">inertia_matrix</span><span class="o">=</span><span class="n">inertia_matrix</span><span class="p">,</span>
+            <span class="n">ang_acc_limit</span><span class="o">=</span><span class="n">acc_limit_combined</span><span class="p">,</span>
+            <span class="n">ang_vel_limit</span><span class="o">=</span><span class="n">vel_limit_combined</span><span class="p">,</span>
+            <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
+            <span class="n">body_frame_thrust</span><span class="o">=</span><span class="n">body_frame_thrust</span><span class="p">,</span>
+            <span class="n">integration_method</span><span class="o">=</span><span class="n">integration_method</span>
         <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lead</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">partner</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">dynamics</span><span class="p">,</span> <span class="n">control_default</span><span class="o">=</span><span class="n">control_default</span><span class="p">,</span> <span class="n">control_min</span><span class="o">=</span><span class="n">control_min</span><span class="p">,</span> <span class="n">control_max</span><span class="o">=</span><span class="n">control_max</span><span class="p">,</span> <span class="n">control_map</span><span class="o">=</span><span class="n">control_map</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
@@ -877,10 +961,10 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_get_config_validator</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">CWHRotation2dSpacecraftValidator</span>
+        <span class="k">return</span> <span class="n">SixDOFSpacecraftValidator</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">CWHRotation2dSpacecraft</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">SixDOFSpacecraft</span><span class="p">):</span>
             <span class="n">eq</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">velocity</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
             <span class="n">eq</span> <span class="o">=</span> <span class="n">eq</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">position</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
             <span class="n">eq</span> <span class="o">=</span> <span class="n">eq</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="o">.</span><span class="n">as_quat</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">orientation</span><span class="o">.</span><span class="n">as_quat</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
@@ -888,13 +972,28 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
             <span class="k">return</span> <span class="n">eq</span>
         <span class="k">return</span> <span class="kc">False</span>
 
+    <span class="k">def</span> <span class="nf">register_lead</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lead</span><span class="p">:</span> <span class="n">BaseRotationEntity</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register another entity as this entity&#39;s lead. Defines line of communication between entities.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        lead: BaseRotationEntity</span>
+<span class="sd">            Entity with line of communication to this entity.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lead</span> <span class="o">=</span> <span class="n">lead</span>
+
     <span class="k">def</span> <span class="nf">register_partner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partner</span><span class="p">:</span> <span class="n">BaseRotationEntity</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Register another entity as this entity&#39;s partner. Defines line of communication between entities.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        partner: BaseEntity</span>
+<span class="sd">        partner: BaseRotationEntity</span>
 <span class="sd">            Entity with line of communication to this entity.</span>
 
 <span class="sd">        Returns</span>
@@ -906,7 +1005,9 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
     <span class="k">def</span> <span class="nf">_build_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;form state vector&quot;&quot;&quot;</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">theta</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">x_dot</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">y_dot</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">wz</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">z</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">q1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">q2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">q3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">q4</span><span class="p">]</span> <span class="o">+</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">x_dot</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">y_dot</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">z_dot</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">wx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">wy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">wz</span><span class="p">],</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span>
         <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">state</span>
@@ -924,62 +1025,57 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">z</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get z&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">q1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get first element of quaternion&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quaternion</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">q2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get second element of quaternion&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quaternion</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">q3</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get third element of quaternion&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quaternion</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">q4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get fourth element of quaternion (scalar)&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quaternion</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">theta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;get theta&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">x_dot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get x_dot, the velocity component in the x direction&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">y_dot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get y_dot, the velocity component in the y direction&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">z_dot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get z_dot, the velocity component in the z axis&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">wx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get wz_dot, the angular velocity component about the x axis&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">wy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get wz_dot, the angular velocity component about the y axis&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">wz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get wz_dot, the angular velocity component about the z axis&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">position</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -997,14 +1093,15 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 <span class="sd">        scipy.spatial.transform.Rotation</span>
 <span class="sd">            Rotation transformation of the entity&#39;s local reference frame basis vectors in the global reference frame.</span>
 <span class="sd">            i.e. applying this rotation to [1, 0, 0] yields the entity&#39;s local x-axis in the global frame.</span>
+
+<span class="sd">            In this implementation local frame is body, global frame is Hill&#39;s frame</span>
+<span class="sd">            Quaternion order (scalar in 4th element) matches scipy convention of [x,y,z,w]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Rotation</span><span class="o">.</span><span class="n">from_euler</span><span class="p">(</span><span class="s2">&quot;ZYX&quot;</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">Rotation</span><span class="o">.</span><span class="n">from_quat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">q1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">q2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">q3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">q4</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">quaternion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;get 4d quaternion</span>
-<span class="sd">           Quaternion order (scalar in 4th element) matches scipy convention of [x,y,z,w]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;get 4d quaternion&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="o">.</span><span class="n">as_quat</span><span class="p">()</span>
 
     <span class="nd">@property</span>
@@ -1032,7 +1129,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.angular_velocity" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.angular_velocity" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">angular_velocity</span></code>
 
   <span class="doc doc-properties">
@@ -1040,7 +1137,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.angular_velocity" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.angular_velocity" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1054,7 +1151,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.orientation" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.orientation" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">orientation</span></code>
 
   <span class="doc doc-properties">
@@ -1062,7 +1159,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.orientation" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.orientation" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1076,7 +1173,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.position" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.position" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">position</span></code>
 
   <span class="doc doc-properties">
@@ -1084,7 +1181,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.position" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.position" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1098,7 +1195,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.q1" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.q1" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">q1</span></code>
 
   <span class="doc doc-properties">
@@ -1106,7 +1203,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.q1" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.q1" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1120,7 +1217,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.q2" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.q2" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">q2</span></code>
 
   <span class="doc doc-properties">
@@ -1128,7 +1225,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.q2" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.q2" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1142,7 +1239,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.q3" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.q3" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">q3</span></code>
 
   <span class="doc doc-properties">
@@ -1150,7 +1247,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.q3" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.q3" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1164,7 +1261,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.q4" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.q4" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">q4</span></code>
 
   <span class="doc doc-properties">
@@ -1172,7 +1269,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.q4" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.q4" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1186,7 +1283,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.quaternion" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.quaternion" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">quaternion</span></code>
 
   <span class="doc doc-properties">
@@ -1194,7 +1291,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.quaternion" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.quaternion" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1208,29 +1305,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.theta" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">theta</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-property"><code>property</code></small>
-      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
-  </span>
-
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.theta" class="headerlink" title="Permanent link">¤</a></h3>
-
-    <div class="doc doc-contents ">
-
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.velocity" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.velocity" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">velocity</span></code>
 
   <span class="doc doc-properties">
@@ -1238,7 +1313,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.velocity" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.velocity" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1252,7 +1327,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.wx" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.wx" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">wx</span></code>
 
   <span class="doc doc-properties">
@@ -1260,7 +1335,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.wx" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.wx" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1274,7 +1349,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.wy" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.wy" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">wy</span></code>
 
   <span class="doc doc-properties">
@@ -1282,7 +1357,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.wy" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.wy" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1296,7 +1371,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.wz" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.wz" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">wz</span></code>
 
   <span class="doc doc-properties">
@@ -1304,7 +1379,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.wz" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.wz" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1318,7 +1393,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.x" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.x" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">x</span></code>
 
   <span class="doc doc-properties">
@@ -1326,7 +1401,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.x" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.x" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1340,7 +1415,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.x_dot" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.x_dot" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">x_dot</span></code>
 
   <span class="doc doc-properties">
@@ -1348,7 +1423,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.x_dot" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.x_dot" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1362,7 +1437,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.y" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.y" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">y</span></code>
 
   <span class="doc doc-properties">
@@ -1370,7 +1445,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.y" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.y" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1384,7 +1459,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.y_dot" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.y_dot" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">y_dot</span></code>
 
   <span class="doc doc-properties">
@@ -1392,7 +1467,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.y_dot" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.y_dot" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1406,7 +1481,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.z" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.z" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">z</span></code>
 
   <span class="doc doc-properties">
@@ -1414,7 +1489,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.z" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.z" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1428,7 +1503,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.z_dot" class="doc doc-heading">
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.z_dot" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">z_dot</span></code>
 
   <span class="doc doc-properties">
@@ -1436,7 +1511,7 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.z_dot" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.z_dot" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1455,24 +1530,61 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h3 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.register_partner" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">register_partner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partner</span><span class="p">)</span></code>
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.register_lead" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">register_lead</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lead</span><span class="p">)</span></code>
 
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraft.register_partner" class="headerlink" title="Permanent link">¤</a></h3>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.register_lead" class="headerlink" title="Permanent link">¤</a></h3>
 
     <div class="doc doc-contents ">
 
 
         <details class="quote">
-          <summary>Source code in <code>safe_autonomy_dynamics/cwh/rotational_model.py</code></summary>
+          <summary>Source code in <code>safe_autonomy_dynamics/cwh/sixdof_model.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">register_lead</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lead</span><span class="p">:</span> <span class="n">BaseRotationEntity</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Register another entity as this entity&#39;s lead. Defines line of communication between entities.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    lead: BaseRotationEntity</span>
+<span class="sd">        Entity with line of communication to this entity.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">lead</span> <span class="o">=</span> <span class="n">lead</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.register_partner" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">register_partner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partner</span><span class="p">)</span></code>
+
+
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraft.register_partner" class="headerlink" title="Permanent link">¤</a></h3>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>safe_autonomy_dynamics/cwh/sixdof_model.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">register_partner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partner</span><span class="p">:</span> <span class="n">BaseRotationEntity</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Register another entity as this entity&#39;s partner. Defines line of communication between entities.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    partner: BaseEntity</span>
+<span class="sd">    partner: BaseRotationEntity</span>
 <span class="sd">        Entity with line of communication to this entity.</span>
 
 <span class="sd">    Returns</span>
@@ -1502,9 +1614,9 @@ CWHRotation2dSpacecraft            (<a class="autorefs autorefs-internal" title=
 
 
 
-<h2 id="safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraftValidator" class="doc doc-heading">
+<h2 id="safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraftValidator" class="doc doc-heading">
         <code>
-CWHRotation2dSpacecraftValidator            (<a class="autorefs autorefs-internal" title="safe_autonomy_dynamics.base_models.BaseEntityValidator" href="../../base_models/#safe_autonomy_dynamics.base_models.BaseEntityValidator">BaseEntityValidator</a>)
+SixDOFSpacecraftValidator            (<a class="autorefs autorefs-internal" title="safe_autonomy_dynamics.base_models.BaseEntityValidator" href="../../base_models/#safe_autonomy_dynamics.base_models.BaseEntityValidator">BaseEntityValidator</a>)
         </code>
 
 
@@ -1512,42 +1624,64 @@ CWHRotation2dSpacecraftValidator            (<a class="autorefs autorefs-interna
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-<a href="#safe_autonomy_dynamics.cwh.rotational_model.CWHRotation2dSpacecraftValidator" class="headerlink" title="Permanent link">¤</a></h2>
+<a href="#safe_autonomy_dynamics.cwh.sixdof_model.SixDOFSpacecraftValidator" class="headerlink" title="Permanent link">¤</a></h2>
 
     <div class="doc doc-contents ">
 
 
         <details class="quote">
-          <summary>Source code in <code>safe_autonomy_dynamics/cwh/rotational_model.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">CWHRotation2dSpacecraftValidator</span><span class="p">(</span><span class="n">BaseEntityValidator</span><span class="p">):</span>
+          <summary>Source code in <code>safe_autonomy_dynamics/cwh/sixdof_model.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SixDOFSpacecraftValidator</span><span class="p">(</span><span class="n">BaseEntityValidator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Validator for CWHRotation2dSpacecraft kwargs.</span>
+<span class="sd">    Validator for SixDOFSpacecraft kwargs.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    x: [float]</span>
-<span class="sd">       Length 1, x position value. m</span>
+<span class="sd">       Length 1, x position value</span>
 <span class="sd">    y: [float]</span>
-<span class="sd">       Length 1, y position value. m</span>
-<span class="sd">    theta: [float]</span>
-<span class="sd">       Length 1, rotation angle value. rad</span>
+<span class="sd">       Length 1, y position value</span>
+<span class="sd">    z: [float]</span>
+<span class="sd">       Length 1, z position value</span>
 <span class="sd">    x_dot: [float]</span>
-<span class="sd">       Length 1, x velocity value. m/s</span>
+<span class="sd">       Length 1, x velocity value</span>
 <span class="sd">    y_dot: [float]</span>
-<span class="sd">       Length 1, y velocity value. m/s</span>
-<span class="sd">    theta_dot: [float]</span>
-<span class="sd">       Length 1, rotation rate value. rad/s</span>
+<span class="sd">       Length 1, y velocity value</span>
+<span class="sd">    z_dot: [float]</span>
+<span class="sd">       Length 1, z velocity value</span>
+<span class="sd">    q1: [float]</span>
+<span class="sd">       Length 1, first element of quaternion - rotation from body to Hill frame</span>
+<span class="sd">    q2: [float]</span>
+<span class="sd">       Length 1, second element of quaternion value - rotation from body to Hill frame</span>
+<span class="sd">    q3: [float]</span>
+<span class="sd">       Length 1, third element of quaternion value - rotation from body to Hill frame</span>
+<span class="sd">    q4: [float]</span>
+<span class="sd">       Length 1, fourth element of quaternion value (scalar) - rotation from body to Hill frame</span>
+<span class="sd">       Placing the scalar as the 4th element matches the convention used by scipy</span>
+<span class="sd">    wx: [float]</span>
+<span class="sd">       Length 1, x axis angular rate value</span>
+<span class="sd">    wy: [float]</span>
+<span class="sd">       Length 1, y axis angular rate value</span>
+<span class="sd">    wz: [float]</span>
+<span class="sd">       Length 1, z axis angular rate value</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
 <span class="sd">    ValueError</span>
-<span class="sd">        Improper list lengths for parameters &#39;x&#39;, &#39;y&#39;, &#39;theta&#39;, &#39;x_dot&#39;, &#39;y_dot&#39;, &#39;theta_dot&#39;</span>
+<span class="sd">        Improper list lengths for parameters &#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;x_dot&#39;, &#39;y_dot&#39;, &#39;z_dot&#39;, &#39;q1&#39;, &#39;q2&#39;, &#39;q3&#39;, &#39;q4&#39;, &#39;wx&#39;, &#39;wy&#39;, &#39;wz&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">y</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">z</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">x_dot</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">y_dot</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">z_dot</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">q1</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">q2</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">q3</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">q4</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">wx</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">wy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">wz</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
 </code></pre></div>
         </details>
@@ -1555,6 +1689,13 @@ CWHRotation2dSpacecraftValidator            (<a class="autorefs autorefs-interna
 
 
   <div class="doc doc-children">
+
+
+
+
+
+
+
 
 
 
