@@ -81,6 +81,8 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
     Controls
         thrust_x
             range = [-1, 1] Newtons
+        thrust_y
+            range = [-1, 1] Newtons
         moment_z
             range = [-0.001, 0.001] Newton-Meters
 
