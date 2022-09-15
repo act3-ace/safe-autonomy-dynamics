@@ -1,19 +1,20 @@
-'''
+"""
 Stanley Bak
 F16 GCAS in Python
 
 Morelli dynamics (Polynomial interpolation)
-'''
+"""
+import numpy as np
 
 
 def Morellif16(alpha, beta, de, da, dr, p, q, r, cbar, b, V, xcg, xcgref):
-    'desc'
 
-    #alpha=max(-10*pi/180,min(45*pi/180,alpha)) # bounds alpha between -10 deg and 45 deg
-    #beta = max( - 30 * pi / 180, min(30 * pi / 180, beta)) #bounds beta between -30 deg and 30 deg
-    #de = max( - 25 * pi / 180, min(25 * pi / 180, de)) #bounds elevator deflection between -25 deg and 25 deg
-    #da = max( - 21.5 * pi / 180, min(21.5 * pi / 180, da)) #bounds aileron deflection between -21.5 deg and 21.5 deg
-    #dr = max( - 30 * pi / 180, min(30 * pi / 180, dr)) #bounds rudder deflection between -30 deg and 30 deg
+    pi = np.pi
+    alpha = max(-10*pi/180,min(45*pi/180,alpha)) # bounds alpha between -10 deg and 45 deg
+    beta = max( - 30 * pi / 180, min(30 * pi / 180, beta)) #bounds beta between -30 deg and 30 deg
+    de = max( - 25 * pi / 180, min(25 * pi / 180, de)) #bounds elevator deflection between -25 deg and 25 deg
+    da = max( - 21.5 * pi / 180, min(21.5 * pi / 180, da)) #bounds aileron deflection between -21.5 deg and 21.5 deg
+    dr = max( - 30 * pi / 180, min(30 * pi / 180, dr)) #bounds rudder deflection between -30 deg and 30 deg
 
     # xcgref = 0.35
     #reference longitudinal cg position in Morelli f16 model
@@ -154,6 +155,9 @@ def Morellif16(alpha, beta, de, da, dr, p, q, r, cbar, b, V, xcg, xcgref):
 
     ##
     Cx0 = a0 + a1 * alpha + a2 * de**2 + a3 * de + a4 * alpha * de + a5 * alpha**2 + a6 * alpha**3
+    # Debug
+    if b0 + b1 * alpha + b2 * alpha**2 + b3 * alpha**3 + b4 * alpha**4 > np.finfo(np.double).max:
+        print()
     Cxq = b0 + b1 * alpha + b2 * alpha**2 + b3 * alpha**3 + b4 * alpha**4
     Cy0 = c0 * beta + c1 * da + c2 * dr
     Cyp = d0 + d1 * alpha + d2 * alpha**2 + d3 * alpha**3
