@@ -60,7 +60,7 @@ class AeroBenchF16Validator(BaseEntityValidator):
     x: float = 0
     y: float = 0
     z: float = 0
-    v: float = 0
+    v: float = 100
     attack_angle: float = 0
     sideslip_angle: float = 0
     roll: float = 0
