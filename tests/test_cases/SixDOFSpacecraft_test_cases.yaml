@@ -1,0 +1,266 @@
+# No control:
+- ID: At_origin_stationary
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  num_steps: 10
+  attr_targets:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  error_bound: 1e-4
+- ID: At_origin_stationary_45deg_positive_x
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0.38268343236509, 0, 0, 0.92387953251129]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  num_steps: 10
+  attr_targets:
+    position: [0, 0, 0]
+    quaternion: [0.38268343236509, 0, 0, 0.92387953251129]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  error_bound: 1e-4
+- ID: At_origin_stationary_45deg_negative_x
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [-0.38268343236509, 0, 0, 0.92387953251129]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  num_steps: 10
+  attr_targets:
+    position: [0, 0, 0]
+    quaternion: [-0.38268343236509, 0, 0, 0.92387953251129]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  error_bound: 1e-4
+- ID: At_origin_moving_positive_x_90deg_positive_y
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0.70710678118655, 0, 0.70710678118655]
+    velocity: [2, 0, 0]
+    angular_velocity: [0, 0, 0]
+  num_steps: 10
+  attr_targets:
+    position: [19.999648425520753, -0.2053981946620434, 0.0]
+    quaternion: [0, 0.70710678118655, 0, 0.70710678118655]
+    velocity: [1.999894528027041, -0.04107927786601962, 0.0]
+    angular_velocity: [0, 0, 0]
+  error_bound: 1e-4
+- ID: At_origin_moving_negative_y_90deg_negative_y
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, -0.70710678118655, 0, 0.70710678118655]
+    velocity: [0, -2, 0]
+    angular_velocity: [0, 0, 0]
+  num_steps: 10
+  attr_targets:
+    position: [-0.2053981946620434, -19.99859370208301, 0.0]
+    quaternion: [0, -0.70710678118655, 0, 0.70710678118655]
+    velocity: [-0.04107927786601962, -1.9995781121081642, 0.0]
+    angular_velocity: [0, 0, 0]
+  error_bound: 1e-4
+- ID: At_origin_moving_positive_z_225deg_positive_z
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0.92387953251129, -0.382683432365089]
+    velocity: [0, 0, 2]
+    angular_velocity: [0, 0, 0]
+  num_steps: 10
+  attr_targets:
+    position: [0, 0, 19.99964842552075]
+    quaternion: [0, 0, 0.92387953251129, -0.382683432365089]
+    velocity: [0, 0, 1.9998945280270413]
+    angular_velocity: [0, 0, 0]
+  error_bound: 1e-4
+- ID: At_origin_moving_negative_z_225deg_negative_z
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, -0.92387953251129, -0.382683432365089]
+    velocity: [0, 0, -2]
+    angular_velocity: [0, 0, 0]
+  num_steps: 10
+  attr_targets:
+    position: [0, 0, -19.99964842552075]
+    quaternion: [0, 0, -0.92387953251129, -0.382683432365089]
+    velocity: [0, 0, -1.9998945280270413]
+    angular_velocity: [0, 0, 0]
+  error_bound: 1e-4
+- ID: At_origin_rotating_positive_x
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0.02, 0, 0]
+  num_steps: 10
+  attr_targets:
+    position: [0, 0, 0]
+    quaternion: [0.099833416646828, 0, 0, 0.995004165278026]
+    velocity: [0, 0, 0]
+    angular_velocity: [0.02, 0, 0]
+  error_bound: 1e-4
+- ID: At_origin_rotating_negative_x
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [-0.02, 0, 0]
+  num_steps: 10
+  attr_targets:
+    position: [0, 0, 0]
+    quaternion: [-0.099833416646828, 0, 0, 0.995004165278026]
+    velocity: [0, 0, 0]
+    angular_velocity: [-0.02, 0, 0]
+  error_bound: 1e-4
+- ID: At_origin_rotating_positive_y
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0.02, 0]
+  num_steps: 10
+  attr_targets:
+    position: [0, 0, 0]
+    quaternion: [0, 0.099833416646828, 0, 0.995004165278026]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0.02, 0]
+  error_bound: 1e-4
+- ID: At_origin_rotating_negative_y
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, -0.02, 0]
+  num_steps: 10
+  attr_targets:
+    position: [0, 0, 0]
+    quaternion: [0, -0.099833416646828, 0, 0.995004165278026]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, -0.02, 0]
+  error_bound: 1e-4
+- ID: At_origin_rotating_positive_z
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0.02]
+  num_steps: 10
+  attr_targets:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0.099833416646828, 0.995004165278026]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0.02]
+  error_bound: 1e-4
+- ID: At_origin_rotating_negative_z
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, -0.02]
+  num_steps: 10
+  attr_targets:
+    position: [0, 0, 0]
+    quaternion: [0, 0, -0.099833416646828, 0.995004165278026]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, -0.02]
+  error_bound: 1e-4
+# With Control:
+- ID: At_origin_max_x_trans_max_x_rot_control
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  control: [1, 0, 0, 0.001, 0, 0]
+  num_steps: 10 
+  attr_targets:
+    position: [4.166630044273398, -0.028527627332646233, 0.0]
+    quaternion: [0.1564348248516, 0, 0, 0.9876882836065]
+    velocity: [0.8333186843966979, -0.008558258110937557, 0.0]
+    angular_velocity: [0.03500, 0, 0]
+  error_bound: 1e-4
+- ID: At_origin_min_x_trans__min_x_rot_control
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  control: [-1, 0, 0, -0.001, 0, 0]
+  num_steps: 10 
+  attr_targets:
+    position: [-4.166630044273398, 0.028527627332646233, 0.0]
+    quaternion: [-0.1564348248516, 0, 0, 0.9876882836065]
+    velocity: [-0.8333186843966979, 0.008558258110937557, 0.0]
+    angular_velocity: [-0.03500, 0, 0]
+  error_bound: 1e-4
+- ID: At_origin_max_z_trans_max_z_rot_control
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  control: [0, 0, 1, 0, 0, 0.001]
+  num_steps: 10 
+  attr_targets:
+    position: [0.0, 0.0, 4.1666300442734014]
+    quaternion: [0, 0, 0.1564348248516, 0.9876882836065]
+    velocity: [0.0, 0.0, 0.8333186843966979]
+    angular_velocity: [0, 0, 0.03500]
+  error_bound: 1e-4
+- ID: At_origin_min_z_trans_min_z_rot_control
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  control: [0, 0, -1, 0, 0, -0.001]
+  num_steps: 10 
+  attr_targets:
+    position: [0.0, 0.0, -4.1666300442734014]
+    quaternion: [0, 0, -0.1564348248516, 0.9876882836065]
+    velocity: [0.0, 0.0, -0.8333186843966979]
+    angular_velocity: [0, 0, -0.03500]
+  error_bound: 1e-4
+- ID: At_origin_max_x_trans_max_z_rot_control
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  control: [1, 0, 0, 0, 0, 0.001]
+  num_steps: 10 
+  attr_targets:
+    position: [4.140602326728835, 0.327614854070164, 0.0]
+    quaternion: [0, 0, 0.1564348248516, 0.9876882836065]
+    velocity: [0.821770547721124, 0.10882280537310987, 0.0]
+    angular_velocity: [0, 0, 0.03500]
+  error_bound: 5e-4
+- ID: At_origin_min_x_trans_min_z_rot_control
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  control: [-1, 0, 0, 0, 0, -0.001]
+  num_steps: 10 
+  attr_targets:
+    position: [-4.137265643330824, 0.384464808391911, 0.0]
+    quaternion: [0, 0, -0.1564348248516, 0.9876882836065]
+    velocity: [-0.8203079167643681, 0.12582554618361244, 0.0]
+    angular_velocity: [0, 0, -0.03500]
+  error_bound: 5e-4
+- ID: At_origin_min_x_trans_min_z_rot_control_long_hold
+  attr_init:
+    position: [0, 0, 0]
+    quaternion: [0, 0, 0, 1]
+    velocity: [0, 0, 0]
+    angular_velocity: [0, 0, 0]
+  control: [-1, 0, 0, 0, 0, -0.001]
+  num_steps: 100
+  attr_targets:
+    angular_velocity: [0, 0, -0.03500]
+  error_bound: 5e-4

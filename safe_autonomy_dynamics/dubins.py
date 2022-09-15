@@ -494,7 +494,7 @@ class Dubins3dAircraft(BaseDubinsAircraft):
 
 class Dubins3dDynamics(BaseODESolverDynamics):
     """
-    State transition implementation of non-linear 2D Dubins dynamics model.
+    State transition implementation of non-linear 3D Dubins dynamics model.
 
     Parameters
     ----------

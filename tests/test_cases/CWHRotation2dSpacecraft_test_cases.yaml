@@ -1,0 +1,467 @@
+# No control:
+- ID: At_origin_stationary
+  attr_init:
+    position: [0, 0]
+    theta: [0]
+    velocity: [0, 0]
+    wz: [0]
+  num_steps: 10
+  attr_targets:
+    position: [0, 0, 0]
+    theta: [0]
+    velocity: [0, 0, 0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_origin_moving_positive_x
+  attr_init:
+    position: [0, 0]
+    theta: [0]
+    velocity: [2, 0]
+    wz: [0]
+  num_steps: 10
+  attr_targets:
+    position: [19.999648425520753, -0.2053981946620434, 0.0]
+    theta: [0]
+    velocity: [1.999894528027041, -0.04107927786601962, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_origin_moving_negative_x
+  attr_init:
+    position: [0, 0]
+    theta: [0]
+    velocity: [-2, 0]
+    wz: [0]
+  num_steps: 10
+  attr_targets:
+    position: [-19.999648425520753, 0.2053981946620434, 0.0]
+    theta: [0]
+    velocity: [-1.999894528027041, 0.04107927786601962, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_origin_moving_positive_y
+  attr_init:
+    position: [0, 0]
+    theta: [0]
+    velocity: [0, 2]
+    wz: [0]
+  num_steps: 10
+  attr_targets:
+    position: [0.2053981946620434, 19.99859370208301, 0.0]
+    theta: [0]
+    velocity: [0.04107927786601962, 1.9995781121081642, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_origin_moving_negative_y
+  attr_init:
+    position: [0, 0]
+    theta: [0]
+    velocity: [0, -2]
+    wz: [0]
+  num_steps: 10
+  attr_targets:
+    position: [-0.2053981946620434, -19.99859370208301, 0.0]
+    theta: [0]
+    velocity: [-0.04107927786601962, -1.9995781121081642, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_origin_rotating_positive_z
+  attr_init:
+    position: [0, 0]
+    theta: [0]
+    velocity: [0, 0]
+    wz: [0.02]
+  num_steps: 10
+  attr_targets:
+    position: [0.0, 0.0, 0.0]
+    theta: [0.2]
+    velocity: [0.0, 0.0, 0.0]
+    wz: [0.02]
+  error_bound: 1e-4
+- ID: At_origin_rotating_negative_z
+  attr_init:
+    position: [0, 0]
+    theta: [0]
+    velocity: [0, 0]
+    wz: [-0.02]
+  num_steps: 10
+  attr_targets:
+    position: [0.0, 0.0, 0.0]
+    theta: [-0.2]
+    velocity: [0.0, 0.0, 0.0]
+    wz: [-0.02]
+  error_bound: 1e-4
+- ID: At_origin_moving_all_directions
+  attr_init:
+    position: [0, 0]
+    theta: [0]
+    velocity: [3, -4]
+    wz: [0]
+  num_steps: 10
+  attr_targets:
+    position: [29.588676248957043, -40.305284696159084, 0.0]
+    theta: [0]
+    velocity: [2.9176832363085223, -4.060775141015358, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_positive_point_1_stationary
+  attr_init:
+    position: [1795, 293]
+    theta: [0]
+    velocity: [0, 0]
+    wz: [0]
+  num_steps: 10
+  attr_targets:
+    position: [1795.283983287192, 292.9980556542578, 0.0]
+    theta: [0]
+    velocity: [0.05679615822846139, -0.0005833016718923634, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_positive_point_2_stationary
+  attr_init:
+    position: [-424, -342]
+    theta: [0]
+    velocity: [0, 0]
+    wz: [0]
+  num_steps: 10
+  attr_targets:
+    position: [-424.0670801748019, -341.9995407227885, 0.0]
+    theta: [0]
+    velocity: [-0.013415917041151883, 0.00013778267904309866, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_positive_point_3_stationary
+  attr_init:
+    position: [-241, 1932]
+    theta: [0]
+    velocity: [0, 0]
+    wz: [0]
+  num_steps: 10
+  attr_targets:
+    position: [-241.03812811822468, 1932.0002610514339, 0.0]
+    theta: [0]
+    velocity: [-0.007625556620088688, 7.831515483345938e-05, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_positive_point_1_moving
+  attr_init:
+    position: [1795, 293]
+    theta: [0]
+    velocity: [2.81649526,  -4.41614603]
+    wz: [0]
+  num_steps: 10
+  attr_targets:
+    position: [1822.994906572302, 248.55044904190027, 0.0]
+    theta: [0]
+    velocity: [2.7824368426408657, -4.4736475680995085, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_positive_point_2_moving
+  attr_init:
+    position: [-424, -342]
+    theta: [0]
+    velocity: [3.3033103 , -17.06746379]
+    wz: [0]
+  num_steps: 10
+  attr_targets:
+    position: [-392.78737097956406, -513.0014246394147, 0.0]
+    theta: [0]
+    velocity: [2.9391606358827103, -17.131574530007974, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_positive_point_3_moving
+  attr_init:
+    position: [-241, 1932]
+    theta: [0]
+    velocity: [-11.31675638, -14.37759259]
+    wz: [0]
+  num_steps: 10
+  attr_targets:
+    position: [-355.68026835764533, 1789.3966654056303, 0.0]
+    theta: [0]
+    velocity: [-11.61909569683316, -14.142039318793397, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+
+# With X Control Only:
+- ID: At_origin_stationary_max_trans_control
+  attr_init:
+    position: [0, 0]
+    theta: [0.78539816339744830]
+    velocity: [0, 0]
+    wz: [0]
+  control: [1, 0, 0]
+  num_steps: 10
+  attr_targets:
+    position: [2.9664244377394007, 2.9260025924353887, 0.0]
+    theta: [0.78539816339744830]
+    velocity: [0.5952968949717463, 0.5831626151936727, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_origin_stationary_min_trans_control
+  attr_init:
+    position: [0, 0]
+    theta: [0.78539816339744830]
+    velocity: [0, 0]
+    wz: [0]
+  control: [-1, 0, 0]
+  num_steps: 10
+  attr_targets:
+    position: [-2.9664244377394007, -2.9260025924353887, 0.0]
+    theta: [0.78539816339744830]
+    velocity: [-0.5952968949717463, -0.5831626151936727, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_origin_stationary_max_trans_control_exceeded
+  attr_init:
+    position: [0, 0]
+    theta: [0.78539816339744830]
+    velocity: [0, 0]
+    wz: [0]
+  control: [1.1, 0, 0.0]
+  num_steps: 10
+  attr_targets:
+    position: [2.9664244377394007, 2.9260025924353887, 0.0]
+    theta: [0.78539816339744830]
+    velocity: [0.5952968949717463, 0.5831626151936727, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_origin_stationary_min_trans_control_exceeded
+  attr_init:
+    position: [0, 0]
+    theta: [0.78539816339744830]
+    velocity: [0, 0]
+    wz: [0]
+  control: [-1.1, 0, 0.0]
+  num_steps: 10
+  attr_targets:
+    position: [-2.9664244377394007, -2.9260025924353887, 0.0]
+    theta: [0.78539816339744830]
+    velocity: [-0.5952968949717463, -0.5831626151936727, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_origin_stationary_max_rot_control
+  attr_init:
+    position: [0, 0]
+    theta: [0.0]
+    velocity: [0, 0]
+    wz: [0]
+  control: [0, 0, 0.001]
+  num_steps: 10 
+  attr_targets:
+    position: [0.0, 0.0, 0.0]
+    theta: [0.31417996802493625]
+    velocity: [0.0, 0.0, 0.0]
+    wz: [0.03490763657395811]
+  error_bound: 1e-4
+- ID: At_origin_stationary_min_rot_control
+  attr_init:
+    position: [0, 0]
+    theta: [0.0]
+    velocity: [0, 0]
+    wz: [0]
+  control: [0, 0, -0.001]
+  num_steps: 10 
+  attr_targets:
+    position: [0.0, 0.0, 0.0]
+    theta: [-0.31417996802493625]
+    velocity: [0.0, 0.0, 0.0]
+    wz: [-0.03490763657395811]
+  error_bound: 1e-4
+- ID: At_origin_stationary_max_rot_control_exceeded
+  attr_init:
+    position: [0, 0]
+    theta: [0.0]
+    velocity: [0, 0]
+    wz: [0]
+  control: [0, 0, 0.0011]
+  num_steps: 10 
+  attr_targets:
+    position: [0.0, 0.0, 0.0]
+    theta: [0.31417996802493625]
+    velocity: [0.0, 0.0, 0.0]
+    wz: [0.03490763657395811]
+  error_bound: 1e-4
+- ID: At_origin_stationary_min_rot_control_exceeded
+  attr_init:
+    position: [0, 0]
+    theta: [0.0]
+    velocity: [0, 0]
+    wz: [0]
+  control: [0, 0, -0.0011]
+  num_steps: 10 
+  attr_targets:
+    position: [0.0, 0.0, 0.0]
+    theta: [-0.31417996802493625]
+    velocity: [0.0, 0.0, 0.0]
+    wz: [-0.03490763657395811]
+  error_bound: 1e-4
+- ID: random_inputs_1
+  attr_init:
+    position: [378.43311614769686, -899.1465249919404]
+    theta: [-1.793111526994420]
+    velocity: [7.373886360503278, -5.387059196674235]
+    wz: [0]
+  control: [0.382431662958476, 0, 0.0]
+  num_steps: 15
+  attr_targets:
+    position: [487.1005400235034, -985.1335654807021, 0.0]
+    theta: [-1.793111526994420]
+    velocity: [7.1124226210522785, -6.076536913524862, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: random_inputs_2
+  attr_init:
+    position: [401.0710014944277, -524.8182691047782]
+    theta: [-2.162200991560120]
+    velocity: [-9.575557314121877, 6.880063127211869]
+    wz: [0]
+  control: [0.490961227880095, 0, 0.0]
+  num_steps: 59
+  attr_targets:
+    position: [-178.82135098778141, -143.1947617073997, 0.0]
+    theta: [-2.162200991560120]
+    velocity: [-10.116272691726516, 6.067248813772067, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: random_inputs_3
+  attr_init:
+    position: [-523.1457315141807, -248.7512703155934]
+    theta: [-2.327122916308190]
+    velocity: [5.2410919696930165, -5.7675255661019715]
+    wz: [0]
+  control: [0.877217620183856, 0, 0.0]
+  num_steps: 59
+  attr_targets:
+    position: [-328.6284534075677, -695.7220842229068, 0.0]
+    theta: [-2.327122916308190]
+    velocity: [1.2873304959881975, -9.304165801081503, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: random_inputs_4
+  attr_init:
+    position: [479.96046036650023, -794.0299190461053]
+    theta: [5.861272369306416]
+    velocity: [-0.9278319549471075, 6.843239152043321]
+    wz: [-0.03452406398924284]
+  control: [-0.24002783653069404, 0, 0.0002222848219998264]
+  num_steps: 85
+  attr_targets:
+    position: [398.3944960655981, -204.5637189681981, 0.0]
+    theta: [1.9238417801698553]
+    velocity: [-0.6793547322876764, 6.467936621342318, 0.0]
+    wz: [0.034919232994182356]
+  error_bound: 1e-4
+
+# With Y Control Only:
+- ID: At_origin_stationary_max_trans_control_y_thrust_only
+  attr_init:
+    position: [0, 0]
+    theta: -0.7853981633974483
+    velocity: [0, 0]
+    wz: [0]
+  control: [0, 1, 0]
+  num_steps: 10
+  attr_targets:
+    position: [2.9664244377394007, 2.9260025924353887, 0.0]
+    theta: -0.7853981633974483
+    velocity: [0.5952968949717463, 0.5831626151936727, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_origin_stationary_min_trans_control_y_thrust_only
+  attr_init:
+    position: [0, 0]
+    theta: -0.7853981633974483
+    velocity: [0, 0]
+    wz: [0]
+  control: [0, -1, 0]
+  num_steps: 10
+  attr_targets:
+    position: [-2.9664244377394007, -2.9260025924353887, 0.0]
+    theta: -0.7853981633974483
+    velocity: [-0.5952968949717463, -0.5831626151936727, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_origin_stationary_max_trans_control_exceeded_y_thrust_only
+  attr_init:
+    position: [0, 0]
+    theta: -0.7853981633974483
+    velocity: [0, 0]
+    wz: [0]
+  control: [0, 1.1, 0.0]
+  num_steps: 10
+  attr_targets:
+    position: [2.9664244377394007, 2.9260025924353887, 0.0]
+    theta: -0.7853981633974483
+    velocity: [0.5952968949717463, 0.5831626151936727, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: At_origin_stationary_min_trans_control_exceeded_y_thrust_only
+  attr_init:
+    position: [0, 0]
+    theta: -0.7853981633974483
+    velocity: [0, 0]
+    wz: [0]
+  control: [0, -1.1, 0.0]
+  num_steps: 10
+  attr_targets:
+    position: [-2.9664244377394007, -2.9260025924353887, 0.0]
+    theta: -0.7853981633974483
+    velocity: [-0.5952968949717463, -0.5831626151936727, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: random_inputs_1_y_thrust_only
+  attr_init:
+    position: [378.43311614769686, -899.1465249919404]
+    theta: 2.9192774533902695
+    velocity: [7.373886360503278, -5.387059196674235]
+    wz: [0]
+  control: [0, 0.382431662958476, 0.0]
+  num_steps: 15
+  attr_targets:
+    position: [487.1005400235034, -985.1335654807021, 0.0]
+    theta: 2.9192774533902695
+    velocity: [7.1124226210522785, -6.076536913524862, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: random_inputs_2_y_thrust_only
+  attr_init:
+    position: [401.0710014944277, -524.8182691047782]
+    theta: 2.55018798882457
+    velocity: [-9.575557314121877, 6.880063127211869]
+    wz: [0]
+  control: [0, 0.490961227880095, 0.0]
+  num_steps: 59
+  attr_targets:
+    position: [-178.82135098778141, -143.1947617073997, 0.0]
+    theta: 2.55018798882457
+    velocity: [-10.116272691726516, 6.067248813772067, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: random_inputs_3_y_thrust_only
+  attr_init:
+    position: [-523.1457315141807, -248.7512703155934]
+    theta: 2.3852660640765
+    velocity: [5.2410919696930165, -5.7675255661019715]
+    wz: [0]
+  control: [0, 0.877217620183856, 0.0]
+  num_steps: 59
+  attr_targets:
+    position: [-328.6284534075677, -695.7220842229068, 0.0]
+    theta: 2.3852660640765
+    velocity: [1.2873304959881975, -9.304165801081503, 0.0]
+    wz: [0]
+  error_bound: 1e-4
+- ID: random_inputs_4_y_thrust_only
+  attr_init:
+    position: [479.96046036650023, -794.0299190461053]
+    theta: -1.9927092646680666
+    velocity: [-0.9278319549471075, 6.843239152043321]
+    wz: [-0.03452406398924284]
+  control: [0, -0.24002783653069404, 0.0002222848219998264]
+  num_steps: 85
+  attr_targets:
+    position: [398.3944960655981, -204.5637189681981, 0.0]
+    theta: 0.35304545337495874
+    velocity: [-0.6793547322876764, 6.467936621342318, 0.0]
+    wz: [0.034919232994182356]
+  error_bound: 1e-4

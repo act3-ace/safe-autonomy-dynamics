@@ -13,10 +13,15 @@ This module implements a 3D point mass spacecraft with Clohessy-Wilshire physics
 Hill's reference frame.
 """
 
+from typing import Tuple
+
 import numpy as np
 from scipy.spatial.transform import Rotation
 
 from safe_autonomy_dynamics.base_models import BaseEntity, BaseEntityValidator, BaseLinearODESolverDynamics
+
+M_DEFAULT = 12
+N_DEFAULT = 0.001027
 
 
 class CWHSpacecraftValidator(BaseEntityValidator):
@@ -25,22 +30,30 @@ class CWHSpacecraftValidator(BaseEntityValidator):
 
     Parameters
     ----------
-    position : list[float]
-        Length 3 list of x, y, z position values.
-    velocity : list[float]
-        Length 3 list of x, y, z velocity values.
+    x: [float]
+        Length 1, x position value
+    y: [float]
+        Length 1, y position value
+    z: [float]
+        Length 1, z position value
+    x_dot: [float]
+        Length 1, x velocity value
+    y_dot: [float]
+        Length 1, y velocity value
+    z_dot: [float]
+        Length 1, z velocity value
 
     Raises
     ------
     ValueError
-        Improper list lengths for parameters 'position', 'velocity'
+        Improper list lengths for parameters 'x', 'y', 'z', 'x_dot', 'y_dot', 'z_dot'
     """
     x: float = 0
     y: float = 0
     z: float = 0
-    xdot: float = 0
-    ydot: float = 0
-    zdot: float = 0
+    x_dot: float = 0
+    y_dot: float = 0
+    z_dot: float = 0
 
 
 class CWHSpacecraft(BaseEntity):
@@ -75,7 +88,7 @@ class CWHSpacecraft(BaseEntity):
         Additional keyword arguments passed to CWHSpacecraftValidator.
     """
 
-    def __init__(self, m=12, n=0.001027, integration_method="RK45", **kwargs):
+    def __init__(self, m=M_DEFAULT, n=N_DEFAULT, integration_method="RK45", **kwargs):
         dynamics = CWHDynamics(m=m, n=n, integration_method=integration_method)
         self._state = np.array([])
 
@@ -101,7 +114,7 @@ class CWHSpacecraft(BaseEntity):
 
     def _build_state(self):
         state = np.array(
-            [self.config.x, self.config.y, self.config.z] + [self.config.xdot, self.config.ydot, self.config.zdot], dtype=np.float32
+            [self.config.x, self.config.y, self.config.z] + [self.config.x_dot, self.config.y_dot, self.config.z_dot], dtype=np.float32
         )
 
         return state
@@ -175,16 +188,50 @@ class CWHDynamics(BaseLinearODESolverDynamics):
         Additional keyword arguments passed to parent class BaseLinearODESolverDynamics constructor
     """
 
-    def __init__(self, m=12, n=0.001027, **kwargs):
+    def __init__(self, m=M_DEFAULT, n=N_DEFAULT, **kwargs):
         self.m = m  # kg
         self.n = n  # rads/s
 
-        super().__init__(**kwargs)
+        A, B = generate_cwh_matrices(self.m, self.n, '3d')
 
-    def _gen_dynamics_matrices(self):
-        m = self.m
-        n = self.n
+        super().__init__(A=A, B=B, **kwargs)
 
+
+def generate_cwh_matrices(m: float, n: float, mode: str = '2d') -> Tuple[np.ndarray, np.ndarray]:
+    """Generates A and B Matrices from Clohessy-Wiltshire linearized dynamics of dx/dt = Ax + Bu
+
+    Parameters
+    ----------
+    m : float
+        mass in kg of spacecraft
+    n : float
+        orbital mean motion in rad/s of current Hill's reference frame
+    mode : str, optional
+        dimensionality of dynamics matrices. '2d' or '3d', by default '2d'
+
+    Returns
+    -------
+    np.ndarray
+        A dynamics matrix
+    np.ndarray
+        B dynamics matrix
+    """
+    assert mode in ['2d', '3d'], "mode must be on of ['2d', '3d']"
+    if mode == '2d':
+        A = np.array([
+            [0, 0, 1, 0],
+            [0, 0, 0, 1],
+            [3 * n**2, 0, 0, 2 * n],
+            [0, 0, -2 * n, 0],
+        ], dtype=np.float64)
+
+        B = np.array([
+            [0, 0],
+            [0, 0],
+            [1 / m, 0],
+            [0, 1 / m],
+        ], dtype=np.float64)
+    else:
         A = np.array(
             [
                 [0, 0, 0, 1, 0, 0],
@@ -192,21 +239,18 @@ class CWHDynamics(BaseLinearODESolverDynamics):
                 [0, 0, 0, 0, 0, 1],
                 [3 * n**2, 0, 0, 0, 2 * n, 0],
                 [0, 0, 0, -2 * n, 0, 0],
-                [0, 0, -(n**2), 0, 0, 0],
+                [0, 0, -n**2, 0, 0, 0],
             ],
-            dtype=np.float32,
+            dtype=np.float64
         )
 
-        B = np.array(
-            [
-                [0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0],
-                [1 / m, 0, 0],
-                [0, 1 / m, 0],
-                [0, 0, 1 / m],
-            ],
-            dtype=np.float32,
-        )
+        B = np.array([
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0],
+            [1 / m, 0, 0],
+            [0, 1 / m, 0],
+            [0, 0, 1 / m],
+        ], dtype=np.float64)
 
-        return A, B
+    return A, B
