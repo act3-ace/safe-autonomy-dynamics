@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.3.0...v0.4.0) (2022-09-22)
+
+
+### Features
+
+* initial aerobench dynamics implementation ([9d4d69f](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/9d4d69f2089e2dd779970c468583878abe56e922))
+
 # [0.3.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.2.0...v0.3.0) (2022-08-13)
 
 
