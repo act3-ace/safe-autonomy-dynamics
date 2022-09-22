@@ -111,6 +111,35 @@ nav:
 ##  - "License": license.md
   - "API":
       - api/index.md
+      - "external":
+          - api/external/index.md
+          - "aerobench":
+              - api/external/aerobench/index.md
+              - "controlled_f16": reference/external/aerobench/controlled_f16.md
+              - "util": reference/external/aerobench/util.md
+              - "lowlevel":
+                  - api/external/aerobench/lowlevel/index.md
+                  - "adc": reference/external/aerobench/lowlevel/adc.md
+                  - "cl": reference/external/aerobench/lowlevel/cl.md
+                  - "clf16": reference/external/aerobench/lowlevel/clf16.md
+                  - "cm": reference/external/aerobench/lowlevel/cm.md
+                  - "cn": reference/external/aerobench/lowlevel/cn.md
+                  - "conf16": reference/external/aerobench/lowlevel/conf16.md
+                  - "cx": reference/external/aerobench/lowlevel/cx.md
+                  - "cy": reference/external/aerobench/lowlevel/cy.md
+                  - "cz": reference/external/aerobench/lowlevel/cz.md
+                  - "dampp": reference/external/aerobench/lowlevel/dampp.md
+                  - "dlda": reference/external/aerobench/lowlevel/dlda.md
+                  - "dldr": reference/external/aerobench/lowlevel/dldr.md
+                  - "dnda": reference/external/aerobench/lowlevel/dnda.md
+                  - "dndr": reference/external/aerobench/lowlevel/dndr.md
+                  - "low_level_controller": reference/external/aerobench/lowlevel/low_level_controller.md
+                  - "morellif16": reference/external/aerobench/lowlevel/morellif16.md
+                  - "pdot": reference/external/aerobench/lowlevel/pdot.md
+                  - "rtau": reference/external/aerobench/lowlevel/rtau.md
+                  - "subf16_model": reference/external/aerobench/lowlevel/subf16_model.md
+                  - "tgear": reference/external/aerobench/lowlevel/tgear.md
+                  - "thrust": reference/external/aerobench/lowlevel/thrust.md
       - "base models": reference/base_models.md
       - "cwh": reference/cwh.md
       - "dubins": reference/dubins.md
