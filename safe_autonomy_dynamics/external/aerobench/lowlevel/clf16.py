@@ -7,9 +7,9 @@ This is the objective function for finding the trim condition of the initial sta
 
 from math import asin, sin
 
-from safe_autonomy_dynamics.external.aerobench.lowlevel.tgear import tgear
 from safe_autonomy_dynamics.external.aerobench.lowlevel.conf16 import conf16
 from safe_autonomy_dynamics.external.aerobench.lowlevel.subf16_model import subf16_model
+from safe_autonomy_dynamics.external.aerobench.lowlevel.tgear import tgear
 
 
 def clf16(s, x, u, const, model='stevens', adjust_cy=True):
@@ -43,7 +43,7 @@ def clf16(s, x, u, const, model='stevens', adjust_cy=True):
     [x, u] = conf16(x, u, const)
 
     # we just want the derivative
-    subf16 = lambda x, u: subf16_model(x, u, model, adjust_cy)[0]
+    subf16 = lambda x, u: subf16_model(x, u, model, adjust_cy)[0]  # noqa: E731
 
     xd = subf16(x, u)
 
@@ -51,30 +51,29 @@ def clf16(s, x, u, const, model='stevens', adjust_cy=True):
     # Steady Level flight
     #
     if orient == 1:
-        r = 100.0*(xd[0]**2 + xd[1]**2 + xd[2]**2 + xd[6]**2 + xd[7]**2 + xd[8]**2)
+        r = 100.0 * (xd[0]**2 + xd[1]**2 + xd[2]**2 + xd[6]**2 + xd[7]**2 + xd[8]**2)
 
     #
     # Steady Climb
     #
     if orient == 2:
-        r = 500.0*(xd[11]-x[0]*sin(gamm))**2 + xd[0]**2 + 100.0*(xd[1]**2 + xd[2]**2) + \
-            10.0*(xd[6]**2 + xd[7]**2 + xd[8]**2)
-
-
+        r = 500.0 * (xd[11] - x[0] * sin(gamm))**2 + xd[0]**2 + 100.0 * (xd[1]**2 + xd[2]**2) + \
+            10.0 * (xd[6]**2 + xd[7]**2 + xd[8]**2)
 
     #
     # Coord Turn
     #
     if orient == 3:
-        r = xd[0]*xd[0] + 100.0 * (xd[1] * xd[1] + xd[2]*xd[2] + xd[11]*xd[11]) + 10.0*(xd[6]*xd[6] + \
-            xd[7]*xd[7]+xd[8]*xd[8]) + 500.0*(xd[5] - tr)**2
+        r = xd[0] * xd[0] + 100.0 * (xd[1] * xd[1] + xd[2] * xd[2] + xd[11] * xd[11]) + \
+            10.0 * (xd[6] * xd[6] + xd[7] * xd[7] + xd[8] * xd[8]) + 500.0 * (xd[5] - tr)**2
 
     #
     # Pitch Pull Up
     #
 
     if orient == 4:
-        r = 500.0*(xd[4]-thetadot)**2 + xd[0]**2 + 100.0*(xd[1]**2 + xd[2]**2) + 10.0*(xd[6]**2 + xd[7]**2 + xd[8]**2)
+        r = 500.0 * (xd[4] - thetadot)**2 + xd[0]**2 + 100.0 * (xd[1]**2 + xd[2]**2) + \
+            10.0 * (xd[6]**2 + xd[7]**2 + xd[8]**2)
 
     #
     # Scale r if it is less than 1

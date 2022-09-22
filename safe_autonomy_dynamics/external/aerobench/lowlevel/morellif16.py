@@ -6,19 +6,23 @@ Morelli dynamics (Polynomial interpolation)
 """
 import numpy as np
 
+# pylint: disable=R0914, R0915
+
 
 def Morellif16(alpha, beta, de, da, dr, p, q, r, cbar, b, V, xcg, xcgref):
+    """
+    Morelli dynamics (Polynomial interpolation)
+    """
 
     pi = np.pi
-    alpha = max(-10*pi/180,min(45*pi/180,alpha)) # bounds alpha between -10 deg and 45 deg
-    beta = max( - 30 * pi / 180, min(30 * pi / 180, beta)) #bounds beta between -30 deg and 30 deg
-    de = max( - 25 * pi / 180, min(25 * pi / 180, de)) #bounds elevator deflection between -25 deg and 25 deg
-    da = max( - 21.5 * pi / 180, min(21.5 * pi / 180, da)) #bounds aileron deflection between -21.5 deg and 21.5 deg
-    dr = max( - 30 * pi / 180, min(30 * pi / 180, dr)) #bounds rudder deflection between -30 deg and 30 deg
+    alpha = max(-10 * pi / 180, min(45 * pi / 180, alpha))  # bounds alpha between -10 deg and 45 deg
+    beta = max(-30 * pi / 180, min(30 * pi / 180, beta))  # bounds beta between -30 deg and 30 deg
+    de = max(-25 * pi / 180, min(25 * pi / 180, de))  # bounds elevator deflection between -25 deg and 25 deg
+    da = max(-21.5 * pi / 180, min(21.5 * pi / 180, da))  # bounds aileron deflection between -21.5 deg and 21.5 deg
+    dr = max(-30 * pi / 180, min(30 * pi / 180, dr))  # bounds rudder deflection between -30 deg and 30 deg
 
     # xcgref = 0.35
-    #reference longitudinal cg position in Morelli f16 model
-
+    # reference longitudinal cg position in Morelli f16 model
 
     phat = p * b / (2 * V)
     qhat = q * cbar / (2 * V)
@@ -172,7 +176,6 @@ def Morellif16(alpha, beta, de, da, dr, p, q, r, cbar, b, V, xcg, xcgref):
     Cldr = l0 + l1 * alpha + l2 * beta + l3 * alpha * beta + l4 * alpha**2 * beta + l5 * alpha**3 * beta + l6 * beta**2
     Cm0 = m0 + m1 * alpha + m2 * de + m3 * alpha * de + m4 * de**2 + m5 * alpha**2 * de + m6 * de**3 + m7 * \
         alpha * de**2
-
 
     Cmq = n0 + n1 * alpha + n2 * alpha**2 + n3 * alpha**3 + n4 * alpha**4 + n5 * alpha**5
     Cn0 = o0 * beta + o1 * alpha * beta + o2 * beta**2 + o3 * alpha * beta**2 + o4 * alpha**2 * beta + o5 * \

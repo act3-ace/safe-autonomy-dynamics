@@ -24,25 +24,26 @@ outputs aircraft state vector deriative
 #         u[3] = rudder command in degrees
 #
 
-from math import sin, cos, pi
+from math import cos, pi, sin
 
 from safe_autonomy_dynamics.external.aerobench.lowlevel.adc import adc
-from safe_autonomy_dynamics.external.aerobench.lowlevel.tgear import tgear
-from safe_autonomy_dynamics.external.aerobench.lowlevel.pdot import pdot
-from safe_autonomy_dynamics.external.aerobench.lowlevel.thrust import thrust
+from safe_autonomy_dynamics.external.aerobench.lowlevel.cl import cl
+from safe_autonomy_dynamics.external.aerobench.lowlevel.cm import cm
+from safe_autonomy_dynamics.external.aerobench.lowlevel.cn import cn
 from safe_autonomy_dynamics.external.aerobench.lowlevel.cx import cx
 from safe_autonomy_dynamics.external.aerobench.lowlevel.cy import cy
 from safe_autonomy_dynamics.external.aerobench.lowlevel.cz import cz
-from safe_autonomy_dynamics.external.aerobench.lowlevel.cl import cl
+from safe_autonomy_dynamics.external.aerobench.lowlevel.dampp import dampp
 from safe_autonomy_dynamics.external.aerobench.lowlevel.dlda import dlda
 from safe_autonomy_dynamics.external.aerobench.lowlevel.dldr import dldr
-from safe_autonomy_dynamics.external.aerobench.lowlevel.cm import cm
-from safe_autonomy_dynamics.external.aerobench.lowlevel.cn import cn
 from safe_autonomy_dynamics.external.aerobench.lowlevel.dnda import dnda
 from safe_autonomy_dynamics.external.aerobench.lowlevel.dndr import dndr
-from safe_autonomy_dynamics.external.aerobench.lowlevel.dampp import dampp
-
 from safe_autonomy_dynamics.external.aerobench.lowlevel.morellif16 import Morellif16
+from safe_autonomy_dynamics.external.aerobench.lowlevel.pdot import pdot
+from safe_autonomy_dynamics.external.aerobench.lowlevel.tgear import tgear
+from safe_autonomy_dynamics.external.aerobench.lowlevel.thrust import thrust
+
+# pylint: disable=R0914, R0915
 
 
 def subf16_model(x, u, model, adjust_cy=True):
@@ -79,8 +80,8 @@ def subf16_model(x, u, model, adjust_cy=True):
 
     xd = x.copy()
     vt = x[0]
-    alpha = x[1]*rtod
-    beta = x[2]*rtod
+    alpha = x[1] * rtod
+    beta = x[2] * rtod
     phi = x[3]
     theta = x[4]
     psi = x[5]
@@ -97,8 +98,8 @@ def subf16_model(x, u, model, adjust_cy=True):
     xd[12] = pdot(power, cpow)
 
     t = thrust(power, alt, amach)
-    dail = ail/20
-    drdr = rdr/30
+    dail = ail / 20
+    drdr = rdr / 30
 
     # component build up
 
@@ -113,8 +114,8 @@ def subf16_model(x, u, model, adjust_cy=True):
         cnt = cn(alpha, beta) + dnda(alpha, beta) * dail + dndr(alpha, beta) * drdr
     else:
         # morelli model (polynomial version)
-        cxt, cyt, czt, clt, cmt, cnt = Morellif16(alpha*pi/180, beta*pi/180, el*pi/180, ail*pi/180, rdr*pi/180, \
-                                                  p, q, r, cbar, b, vt, xcg, xcgr)
+        cxt, cyt, czt, clt, cmt, cnt = Morellif16(alpha * pi / 180, beta * pi / 180, el * pi / 180, ail * pi / 180,
+                                                  rdr * pi / 180, p, q, r, cbar, b, vt, xcg, xcgr)
 
     # add damping derivatives
 
@@ -128,8 +129,8 @@ def subf16_model(x, u, model, adjust_cy=True):
     cyt = cyt + b2v * (d[1] * r + d[2] * p)
     czt = czt + cq * d[3]
     clt = clt + b2v * (d[4] * r + d[5] * p)
-    cmt = cmt + cq * d[6] + czt * (xcgr-xcg)
-    cnt = cnt + b2v * (d[7] * r + d[8] * p)-cyt * (xcgr-xcg) * cbar/b
+    cmt = cmt + cq * d[6] + czt * (xcgr - xcg)
+    cnt = cnt + b2v * (d[7] * r + d[8] * p) - cyt * (xcgr - xcg) * cbar / b
     cbta = cos(x[2])
     u = vt * cos(x[1]) * cbta
     v = vt * sin(x[2])
@@ -149,25 +150,25 @@ def subf16_model(x, u, model, adjust_cy=True):
     az = rmqs * czt
 
     # force equations
-    udot = r * v-q * w-g * sth + rm * (qs * cxt + t)
-    vdot = p * w-r * u + gcth * sph + ay
-    wdot = q * u-p * v + gcth * cph + az
+    udot = r * v - q * w - g * sth + rm * (qs * cxt + t)
+    vdot = p * w - r * u + gcth * sph + ay
+    wdot = q * u - p * v + gcth * cph + az
     dum = (u * u + w * w)
 
-    xd[0] = (u * udot + v * vdot + w * wdot)/vt
-    xd[1] = (u * wdot-w * udot)/dum
-    xd[2] = (vt * vdot-v * xd[0]) * cbta/dum
+    xd[0] = (u * udot + v * vdot + w * wdot) / vt
+    xd[1] = (u * wdot - w * udot) / dum
+    xd[2] = (vt * vdot - v * xd[0]) * cbta / dum
 
     # kinematics
-    xd[3] = p + (sth/cth) * (qsph + r * cph)
-    xd[4] = q * cph-r * sph
-    xd[5] = (qsph + r * cph)/cth
+    xd[3] = p + (sth / cth) * (qsph + r * cph)
+    xd[4] = q * cph - r * sph
+    xd[5] = (qsph + r * cph) / cth
 
     # moments
     xd[6] = (c2 * p + c1 * r + c4 * he) * q + qsb * (c3 * clt + c4 * cnt)
 
-    xd[7] = (c5 * p-c7 * he) * r + c6 * (r * r-p * p) + qs * cbar * c7 * cmt
-    xd[8] = (c8 * p-c2 * r + c9 * he) * q + qsb * (c4 * clt + c9 * cnt)
+    xd[7] = (c5 * p - c7 * he) * r + c6 * (r * r - p * p) + qs * cbar * c7 * cmt
+    xd[8] = (c8 * p - c2 * r + c9 * he) * q + qsb * (c4 * clt + c9 * cnt)
 
     # navigation
     t1 = sph * cpsi
@@ -175,25 +176,25 @@ def subf16_model(x, u, model, adjust_cy=True):
     t3 = sph * spsi
     s1 = cth * cpsi
     s2 = cth * spsi
-    s3 = t1 * sth-cph * spsi
+    s3 = t1 * sth - cph * spsi
     s4 = t3 * sth + cph * cpsi
     s5 = sph * cth
     s6 = t2 * cpsi + t3
-    s7 = t2 * spsi-t1
+    s7 = t2 * spsi - t1
     s8 = cph * cth
     xd[9] = u * s1 + v * s3 + w * s6  # north speed
     xd[10] = u * s2 + v * s4 + w * s7  # east speed
-    xd[11] = u * sth-v * s5-w * s8  # vertical speed
+    xd[11] = u * sth - v * s5 - w * s8  # vertical speed
 
     # outputs
 
-    xa = 15.0                  # sets distance normal accel is in front of the c.g. (xa = 15.0 at pilot)
-    az = az-xa * xd[7]         # moves normal accel in front of c.g.
+    xa = 15.0  # sets distance normal accel is in front of the c.g. (xa = 15.0 at pilot)
+    az = az - xa * xd[7]  # moves normal accel in front of c.g.
 
     ####################################
     ###### peter additions below ######
     if adjust_cy:
-        ay = ay+xa*xd[8]           # moves side accel in front of c.g.
+        ay = ay + xa * xd[8]  # moves side accel in front of c.g.
 
     # For extraction of Nz
     Nz = (-az / g) - 1  # zeroed at 1 g, positive g = pulling up

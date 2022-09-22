@@ -4,6 +4,7 @@ Low-level flight controller
 '''
 
 import numpy as np
+
 from safe_autonomy_dynamics.external.aerobench.util import Freezable
 
 
@@ -11,7 +12,7 @@ class CtrlLimits(Freezable):
     'Control Limits'
 
     def __init__(self):
-        self.ThrottleMax = 1 # Afterburner on for throttle > 0.7
+        self.ThrottleMax = 1  # Afterburner on for throttle > 0.7
         self.ThrottleMin = 0
         self.ElevatorMaxDeg = 25
         self.ElevatorMinDeg = -25
@@ -19,7 +20,7 @@ class CtrlLimits(Freezable):
         self.AileronMinDeg = -21.5
         self.RudderMaxDeg = 30
         self.RudderMinDeg = -30
-        
+
         self.NzMax = 6
         self.NzMin = -1
 
@@ -31,11 +32,11 @@ class LowLevelController(Freezable):
     '''
 
     old_k_long = np.array([[-156.8801506723475, -31.037008068526642, -38.72983346216317]], dtype=float)
-    old_k_lat = np.array([[37.84483, -25.40956, -6.82876, -332.88343, -17.15997],
-                          [-23.91233, 5.69968, -21.63431, 64.49490, -88.36203]], dtype=float)
+    old_k_lat = np.array(
+        [[37.84483, -25.40956, -6.82876, -332.88343, -17.15997], [-23.91233, 5.69968, -21.63431, 64.49490, -88.36203]], dtype=float
+    )
 
-    old_xequil = np.array([502.0, 0.0389, 0.0, 0.0, 0.0389, 0.0, 0.0, 0.0, \
-                        0.0, 0.0, 0.0, 1000.0, 9.0567], dtype=float).transpose()
+    old_xequil = np.array([502.0, 0.0389, 0.0, 0.0, 0.0389, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1000.0, 9.0567], dtype=float).transpose()
     old_uequil = np.array([0.1395, -0.7496, 0.0, 0.0], dtype=float).transpose()
 
     def __init__(self, gain_str='old'):
@@ -72,10 +73,10 @@ class LowLevelController(Freezable):
         x_ctrl = np.array([x_delta[i] for i in [1, 7, 13, 2, 6, 8, 14, 15]], dtype=float)
 
         # Initialize control vectors
-        u_deg = np.zeros((4,)) # throt, ele, ail, rud
+        u_deg = np.zeros((4, ))  # throt, ele, ail, rud
 
         # Calculate control using LQR gains
-        u_deg[1:4] = np.dot(-self.K_lqr, x_ctrl) # Full Control
+        u_deg[1:4] = np.dot(-self.K_lqr, x_ctrl)  # Full Control
 
         # Set throttle as directed from output of getOuterLoopCtrl(...)
         u_deg[0] = u_ref[3]
@@ -105,7 +106,7 @@ class LowLevelController(Freezable):
 
         return 3
 
-    def get_integrator_derivatives(self, t, x_f16, u_ref, Nz, ps, Ny_r):
+    def get_integrator_derivatives(self, u_ref, Nz, ps, Ny_r):
         'get the derivatives of the integrators in the low-level controller'
 
         return [Nz - u_ref[0], ps - u_ref[1], Ny_r - u_ref[2]]

@@ -4,16 +4,16 @@ Python Version of F-16 GCAS
 ODE derivative code (controlled F16)
 '''
 
-from math import sin, cos
+from math import cos, sin
 
 import numpy as np
 from numpy import deg2rad
 
-from safe_autonomy_dynamics.external.aerobench.lowlevel.subf16_model import subf16_model
 from safe_autonomy_dynamics.external.aerobench.lowlevel.low_level_controller import LowLevelController
+from safe_autonomy_dynamics.external.aerobench.lowlevel.subf16_model import subf16_model
 
 
-def controlled_f16(t, x_f16, u_ref, llc, f16_model='morelli', v2_integrators=False):
+def controlled_f16(x_f16, u_ref, llc, f16_model='morelli', v2_integrators=False):
     'returns the LQR-controlled F-16 state derivatives and more'
 
     assert isinstance(x_f16, np.ndarray)
@@ -39,23 +39,23 @@ def controlled_f16(t, x_f16, u_ref, llc, f16_model='morelli', v2_integrators=Fal
         # Calculate (side force + yaw rate) term
         Ny_r = Ny + x_ctrl[5]
 
-    xd = np.zeros((x_f16.shape[0],))
+    xd = np.zeros((x_f16.shape[0], ))
     xd[:len(xd_model)] = xd_model
 
     # integrators from low-level controller
     start = len(xd_model)
     end = start + llc.get_num_integrators()
-    int_der = llc.get_integrator_derivatives(t, x_f16, u_ref, Nz, ps, Ny_r)
+    int_der = llc.get_integrator_derivatives(u_ref, Nz, ps, Ny_r)
     xd[start:end] = int_der
 
     # Convert all degree values to radians for output
-    u_rad = np.zeros((7,))  # throt, ele, ail, rud, Nz_ref, ps_ref, Ny_r_ref
+    u_rad = np.zeros((7, ))  # throt, ele, ail, rud, Nz_ref, ps_ref, Ny_r_ref
 
     u_rad[0] = u_deg[0]  # throttle
 
     for i in range(1, 4):
         u_rad[i] = deg2rad(u_deg[i])
 
-    u_rad[4:7] = u_ref[0:3] # inner-loop commands are 4-7
+    u_rad[4:7] = u_ref[0:3]  # inner-loop commands are 4-7
 
     return xd, u_rad, Nz, ps, Ny_r

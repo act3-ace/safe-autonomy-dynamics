@@ -12,18 +12,18 @@ limitation or restriction. See accompanying README and LICENSE for details.
 This module implements 3D 6dof F16 entities using flight dynamics from AeroBenchVV
 """
 
-import abc
 import math
 
 import numpy as np
 from scipy.spatial.transform import Rotation
 
 from safe_autonomy_dynamics.base_models import BaseEntity, BaseEntityValidator, BaseODESolverDynamics
-from safe_autonomy_dynamics.external.aerobench.lowlevel.low_level_controller import LowLevelController
 from safe_autonomy_dynamics.external.aerobench.controlled_f16 import controlled_f16
+from safe_autonomy_dynamics.external.aerobench.lowlevel.low_level_controller import LowLevelController
 
 
 class AeroBenchF16StateVariables:
+    """F-16 state variables"""
     V = 0
     ATTACK = 1
     SIDESLIP = 2
@@ -77,20 +77,13 @@ class AeroBenchF16(BaseEntity):
     Base interface for AeroBench Entities.
     """
 
-    def __init__(self,
-                 integration_method='RK45',
-                 model_str='morelli',
-                 v2_integrators=False,
-                 **kwargs):
+    def __init__(self, integration_method='RK45', model_str='morelli', v2_integrators=False, **kwargs):
         self.partner = None
 
         # state = [vt, alpha, beta, phi, theta, psi, P, Q, R, pn, pe, h, pow]
         state_min = np.array([-np.inf] * 13, dtype=np.float32)
         state_max = np.array([np.inf] * 13, dtype=np.float32)
-        angle_wrap_centers = np.array(
-            [None, 0, 0, 0, 0, 0, 0, 0, 0, None, None, None, None],
-            dtype=np.float32
-        )
+        angle_wrap_centers = np.array([None, 0, 0, 0, 0, 0, 0, 0, 0, None, None, None, None], dtype=np.float32)
 
         # control = [Nz, ps, Ny_r, throttle]
         control_min = np.array([-np.inf] * 4, dtype=np.float32)
@@ -106,13 +99,7 @@ class AeroBenchF16(BaseEntity):
             v2_integrators=v2_integrators
         )
 
-        super().__init__(
-            dynamics,
-            control_default=control_default,
-            control_min=control_min,
-            control_max=control_max,
-            **kwargs
-        )
+        super().__init__(dynamics, control_default=control_default, control_min=control_min, control_max=control_max, **kwargs)
 
     @classmethod
     def _get_config_validator(cls):
@@ -299,7 +286,7 @@ class AeroBenchF16Dynamics(BaseODESolverDynamics):
         s[:len(state)] = state
 
         # compute state derivative
-        xd = controlled_f16(t, s, control, self.llc, self.model_str, self.v2_integrators)[0]
+        xd = controlled_f16(s, control, self.llc, self.model_str, self.v2_integrators)[0]
 
         # remove integral error states from state vector
         xd = xd[:-self.llc.get_num_integrators()]

@@ -2,34 +2,38 @@
 Utilities for F-16 GCAS
 '''
 
-from math import floor, ceil
+from math import ceil, floor
+
 import numpy as np
+
+# pylint: disable=C0301
+
 
 class StateIndex:
     'list of static state indices'
 
     VT = 0
-    VEL = 0 # alias
-    
+    VEL = 0  # alias
+
     ALPHA = 1
     BETA = 2
-    PHI = 3 # roll angle
-    THETA = 4 # pitch angle
-    PSI = 5 # yaw angle
-    
+    PHI = 3  # roll angle
+    THETA = 4  # pitch angle
+    PSI = 5  # yaw angle
+
     P = 6
     Q = 7
     R = 8
-    
+
     POSN = 9
     POS_N = 9
-    
+
     POSE = 10
     POS_E = 10
-    
+
     ALT = 11
     H = 11
-    
+
     POW = 12
 
 
@@ -59,7 +63,7 @@ class Euler(Freezable):
         assert step > 0, "arg step > 0 required in Euler integrator"
         assert tend > tstart
 
-        self.der_func = der_func # signature (t, x)
+        self.der_func = der_func  # signature (t, x)
         self.tstep = step
         self.t = tstart
         self.y = ystart.copy()
@@ -130,7 +134,7 @@ def printmat(mat, main_label, row_label_str, col_label_str):
 
     mat = np.array(mat)
     if len(mat.shape) == 1:
-        mat.shape = (1, mat.shape[0]) # one-row matrix
+        mat.shape = (1, mat.shape[0])  # one-row matrix
 
     print("{main_label} =")
 
@@ -139,10 +143,10 @@ def printmat(mat, main_label, row_label_str, col_label_str):
 
     width = 7
 
-    width = max(width, max([len(l) for l in col_labels]))
+    width = max(width, max([len(l) for l in col_labels]))  # noqa: E741
 
     if row_labels is not None:
-        width = max(width, max([len(l) for l in row_labels]))
+        width = max(width, max([len(l) for l in row_labels]))  # noqa: E741
 
     width += 1
 
@@ -161,7 +165,7 @@ def printmat(mat, main_label, row_label_str, col_label_str):
 
     if row_labels is not None:
         assert len(row_labels) == mat.shape[0], \
-            "row labels (len={}) expected one element for each row of the matrix ({})".format( \
+            "row labels (len={}) expected one element for each row of the matrix ({})".format(
             len(row_labels), mat.shape[0])
 
     for r in range(mat.shape[0]):
@@ -176,8 +180,8 @@ def printmat(mat, main_label, row_label_str, col_label_str):
             print("{:<{}}".format(label, width), end='')
 
         for num in row:
-            #print("{:#<{}}".format(num, width), end='')
-            print("{:{}.{}g}".format(num, width, width-3), end='')
+            # print("{:#<{}}".format(num, width), end='')
+            print("{:{}.{}g}".format(num, width, width - 3), end='')
 
         print('')
 
@@ -224,7 +228,7 @@ def extract_single_result(res, index, llc):
         rv['modes'] = res['modes']
 
         full_states = res['states']
-        rv['states'] = full_states[:, num_vars*index:num_vars*(index+1)]
+        rv['states'] = full_states[:, num_vars * index:num_vars * (index + 1)]
 
         if 'xd_list' in res:
             # extended states
@@ -252,22 +256,27 @@ class SafetyLimits(Freezable):
 
 
 class SafetyLimitsVerifier(Freezable):
-    'given some limits (in a SafetyLimits) and optional low-level controller (in a LowLevelController), verify whether the simulation results are safe.'
+    """given some limits (in a SafetyLimits) and optional low-level controller
+    (in a LowLevelController), verify whether the simulation results are safe."""
 
     def __init__(self, safety_limits, llc=None):
         self.safety_limits = safety_limits
         self.llc = llc
 
     def verify(self, results):
+        """
+        Verify whether simulation results are safe.
+
+        :param results: simulation results
+        :return: None
+        """
         # Determine the number of state variables per tick of the simulation.
         if self.llc is not None:
-            num_state_vars = len(get_state_names()) + \
-                             self.llc.get_num_integrators()
+            num_state_vars = len(get_state_names()) + self.llc.get_num_integrators()
         else:
             num_state_vars = len(get_state_names())
         # Check whether the results are sane.
-        assert (results['states'].size % num_state_vars) == 0, \
-            "Wrong number of state variables."
+        assert (results['states'].size % num_state_vars) == 0, "Wrong number of state variables."
 
         # Go through each tick of the simulation and determine whether
         # the object(s) was (were) in a safe state.
@@ -280,13 +289,19 @@ class SafetyLimitsVerifier(Freezable):
             ps = results['ps_list'][i]
 
             if self.safety_limits.altitude is not None:
-                assert self.safety_limits.altitude[0] <= alt <= self.safety_limits.altitude[1], "Altitude ({}) is not within the specified limits ({}, {}).".format(alt, self.safety_limits.altitude[0], self.safety_limits.altitude[1])
+                assert self.safety_limits.altitude[0] <= alt <= self.safety_limits.altitude[1], \
+                    "Altitude ({}) is not within the specified limits ({}, {}).".format(
+                        alt, self.safety_limits.altitude[0], self.safety_limits.altitude[1])
 
             if self.safety_limits.Nz is not None:
-                assert self.safety_limits.Nz[0] <= nz <= self.safety_limits.Nz[1], "Nz ({}) is not within the specified limits ({}, {}).".format(nz, self.safety_limits.Nz[0], self.safety_limits.Nz[1])
+                assert self.safety_limits.Nz[0] <= nz <= self.safety_limits.Nz[1], \
+                    "Nz ({}) is not within the specified limits ({}, {}).".format(
+                        nz, self.safety_limits.Nz[0], self.safety_limits.Nz[1])
 
             if self.safety_limits.alpha is not None:
-                assert self.safety_limits.alpha[0] <= alpha <= self.safety_limits.alpha[1], "alpha ({}) is not within the specified limits ({}, {}).".format(nz, self.safety_limits.alpha[0], self.safety_limits.alpha[1])
+                assert self.safety_limits.alpha[0] <= alpha <= self.safety_limits.alpha[1], \
+                    "alpha ({}) is not within the specified limits ({}, {}).".format(
+                        nz, self.safety_limits.alpha[0], self.safety_limits.alpha[1])
 
             if self.safety_limits.psMaxAccelDeg is not None:
                 assert ps <= self.safety_limits.psMaxAccelDeg, "Ps is not less than the specified max."
