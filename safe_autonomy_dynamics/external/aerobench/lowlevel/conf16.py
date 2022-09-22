@@ -7,7 +7,7 @@ used when finding trim conditions
 '''
 
 from math import sin, cos, asin
-from tgear import tgear
+from safe_autonomy_dynamics.external.aerobench.lowlevel.tgear import tgear
 
 
 def conf16(x, u, const):

@@ -7,9 +7,9 @@ This is the objective function for finding the trim condition of the initial sta
 
 from math import asin, sin
 
-from tgear import tgear
-from conf16 import conf16
-from subf16_model import subf16_model
+from safe_autonomy_dynamics.external.aerobench.lowlevel.tgear import tgear
+from safe_autonomy_dynamics.external.aerobench.lowlevel.conf16 import conf16
+from safe_autonomy_dynamics.external.aerobench.lowlevel.subf16_model import subf16_model
 
 
 def clf16(s, x, u, const, model='stevens', adjust_cy=True):
