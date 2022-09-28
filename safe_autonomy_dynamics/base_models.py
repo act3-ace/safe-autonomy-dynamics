@@ -1,7 +1,7 @@
 """
 --------------------------------------------------------------------------
 Air Force Research Laboratory (AFRL) Autonomous Capabilities Team (ACT3)
-Reinforcement Learning (RL) Core  Extension.
+Safe Autonomy Dynamics.
 
 This is a US Government Work not subject to copyright protection in the US.
 
@@ -97,7 +97,8 @@ class BaseEntity(abc.ABC):
             control = self.control_default.copy()
         else:
             if isinstance(action, dict):
-                assert self.control_map is not None, "Cannot use dict-type action without a control_map (see BaseEntity __init__())"
+                assert self.control_map is not None, "Cannot use dict-type action without a control_map " \
+                                                     "(see BaseEntity __init__())"
                 control = self.control_default.copy()
                 for action_name, action_value in action.items():
                     if action_name not in self.control_map:
@@ -281,7 +282,8 @@ class BaseDynamics(abc.ABC):
         When a float, represents single limit applied to entire state vector.
         When an ndarray, each element represents the limit to the corresponding state vector element.
     angle_wrap_centers: np.ndarray
-        Enables circular wrapping of angles. Defines the center of circular wrap such that angles are within [center+pi, center-pi].
+        Enables circular wrapping of angles. Defines the center of circular wrap such that angles are within
+        [center+pi, center-pi].
         When None, no angle wrapping applied.
         When ndarray, each element defines the angle wrap center of the corresponding state element.
         Wrapping not applied when element is NaN.
@@ -456,7 +458,8 @@ class BaseVectorizedODESolverDynamics(BaseODESolverDynamics):
 
 class BaseLinearODESolverDynamics(BaseVectorizedODESolverDynamics):
     """
-    State transition implementation for generic Linear Ordinary Differential Equation dynamics models of the form dx/dt = Ax+Bu.
+    State transition implementation for generic Linear Ordinary Differential Equation dynamics models of the form
+    dx/dt = Ax+Bu.
     Computes next state through numerical integration of differential equation.
 
     Parameters

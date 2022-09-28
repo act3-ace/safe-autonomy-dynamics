@@ -1,8 +1,18 @@
-'''
+"""
+--------------------------------------------------------------------------
+Air Force Research Laboratory (AFRL) Autonomous Capabilities Team (ACT3)
+Safe Autonomy Dynamics.
+
+This is a US Government Work not subject to copyright protection in the US.
+
+The use, dissemination or disclosure of data in this file is subject to
+limitation or restriction. See accompanying README and LICENSE for details.
+---------------------------------------------------------------------------
+
 Stanley Bak
-Python Version of F-16 GCAS
+Python Version of LQR controlled F-16
 ODE derivative code (controlled F16)
-'''
+"""
 
 from math import cos, sin
 
@@ -14,7 +24,7 @@ from safe_autonomy_dynamics.external.aerobench.lowlevel.subf16_model import subf
 
 
 def controlled_f16(x_f16, u_ref, llc, f16_model='morelli', v2_integrators=False):
-    'returns the LQR-controlled F-16 state derivatives and more'
+    """returns the LQR-controlled F-16 state derivatives and more"""
 
     assert isinstance(x_f16, np.ndarray)
     assert isinstance(llc, LowLevelController)
@@ -25,19 +35,19 @@ def controlled_f16(x_f16, u_ref, llc, f16_model='morelli', v2_integrators=False)
     x_ctrl, u_deg = llc.get_u_deg(u_ref, x_f16)
 
     # Note: Control vector (u) for subF16 is in units of degrees
-    xd_model, Nz, Ny, _, _ = subf16_model(x_f16[0:13], u_deg, f16_model)
+    xd_model, nz, ny, _, _ = subf16_model(x_f16[0:13], u_deg, f16_model)
 
     if v2_integrators:
         # integrators from matlab v2 model
         ps = xd_model[6] * cos(xd_model[1]) + xd_model[8] * sin(xd_model[1])
 
-        Ny_r = Ny + xd_model[8]
+        ny_r = ny + xd_model[8]
     else:
         # Nonlinear (Actual): ps = p * cos(alpha) + r * sin(alpha)
         ps = x_ctrl[4] * cos(x_ctrl[0]) + x_ctrl[5] * sin(x_ctrl[0])
 
         # Calculate (side force + yaw rate) term
-        Ny_r = Ny + x_ctrl[5]
+        ny_r = ny + x_ctrl[5]
 
     xd = np.zeros((x_f16.shape[0], ))
     xd[:len(xd_model)] = xd_model
@@ -45,7 +55,7 @@ def controlled_f16(x_f16, u_ref, llc, f16_model='morelli', v2_integrators=False)
     # integrators from low-level controller
     start = len(xd_model)
     end = start + llc.get_num_integrators()
-    int_der = llc.get_integrator_derivatives(u_ref, Nz, ps, Ny_r)
+    int_der = llc.get_integrator_derivatives(u_ref, nz, ps, ny_r)
     xd[start:end] = int_der
 
     # Convert all degree values to radians for output
@@ -58,4 +68,4 @@ def controlled_f16(x_f16, u_ref, llc, f16_model='morelli', v2_integrators=False)
 
     u_rad[4:7] = u_ref[0:3]  # inner-loop commands are 4-7
 
-    return xd, u_rad, Nz, ps, Ny_r
+    return xd, u_rad, nz, ps, ny_r

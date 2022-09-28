@@ -1,9 +1,18 @@
-'''
+"""
+--------------------------------------------------------------------------
+Air Force Research Laboratory (AFRL) Autonomous Capabilities Team (ACT3)
+Safe Autonomy Dynamics.
+
+This is a US Government Work not subject to copyright protection in the US.
+
+The use, dissemination or disclosure of data in this file is subject to
+limitation or restriction. See accompanying README and LICENSE for details.
+---------------------------------------------------------------------------
+
 Stanley Bak
 Python F-16 subf16
-outputs aircraft state vector deriative
-'''
-
+outputs aircraft state vector derivative
+"""
 #         x[0] = air speed, VT    (ft/sec)
 #         x[1] = angle of attack, alpha  (rad)
 #         x[2] = angle of sideslip, beta (rad)
