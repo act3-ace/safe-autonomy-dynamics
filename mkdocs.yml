@@ -1,12 +1,14 @@
+#
 #--------------------------------------------------------------------------
 #Air Force Research Laboratory (AFRL) Autonomous Capabilities Team (ACT3)
-#Reinforcement Learning (RL) Core  Extension.
+#Safe Autonomy Dynamics.
 #
 #This is a US Government Work not subject to copyright protection in the US.
 #
 #The use, dissemination or disclosure of data in this file is subject to
 #limitation or restriction. See accompanying README and LICENSE for details.
 #---------------------------------------------------------------------------
+#
 site_name: Safe Autonomy Dynamics
 site_author: Safe Autonomy Team
 repo_url: https://github.com/act3-ace/rta/safe-autonomy-dynamics
@@ -141,7 +143,11 @@ nav:
                   - "tgear": reference/external/aerobench/lowlevel/tgear.md
                   - "thrust": reference/external/aerobench/lowlevel/thrust.md
       - "base models": reference/base_models.md
-      - "cwh": reference/cwh.md
+      - "cwh":
+          - api/cwh/index.md
+          - "point_model": reference/cwh/point_model.md
+          - "rotational_model": reference/cwh/rotational_model.md
+          - "sixdof_model": reference/cwh/sixdof_model.md
       - "dubins": reference/dubins.md
 #      - reference/SUMMARY.md  # API "Table of Contents"
 
