@@ -1,6 +1,16 @@
-'''
+"""
+--------------------------------------------------------------------------
+Air Force Research Laboratory (AFRL) Autonomous Capabilities Team (ACT3)
+Safe Autonomy Dynamics.
+
+This is a US Government Work not subject to copyright protection in the US.
+
+The use, dissemination or disclosure of data in this file is subject to
+limitation or restriction. See accompanying README and LICENSE for details.
+---------------------------------------------------------------------------
+
 Utilities for F-16 GCAS
-'''
+"""
 
 from math import ceil, floor
 
@@ -10,7 +20,7 @@ import numpy as np
 
 
 class StateIndex:
-    'list of static state indices'
+    """list of static state indices"""
 
     VT = 0
     VEL = 0  # alias
@@ -37,13 +47,13 @@ class StateIndex:
     POW = 12
 
 
-class Freezable():
-    'a class where you can freeze the fields (prevent new fields from being created)'
+class Freezable:
+    """a class where you can freeze the fields (prevent new fields from being created)"""
 
     _frozen = False
 
     def freeze_attrs(self):
-        'prevents any new attributes from being created in the object'
+        """prevents any new attributes from being created in the object"""
         self._frozen = True
 
     def __setattr__(self, key, value):
@@ -54,10 +64,10 @@ class Freezable():
 
 
 class Euler(Freezable):
-    '''fixed step euler integration
+    """fixed step euler integration
 
     loosely based on scipy.integrate.RK45
-    '''
+    """
 
     def __init__(self, der_func, tstart, ystart, tend, step=0, time_tol=1e-9):
         assert step > 0, "arg step > 0 required in Euler integrator"
@@ -78,7 +88,7 @@ class Euler(Freezable):
         self.freeze_attrs()
 
     def step(self):
-        'take one step'
+        """take one step"""
 
         if self.status == 'running':
             self.yprev = self.y.copy()
@@ -97,7 +107,7 @@ class Euler(Freezable):
                 self.status = 'finished'
 
     def dense_output(self):
-        'return a function of time'
+        """return a function of time"""
 
         assert self.tprev is not None
 
@@ -107,7 +117,7 @@ class Euler(Freezable):
         dydt = dy / dt
 
         def fun(t):
-            'return state at time t (linear interpolation)'
+            """return state at time t (linear interpolation)"""
 
             deltat = t - self.tprev
 
@@ -117,13 +127,13 @@ class Euler(Freezable):
 
 
 def get_state_names():
-    'returns a list of state variable names'
+    """returns a list of state variable names"""
 
     return ['vt', 'alpha', 'beta', 'phi', 'theta', 'psi', 'P', 'Q', 'R', 'pos_n', 'pos_e', 'alt', 'pow']
 
 
 def printmat(mat, main_label, row_label_str, col_label_str):
-    'print a matrix'
+    """print a matrix"""
 
     if isinstance(row_label_str, list) and len(row_label_str) == 0:
         row_label_str = None
@@ -187,7 +197,7 @@ def printmat(mat, main_label, row_label_str, col_label_str):
 
 
 def fix(ele):
-    'round towards zero'
+    """round towards zero"""
 
     assert isinstance(ele, float)
 
@@ -200,7 +210,7 @@ def fix(ele):
 
 
 def sign(ele):
-    'sign of a number'
+    """sign of a number"""
 
     if ele < 0:
         rv = -1
@@ -213,7 +223,7 @@ def sign(ele):
 
 
 def extract_single_result(res, index, llc):
-    'extract a res object for a sinlge aircraft from a multi-aircraft simulation'
+    """extract a res object for a sinlge aircraft from a multi-aircraft simulation"""
 
     num_vars = len(get_state_names()) + llc.get_num_integrators()
     num_aircraft = res['states'][0].size // num_vars
@@ -222,10 +232,11 @@ def extract_single_result(res, index, llc):
         assert index == 0
         rv = res
     else:
-        rv = {}
-        rv['status'] = res['status']
-        rv['times'] = res['times']
-        rv['modes'] = res['modes']
+        rv = {
+            'status': res['status'],
+            'times': res['times'],
+            'modes': res['modes'],
+        }
 
         full_states = res['states']
         rv['states'] = full_states[:, num_vars * index:num_vars * (index + 1)]
@@ -241,7 +252,7 @@ def extract_single_result(res, index, llc):
 
 
 class SafetyLimits(Freezable):
-    'a class for holding a set of safety limits.'
+    """a class for holding a set of safety limits."""
 
     def __init__(self, **kwargs):
         self.altitude = kwargs['altitude'] if 'altitude' in kwargs and kwargs['altitude'] is not None else None
@@ -249,7 +260,7 @@ class SafetyLimits(Freezable):
         self.v = kwargs['v'] if 'v' in kwargs and kwargs['v'] is not None else None
         self.alpha = kwargs['alpha'] if 'alpha' in kwargs and kwargs['alpha'] is not None else None
 
-        self.psMaxAccelDeg = kwargs['psMaxAccelDeg'] if 'psMaxAccelDeg' in kwargs and kwargs['psMaxAccelDeg'] is not None else None
+        self.psMaxAccelDeg = kwargs['psMaxAccelDeg'] if ('psMaxAccelDeg' in kwargs and kwargs['psMaxAccelDeg'] is not None) else None
         self.betaMaxDeg = kwargs['betaMaxDeg'] if 'betaMaxDeg' in kwargs and kwargs['betaMaxDeg'] is not None else None
 
         self.freeze_attrs()
