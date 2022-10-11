@@ -18,7 +18,7 @@ from typing import Union
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-from safe_autonomy_dynamics.base_models import BaseEntityValidator, BaseODESolverDynamics, BaseRotationEntity
+from safe_autonomy_dynamics.base_models import BaseControlAffineODESolverDynamics, BaseEntityValidator, BaseRotationEntity
 from safe_autonomy_dynamics.cwh import generate_cwh_matrices
 from safe_autonomy_dynamics.utils import number_list_to_np
 
@@ -356,7 +356,7 @@ class SixDOFSpacecraft(BaseRotationEntity):
         return np.array([self.wx, self.wy, self.wz])
 
 
-class SixDOFDynamics(BaseODESolverDynamics):
+class SixDOFDynamics(BaseControlAffineODESolverDynamics):
     """
     State transition implementation of 3D Clohessy-Wiltshire dynamics model and 3D rotational dynamics model.
 
@@ -383,11 +383,11 @@ class SixDOFDynamics(BaseODESolverDynamics):
 
     def __init__(
         self,
-        m,
-        inertia_matrix,
-        ang_acc_limit,
-        ang_vel_limit,
-        n,
+        m=M_DEFAULT,
+        inertia_matrix=INERTIA_MATRIX_DEFAULT,
+        ang_acc_limit=ANG_ACC_LIMIT_DEFAULT,
+        ang_vel_limit=ANG_VEL_LIMIT_DEFAULT,
+        n=N_DEFAULT,
         body_frame_thrust=True,
         state_max: Union[float, np.ndarray] = None,
         state_min: Union[float, np.ndarray] = None,
@@ -455,21 +455,13 @@ class SixDOFDynamics(BaseODESolverDynamics):
 
         super().__init__(state_min=state_min, state_max=state_max, angle_wrap_centers=angle_wrap_centers, **kwargs)
 
-    def _compute_state_dot(self, t: float, state: np.ndarray, control: np.ndarray) -> np.ndarray:
+    def state_transition_system(self, state: np.ndarray) -> np.ndarray:
 
         x, y, z, q1, q2, q3, q4, x_dot, y_dot, z_dot, wx, wy, wz = state
 
-        # Convert the control thrust to Hill's frame prior to application in the CWH equations
-        if self.body_frame_thrust:
-            rotationObj = Rotation.from_quat([q1, q2, q3, q4])
-            self.control_thrust_Hill = rotationObj.apply(control[0:3])
-        else:
-            self.control_thrust_Hill = control[0:3]
-
         # Compute translational derivatives
-        # Use Clohessey-Wiltshire A and B matrices
         pos_vel_state_vec = np.array([x, y, z, x_dot, y_dot, z_dot], dtype=np.float64)
-        pos_vel_derivative = np.matmul(self.A, pos_vel_state_vec) + np.matmul(self.B, self.control_thrust_Hill)
+        pos_vel_derivative = self.A @ pos_vel_state_vec
 
         # Compute rotational derivatives
         q_derivative = np.zeros((4, ))
@@ -478,9 +470,9 @@ class SixDOFDynamics(BaseODESolverDynamics):
         q_derivative[1] = 0.5 * (q3 * wx + q4 * wy - q1 * wz)
         q_derivative[2] = 0.5 * (-q2 * wx + q1 * wy + q4 * wz)
         q_derivative[3] = 0.5 * (-q1 * wx - q2 * wy - q3 * wz)
-        w_derivative[0] = 1 / self.inertia_matrix[0, 0] * ((self.inertia_matrix[1, 1] - self.inertia_matrix[2, 2]) * wy * wz + control[3])
-        w_derivative[1] = 1 / self.inertia_matrix[1, 1] * ((self.inertia_matrix[2, 2] - self.inertia_matrix[0, 0]) * wx * wz + control[4])
-        w_derivative[2] = 1 / self.inertia_matrix[2, 2] * ((self.inertia_matrix[0, 0] - self.inertia_matrix[1, 1]) * wx * wy + control[5])
+        w_derivative[0] = 1 / self.inertia_matrix[0, 0] * ((self.inertia_matrix[1, 1] - self.inertia_matrix[2, 2]) * wy * wz)
+        w_derivative[1] = 1 / self.inertia_matrix[1, 1] * ((self.inertia_matrix[2, 2] - self.inertia_matrix[0, 0]) * wx * wz)
+        w_derivative[2] = 1 / self.inertia_matrix[2, 2] * ((self.inertia_matrix[0, 0] - self.inertia_matrix[1, 1]) * wx * wy)
 
         # Form derivative array
         state_derivative = np.array(
@@ -501,5 +493,63 @@ class SixDOFDynamics(BaseODESolverDynamics):
             ],
             dtype=np.float32
         )
-
         return state_derivative
+
+    def state_transition_input(self, state: np.ndarray) -> np.ndarray:
+        quat = state[3:7]
+
+        w_derivative = np.array(
+            [[1 / self.inertia_matrix[0, 0], 0, 0], [0, 1 / self.inertia_matrix[1, 1], 0], [0, 0, 1 / self.inertia_matrix[2, 2]]]
+        )
+
+        # Convert the control thrust to Hill's frame prior to application in the CWH equations
+        if self.body_frame_thrust:
+            r1 = 1 / self.m * self.apply_quat(np.array([1, 0, 0]), quat)
+            r2 = 1 / self.m * self.apply_quat(np.array([0, 1, 0]), quat)
+            r3 = 1 / self.m * self.apply_quat(np.array([0, 0, 1]), quat)
+            vel_derivative = np.array([[r1[0], r2[0], r3[0]], [r1[1], r2[1], r3[1]], [r1[2], r2[2], r3[2]]])
+        else:
+            vel_derivative = self.B[3:6, :]
+
+        g = np.vstack(
+            (
+                np.zeros((7, 6)),
+                np.hstack((vel_derivative, np.zeros(vel_derivative.shape))),
+                np.hstack((np.zeros(w_derivative.shape), w_derivative))
+            )
+        )
+
+        return g
+
+    def apply_quat(self, x: np.ndarray, quat: np.ndarray) -> np.ndarray:
+        """
+        Apply quaternion rotation to 3d vector
+
+        Parameters
+        ----------
+        x : np.ndarray
+            vector of length 3
+        quat : np.ndarray
+            quaternion vector of form [x, y, z, w]
+
+        Returns
+        -------
+        np.ndarray
+            rotated vector of length 3
+        """
+        p = np.insert(x, 0, 0, axis=0)
+        r = np.array([quat[3], quat[0], quat[1], quat[2]])
+        r_p = np.array([quat[3], -quat[0], -quat[1], -quat[2]])
+        rotated_x = self.hamilton_product(self.hamilton_product(r, p), r_p)[1:]
+        return rotated_x
+
+    def hamilton_product(self, r, q):
+        """Hamilton product between 2 vectors"""
+        return np.array(
+            [
+                r[0] * q[0] - r[1] * q[1] - r[2] * q[2] - r[3] * q[3],
+                r[0] * q[1] + r[1] * q[0] + r[2] * q[3] - r[3] * q[2],
+                r[0] * q[2] - r[1] * q[3] + r[2] * q[0] + r[3] * q[1],
+                r[0] * q[3] + r[1] * q[2] - r[2] * q[1] + r[3] * q[0]
+            ]
+        )

@@ -14,13 +14,12 @@ Hill's reference frame along with rotational dynamics. 2D scenario models in-pla
 motion and rotation about the z axis. 3D scenario is pending.
 """
 
-import math
 from typing import Union
 
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-from safe_autonomy_dynamics.base_models import BaseEntityValidator, BaseODESolverDynamics, BaseRotationEntity
+from safe_autonomy_dynamics.base_models import BaseControlAffineODESolverDynamics, BaseEntityValidator, BaseRotationEntity
 from safe_autonomy_dynamics.cwh import M_DEFAULT, N_DEFAULT, generate_cwh_matrices
 
 INERTIA_DEFAULT = 0.0573
@@ -298,7 +297,7 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
         return np.array([self.wx, self.wy, self.wz])
 
 
-class CWHRotation2dDynamics(BaseODESolverDynamics):
+class CWHRotation2dDynamics(BaseControlAffineODESolverDynamics):
     """
     State transition implementation of 3D Clohessy-Wiltshire dynamics model.
 
@@ -359,29 +358,31 @@ class CWHRotation2dDynamics(BaseODESolverDynamics):
 
         super().__init__(state_min=state_min, state_max=state_max, angle_wrap_centers=angle_wrap_centers, **kwargs)
 
-    def _compute_state_dot(self, t: float, state: np.ndarray, control: np.ndarray) -> np.ndarray:
-
-        x, y, theta, x_dot, y_dot, theta_dot = state
+    def state_transition_system(self, state: np.ndarray) -> np.ndarray:
+        x, y, _, x_dot, y_dot, theta_dot = state
         # Form separate state vector for translational state
         pos_vel_state_vec = np.array([x, y, x_dot, y_dot], dtype=np.float64)
-        # Compute the rotated thrust vector
-        thrust_vector = (
-            control[0] * np.array([math.cos(theta), math.sin(theta)]) + control[1] * np.array([-math.sin(theta), math.cos(theta)])
-        )
         # Compute derivatives
-        pos_vel_derivative = np.matmul(self.A, pos_vel_state_vec) + np.matmul(self.B, thrust_vector)
-        theta_dot_dot = control[2] / self.inertia
+        pos_vel_derivative = self.A @ pos_vel_state_vec
         # check angular velocity limit
         if theta_dot >= self.ang_vel_limit:
-            theta_dot_dot = min(0, theta_dot_dot)
             theta_dot = self.ang_vel_limit
         elif theta_dot <= -self.ang_vel_limit:
-            theta_dot_dot = max(0, theta_dot_dot)
             theta_dot = -self.ang_vel_limit
         # Form array of state derivatives
         state_derivative = np.array(
-            [pos_vel_derivative[0], pos_vel_derivative[1], theta_dot, pos_vel_derivative[2], pos_vel_derivative[3], theta_dot_dot],
-            dtype=np.float32
+            [pos_vel_derivative[0], pos_vel_derivative[1], theta_dot, pos_vel_derivative[2], pos_vel_derivative[3], 0], dtype=np.float32
         )
 
         return state_derivative
+
+    def state_transition_input(self, state: np.ndarray) -> np.ndarray:
+        theta = state[2]
+
+        g = np.array(
+            [
+                [0, 0, 0], [0, 0, 0], [0, 0, 0], [np.cos(theta) / self.m, -np.sin(theta) / self.m, 0],
+                [np.sin(theta) / self.m, np.cos(theta) / self.m, 0], [0, 0, 1 / self.inertia]
+            ]
+        )
+        return g
