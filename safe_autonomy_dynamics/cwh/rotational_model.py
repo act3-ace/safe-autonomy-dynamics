@@ -381,8 +381,12 @@ class CWHRotation2dDynamics(BaseControlAffineODESolverDynamics):
 
         g = np.array(
             [
-                [0, 0, 0], [0, 0, 0], [0, 0, 0], [np.cos(theta) / self.m, -np.sin(theta) / self.m, 0],
-                [np.sin(theta) / self.m, np.cos(theta) / self.m, 0], [0, 0, 1 / self.inertia]
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0],
+                [np.cos(theta) / self.m, -np.sin(theta) / self.m, 0],
+                [np.sin(theta) / self.m, np.cos(theta) / self.m, 0],
+                [0, 0, 1 / self.inertia],
             ]
         )
         return g
