@@ -350,7 +350,7 @@
     theta: [1.9238417801698553]
     velocity: [-0.6793547322876764, 6.467936621342318, 0.0]
     wz: [0.034919232994182356]
-  error_bound: 5e-4
+  error_bound: 1e-4
 
 # With Y Control Only:
 - ID: At_origin_stationary_max_trans_control_y_thrust_only
@@ -464,4 +464,4 @@
     theta: 0.35304545337495874
     velocity: [-0.6793547322876764, 6.467936621342318, 0.0]
     wz: [0.034919232994182356]
-  error_bound: 5e-4
+  error_bound: 1e-4
