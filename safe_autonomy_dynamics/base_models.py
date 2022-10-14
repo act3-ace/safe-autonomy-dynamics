@@ -344,6 +344,16 @@ class BaseODESolverDynamics(BaseDynamics):
 
     Parameters
     ----------
+    state_dot_min : float or np.ndarray
+        Minimum allowable value for the state time derivative. State derivative values that exceed this are clipped.
+        When a float, represents single limit applied to entire state vector.
+        When an ndarray, each element represents the limit to the corresponding state vector element.
+        By default, -inf
+    state_dot_max : float or np.ndarray
+        Maximum allowable value for the state time derivative. State derivative values that exceed this are clipped.
+        When a float, represents single limit applied to entire state vector.
+        When an ndarray, each element represents the limit to the corresponding state vector element.
+        By default, +inf
     integration_method : string
         Numerical integration method used by dynamics solver. One of ['RK45', 'Euler'].
         'RK45' is slow but very accurate.
@@ -352,8 +362,16 @@ class BaseODESolverDynamics(BaseDynamics):
         Additional keyword arguments passed to parent BaseDynamics constructor.
     """
 
-    def __init__(self, integration_method="RK45", **kwargs):
+    def __init__(
+        self,
+        state_dot_min: Union[float, np.ndarray] = -np.inf,
+        state_dot_max: Union[float, np.ndarray] = np.inf,
+        integration_method="RK45",
+        **kwargs
+    ):
         self.integration_method = integration_method
+        self.state_dot_min = state_dot_min
+        self.state_dot_max = state_dot_max
         super().__init__(**kwargs)
 
     def compute_state_dot(self, t: float, state: np.ndarray, control: np.ndarray) -> np.ndarray:
@@ -382,6 +400,9 @@ class BaseODESolverDynamics(BaseDynamics):
     @abc.abstractmethod
     def _compute_state_dot(self, t: float, state: np.ndarray, control: np.ndarray) -> np.ndarray:
         raise NotImplementedError
+
+    def _clip_state_dot_direct(self, state_dot):
+        return np.clip(state_dot, self.state_dot_min, self.state_dot_max)
 
     def _clip_state_dot_by_state_limits(self, state, state_dot):
         lower_bounded_states = state <= self.state_min
