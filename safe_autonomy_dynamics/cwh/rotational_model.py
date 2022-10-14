@@ -325,8 +325,10 @@ class CWHRotation2dDynamics(BaseODESolverDynamics):
         ang_acc_limit=ANG_ACC_LIMIT_DEFAULT,
         ang_vel_limit=ANG_VEL_LIMIT_DEFAULT,
         n=N_DEFAULT,
-        state_max: Union[float, np.ndarray] = None,
         state_min: Union[float, np.ndarray] = None,
+        state_max: Union[float, np.ndarray] = None,
+        state_dot_min: Union[float, np.ndarray] = None,
+        state_dot_max: Union[float, np.ndarray] = None,
         angle_wrap_centers: np.ndarray = None,
         **kwargs
     ):
@@ -350,14 +352,25 @@ class CWHRotation2dDynamics(BaseODESolverDynamics):
 
         if state_min is None:
             state_min = np.array([-np.inf, -np.inf, -np.inf, -np.inf, -np.inf, -self.ang_vel_limit])
-
         if state_max is None:
             state_max = np.array([np.inf, np.inf, np.inf, np.inf, np.inf, self.ang_vel_limit])
+
+        if state_dot_min is None:
+            state_dot_min = np.array([-np.inf, -np.inf, -self.ang_vel_limit, -np.inf, -np.inf, -self.ang_acc_limit])
+        if state_dot_max is None:
+            state_dot_max = np.array([np.inf, np.inf, self.ang_vel_limit, np.inf, np.inf, self.ang_acc_limit])
 
         if angle_wrap_centers is None:
             angle_wrap_centers = np.array([None, None, 0, None, None, None], dtype=float)
 
-        super().__init__(state_min=state_min, state_max=state_max, angle_wrap_centers=angle_wrap_centers, **kwargs)
+        super().__init__(
+            state_min=state_min,
+            state_max=state_max,
+            angle_wrap_centers=angle_wrap_centers,
+            state_dot_min=state_dot_min,
+            state_dot_max=state_dot_max,
+            **kwargs
+        )
 
     def _compute_state_dot(self, t: float, state: np.ndarray, control: np.ndarray) -> np.ndarray:
 
@@ -371,13 +384,7 @@ class CWHRotation2dDynamics(BaseODESolverDynamics):
         # Compute derivatives
         pos_vel_derivative = np.matmul(self.A, pos_vel_state_vec) + np.matmul(self.B, thrust_vector)
         theta_dot_dot = control[2] / self.inertia
-        # check angular velocity limit
-        if theta_dot >= self.ang_vel_limit:
-            theta_dot_dot = min(0, theta_dot_dot)
-            theta_dot = self.ang_vel_limit
-        elif theta_dot <= -self.ang_vel_limit:
-            theta_dot_dot = max(0, theta_dot_dot)
-            theta_dot = -self.ang_vel_limit
+
         # Form array of state derivatives
         state_derivative = np.array(
             [pos_vel_derivative[0], pos_vel_derivative[1], theta_dot, pos_vel_derivative[2], pos_vel_derivative[3], theta_dot_dot],
