@@ -394,6 +394,7 @@ class BaseODESolverDynamics(BaseDynamics):
             Instantaneous time derivative of the state vector.
         """
         state_dot = self._compute_state_dot(t, state, control)
+        state_dot = self._clip_state_dot_direct(state_dot)
         state_dot = self._clip_state_dot_by_state_limits(state, state_dot)
         return state_dot
 
