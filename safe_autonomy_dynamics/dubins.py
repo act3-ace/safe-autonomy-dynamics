@@ -13,12 +13,11 @@ This module implements 2D and 3D Aircraft entities with Dubins physics dynamics 
 """
 
 import abc
-import math
 
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-from safe_autonomy_dynamics.base_models import BaseEntity, BaseEntityValidator, BaseODESolverDynamics
+from safe_autonomy_dynamics.base_models import BaseControlAffineODESolverDynamics, BaseEntity, BaseEntityValidator
 
 
 class BaseDubinsAircraftValidator(BaseEntityValidator):
@@ -146,9 +145,9 @@ class BaseDubinsAircraft(BaseEntity):
         """Get 3d velocity vector"""
         velocity = np.array(
             [
-                self.v * math.cos(self.heading) * math.cos(self.gamma),
-                self.v * math.sin(self.heading) * math.cos(self.gamma),
-                -1 * self.v * math.sin(self.gamma),
+                self.v * np.cos(self.heading) * np.cos(self.gamma),
+                self.v * np.sin(self.heading) * np.cos(self.gamma),
+                -1 * self.v * np.sin(self.gamma),
             ],
             dtype=np.float32,
         )
@@ -302,23 +301,24 @@ class Dubins2dAircraft(BaseDubinsAircraft):
         return acc
 
 
-class Dubins2dDynamics(BaseODESolverDynamics):
+class Dubins2dDynamics(BaseControlAffineODESolverDynamics):
     """
     State transition implementation of non-linear 2D Dubins dynamics model.
     """
 
-    def _compute_state_dot(self, t: float, state: np.ndarray, control: np.ndarray) -> np.ndarray:
+    def state_transition_system(self, state: np.ndarray) -> np.ndarray:
         _, _, heading, v = state
-        rudder, throttle = control
 
-        x_dot = v * math.cos(heading)
-        y_dot = v * math.sin(heading)
-        heading_dot = rudder
-        v_dot = throttle
+        x_dot = v * np.cos(heading)
+        y_dot = v * np.sin(heading)
 
-        state_dot = np.array([x_dot, y_dot, heading_dot, v_dot], dtype=np.float32)
+        state_dot = np.array([x_dot, y_dot, 0, 0])
 
         return state_dot
+
+    def state_transition_input(self, state: np.ndarray) -> np.ndarray:
+        g = np.array([[0, 0], [0, 0], [1, 0], [0, 1]])
+        return g
 
 
 ############################
@@ -492,7 +492,7 @@ class Dubins3dAircraft(BaseDubinsAircraft):
         return acc
 
 
-class Dubins3dDynamics(BaseODESolverDynamics):
+class Dubins3dDynamics(BaseControlAffineODESolverDynamics):
     """
     State transition implementation of non-linear 3D Dubins dynamics model.
 
@@ -508,20 +508,18 @@ class Dubins3dDynamics(BaseODESolverDynamics):
         self.g = g
         super().__init__(**kwargs)
 
-    def _compute_state_dot(self, t: float, state: np.ndarray, control: np.ndarray) -> np.ndarray:
+    def state_transition_system(self, state: np.ndarray) -> np.ndarray:
         _, _, _, heading, gamma, roll, v = state
 
-        elevator, ailerons, throttle = control
+        x_dot = v * np.cos(heading) * np.cos(gamma)
+        y_dot = v * np.sin(heading) * np.cos(gamma)
+        z_dot = -1 * v * np.sin(gamma)
+        heading_dot = (self.g / v) * np.tan(roll)  # g = 32.17 ft/s^2
 
-        x_dot = v * math.cos(heading) * math.cos(gamma)
-        y_dot = v * math.sin(heading) * math.cos(gamma)
-        z_dot = -1 * v * math.sin(gamma)
-
-        gamma_dot = elevator
-        roll_dot = ailerons
-        heading_dot = (self.g / v) * math.tan(roll)  # g = 32.17 ft/s^2
-        v_dot = throttle
-
-        state_dot = np.array([x_dot, y_dot, z_dot, heading_dot, gamma_dot, roll_dot, v_dot], dtype=np.float32)
+        state_dot = np.array([x_dot, y_dot, z_dot, heading_dot, 0, 0, 0])
 
         return state_dot
+
+    def state_transition_input(self, state: np.ndarray) -> np.ndarray:
+        g = np.array([[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1]])
+        return g

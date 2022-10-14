@@ -429,15 +429,12 @@ class BaseODESolverDynamics(BaseDynamics):
         return next_state, state_dot
 
 
-class BaseVectorizedODESolverDynamics(BaseODESolverDynamics):
+class BaseControlAffineODESolverDynamics(BaseODESolverDynamics):
     """
-    State transition implementation for generic Ordinary Differential Equation dynamics models of the form
-        dx/dt = f(x)x + g(x)u.
+    State transition implementation for control affine Ordinary Differential Equation dynamics models of the form
+        dx/dt = f(x) + g(x)u.
 
-    At Each point in the numerical integration processes, f(x) and g(x) are computed at the integration point to find
-        A = f(x)
-        B = g(x)
-        To construct the matrix product dx/dt = Ax + Bu
+    At Each point in the numerical integration processes, f(x) and g(x) are computed at the integration point
 
     Computes next state through numerical integration of differential equation.
 
@@ -450,12 +447,15 @@ class BaseVectorizedODESolverDynamics(BaseODESolverDynamics):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+    def _compute_state_dot(self, t: float, state: np.ndarray, control: np.ndarray):
+        state_dot = self.state_transition_system(state) + self.state_transition_input(state) @ control
+        return state_dot
+
     @abc.abstractmethod
-    def _gen_dynamics_matrices(self, state) -> Tuple[np.ndarray, np.ndarray]:
-        """
-        Computes the vectorized ODE matrices A, B with current system state before computing derivative.
-        Allows non-linear dynamics models to be linearized at each numerical integration interval.
-        Directly modifies self.A,
+    def state_transition_system(self, state: np.ndarray) -> np.ndarray:
+        """Computes the system state contribution to the system state's time derivative
+
+        i.e. implements f(x) from dx/dt = f(x) + g(x)u
 
         Parameters
         ----------
@@ -465,19 +465,30 @@ class BaseVectorizedODESolverDynamics(BaseODESolverDynamics):
         Returns
         -------
         np.ndarray
-            A of dx/dt = Ax + Bu
-        np.ndarray
-            B of dx/dt = Ax + Bu
+            state time derivative contribution from the current system state
         """
         raise NotImplementedError
 
-    def _compute_state_dot(self, t: float, state: np.ndarray, control: np.ndarray):
-        A, B = self._gen_dynamics_matrices(state)
-        state_dot = np.matmul(A, state) + np.matmul(B, control)
-        return state_dot
+    @abc.abstractmethod
+    def state_transition_input(self, state: np.ndarray) -> np.ndarray:
+        """Computes the control input matrix contribution to the system state's time derivative
+
+        i.e. implements g(x) from dx/dt = f(x) + g(x)u
+
+        Parameters
+        ----------
+        state : np.ndarray
+            Current state vector of the system.
+
+        Returns
+        -------
+        np.ndarray
+            input matrix in state space representation time derivative
+        """
+        raise NotImplementedError
 
 
-class BaseLinearODESolverDynamics(BaseVectorizedODESolverDynamics):
+class BaseLinearODESolverDynamics(BaseControlAffineODESolverDynamics):
     """
     State transition implementation for generic Linear Ordinary Differential Equation dynamics models of the form
     dx/dt = Ax+Bu.
@@ -506,5 +517,8 @@ class BaseLinearODESolverDynamics(BaseVectorizedODESolverDynamics):
 
         super().__init__(**kwargs)
 
-    def _gen_dynamics_matrices(self, state) -> Tuple[np.ndarray, np.ndarray]:
-        return self.A, self.B
+    def state_transition_system(self, state: np.ndarray) -> np.ndarray:
+        return self.A @ state
+
+    def state_transition_input(self, state: np.ndarray) -> np.ndarray:
+        return self.B
