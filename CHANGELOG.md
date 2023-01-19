@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.4.0...v0.4.1) (2023-01-19)
+
+
+### Bug Fixes
+
+* **dependencies:** moved developer dependencies out of main requirements file ([dc15e8e](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/dc15e8ee8b72001f9a7e351b03e6b10e6784bde5)), closes [#23](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/issues/23)
+
 # [0.4.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.3.0...v0.4.0) (2022-09-22)
 
 
