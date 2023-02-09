@@ -26,6 +26,7 @@ def parse_requirements(filename: str):
 
 reqs = parse_requirements("requirements.txt")
 
+
 version = {}
 try:
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -35,9 +36,9 @@ with open(os.path.join(base_dir, 'version.py')) as fp:
      exec(fp.read(), version)
 
 if __name__ == '__main__':
-    tests_require = parse_requirements("compliance-requirements.txt")
-
-    docs_require = parse_requirements("mkdocs-requirements.txt")
+    jax_reqs = parse_requirements("requirements-jax.txt")
+    test_reqs = parse_requirements("requirements-compliance.txt") + jax_reqs
+    docs_require = parse_requirements("requirements-mkdocs.txt")
 
     setup(
         name="safe-autonomy-dynamics",
@@ -73,8 +74,9 @@ if __name__ == '__main__':
         install_requires=reqs,
 
         extras_require={
-            "testing":  tests_require,
+            "testing":  test_reqs,
             "docs":  docs_require,
+            "jax": jax_reqs,
         },
         python_requires='>=3.8',
     )

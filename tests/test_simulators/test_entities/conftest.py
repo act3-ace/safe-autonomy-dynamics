@@ -30,6 +30,11 @@ def attr_init(request):
 
 
 @pytest.fixture
+def use_jax(request):
+    return request.param
+
+
+@pytest.fixture
 def initial_entity_state(attr_init):
     # common fixture that composes an entity's initial state array based on attr_init dict read in from yaml config file
     # (order of KVPs should be preserved from yaml file)

@@ -31,11 +31,14 @@ parameterized_fixture_keywords = ["attr_init",
                                   "error_bound"]
 test_configs, IDs = read_test_cases(test_cases_file_path, parameterized_fixture_keywords)
 
+parameterized_fixture_keywords.append("use_jax")
+test_configs =  [config.copy() + [False] for config in test_configs] + [config.copy() + [True] for config in test_configs]
+IDs += [id + "_jax" for id in IDs]
 
 # override entity fixture
 @pytest.fixture
-def entity(initial_entity_state):
-    entity = CWHRotation2dSpacecraft(name="tests")
+def entity(initial_entity_state, use_jax):
+    entity = CWHRotation2dSpacecraft(name="tests", use_jax=use_jax)
     if initial_entity_state is not None:
         entity.state = initial_entity_state
 
@@ -45,3 +48,4 @@ def entity(initial_entity_state):
 @pytest.mark.parametrize(delimiter.join(parameterized_fixture_keywords), test_configs, indirect=True, ids=IDs)
 def test_CWHRotation2dSpacecraft(acted_entity, control, num_steps, attr_targets, error_bound):
     evaluate(acted_entity, attr_targets, error_bound=error_bound)
+

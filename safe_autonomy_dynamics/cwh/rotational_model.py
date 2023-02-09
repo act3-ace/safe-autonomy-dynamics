@@ -14,7 +14,7 @@ Hill's reference frame along with rotational dynamics. 2D scenario models in-pla
 motion and rotation about the z axis. 3D scenario is pending.
 """
 
-from typing import Union
+from typing import Dict, Union
 
 import numpy as np
 from scipy.spatial.transform import Rotation
@@ -105,6 +105,8 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
         Orbital mean motion of Hill's reference frame's circular orbit in rad/s, by default 0.001027.
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics.
+    use_jax : bool
+        True if using jax version of numpy/scipy in dynamics model. By default, False
     kwargs:
         Additional keyword arguments passed to parent class BaseRotationEntity.
     """
@@ -120,10 +122,11 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
         vel_limit_wheel=VEL_LIMIT_WHEEL_DEFAULT,
         n=N_DEFAULT,
         integration_method="RK45",
+        use_jax: bool = False,
         **kwargs
     ):
         self._state = np.array([])
-        self.partner = {}
+        self.partner: Dict = {}
 
         self.m = m  # kg
         self.inertia = inertia  # kg*m^2
@@ -147,7 +150,13 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
         }
         """ Create instance of dynamics class """
         dynamics = CWHRotation2dDynamics(
-            m=m, inertia=inertia, ang_acc_limit=ang_acc_limit, ang_vel_limit=ang_vel_limit, n=n, integration_method=integration_method
+            m=m,
+            inertia=inertia,
+            ang_acc_limit=ang_acc_limit,
+            ang_vel_limit=ang_vel_limit,
+            n=n,
+            integration_method=integration_method,
+            use_jax=use_jax
         )
 
         super().__init__(
@@ -337,18 +346,6 @@ class CWHRotation2dDynamics(BaseControlAffineODESolverDynamics):
         self.ang_vel_limit = ang_vel_limit  # rad/s
         self.n = n  # rads/s
 
-        A, B = generate_cwh_matrices(self.m, self.n, '2d')
-
-        assert len(A.shape) == 2, f"A must be square matrix. Instead got shape {A.shape}"
-        assert len(B.shape) == 2, f"A must be square matrix. Instead got shape {B.shape}"
-        assert A.shape[0] == A.shape[1], f"A must be a square matrix, not dimension {A.shape}"
-        assert A.shape[1] == B.shape[0], (
-            "number of columns in A must match the number of rows in B." + f" However, got shapes {A.shape} for A and {B.shape} for B"
-        )
-
-        self.A = np.copy(A)
-        self.B = np.copy(B)
-
         if state_min is None:
             state_min = np.array([-np.inf, -np.inf, -np.inf, -np.inf, -np.inf, -self.ang_vel_limit])
         if state_max is None:
@@ -371,15 +368,27 @@ class CWHRotation2dDynamics(BaseControlAffineODESolverDynamics):
             **kwargs
         )
 
+        A, B = generate_cwh_matrices(self.m, self.n, '2d')
+
+        assert len(A.shape) == 2, f"A must be square matrix. Instead got shape {A.shape}"
+        assert len(B.shape) == 2, f"A must be square matrix. Instead got shape {B.shape}"
+        assert A.shape[0] == A.shape[1], f"A must be a square matrix, not dimension {A.shape}"
+        assert A.shape[1] == B.shape[0], (
+            "number of columns in A must match the number of rows in B." + f" However, got shapes {A.shape} for A and {B.shape} for B"
+        )
+
+        self.A = self.np.copy(A)
+        self.B = self.np.copy(B)
+
     def state_transition_system(self, state: np.ndarray) -> np.ndarray:
         x, y, _, x_dot, y_dot, theta_dot = state
         # Form separate state vector for translational state
-        pos_vel_state_vec = np.array([x, y, x_dot, y_dot], dtype=np.float64)
+        pos_vel_state_vec = self.np.array([x, y, x_dot, y_dot], dtype=np.float32)
         # Compute derivatives
         pos_vel_derivative = self.A @ pos_vel_state_vec
 
         # Form array of state derivatives
-        state_derivative = np.array(
+        state_derivative = self.np.array(
             [pos_vel_derivative[0], pos_vel_derivative[1], theta_dot, pos_vel_derivative[2], pos_vel_derivative[3], 0], dtype=np.float32
         )
 
@@ -388,13 +397,13 @@ class CWHRotation2dDynamics(BaseControlAffineODESolverDynamics):
     def state_transition_input(self, state: np.ndarray) -> np.ndarray:
         theta = state[2]
 
-        g = np.array(
+        g = self.np.array(
             [
                 [0, 0, 0],
                 [0, 0, 0],
                 [0, 0, 0],
-                [np.cos(theta) / self.m, -np.sin(theta) / self.m, 0],
-                [np.sin(theta) / self.m, np.cos(theta) / self.m, 0],
+                [self.np.cos(theta) / self.m, -self.np.sin(theta) / self.m, 0],
+                [self.np.sin(theta) / self.m, self.np.cos(theta) / self.m, 0],
                 [0, 0, 1 / self.inertia],
             ]
         )

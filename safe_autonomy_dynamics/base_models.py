@@ -11,14 +11,27 @@ limitation or restriction. See accompanying README and LICENSE for details.
 
 This module provides base implementations for entities in the saferl simulator
 """
+from __future__ import annotations
 
 import abc
-from typing import Tuple, Union
+from types import ModuleType
+from typing import TYPE_CHECKING, Tuple, Union
 
 import numpy as np
 import scipy.integrate
 import scipy.spatial
 from pydantic import BaseModel
+
+if TYPE_CHECKING:
+    import jax
+    import jax.numpy as jnp
+else:
+    try:
+        import jax
+        import jax.numpy as jnp
+    except ImportError:
+        jax = None
+        jnp = None
 
 
 class BaseEntityValidator(BaseModel):
@@ -112,8 +125,10 @@ class BaseEntity(abc.ABC):
                 control = np.array(action, dtype=np.float32)
             elif isinstance(action, np.ndarray):
                 control = action.copy()
+            elif jnp is not None and isinstance(action, jnp.ndarray):  # pylint: disable=used-before-assignment
+                control = action.copy()
             else:
-                raise ValueError("action must be type dict, list, or np.ndarray")
+                raise ValueError("action must be type dict, list, np.ndarray or jnp.ndarray")
 
         # enforce control bounds
         control = np.clip(control, self.control_min, self.control_max)
@@ -287,6 +302,8 @@ class BaseDynamics(abc.ABC):
         When None, no angle wrapping applied.
         When ndarray, each element defines the angle wrap center of the corresponding state element.
         Wrapping not applied when element is NaN.
+    use_jax : bool
+        True if using jax version of numpy/scipy. By default, False
     """
 
     def __init__(
@@ -294,10 +311,20 @@ class BaseDynamics(abc.ABC):
         state_min: Union[float, np.ndarray] = -np.inf,
         state_max: Union[float, np.ndarray] = np.inf,
         angle_wrap_centers: np.ndarray = None,
+        use_jax: bool = False,
     ):
         self.state_min = state_min
         self.state_max = state_max
         self.angle_wrap_centers = angle_wrap_centers
+        self.use_jax = use_jax
+
+        self.np: ModuleType
+        if use_jax:
+            if jax is None:  # pylint: disable=used-before-assignment
+                raise ImportError("Failed to import jax. Make sure to install jax if using the `use_jax` option")
+            self.np = jnp
+        else:
+            self.np = np
 
     def step(self, step_size: float, state: np.ndarray, control: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
         """
@@ -318,19 +345,21 @@ class BaseDynamics(abc.ABC):
             Tuple of the system's next state and the state's instantaneous time derivative at the end of the step
         """
         next_state, state_dot = self._step(step_size, state, control)
-        next_state = np.clip(next_state, self.state_min, self.state_max)
+        next_state = self.np.clip(next_state, self.state_min, self.state_max)
         next_state = self._wrap_angles(next_state)
         return next_state, state_dot
 
-    def _wrap_angles(self, state):
-        wrapped_state = state.copy()
+    def _wrap_angles(self, state: Union[np.ndarray, jnp.ndarray]):
         if self.angle_wrap_centers is not None:
-            wrap_idxs = np.logical_not(np.isnan(self.angle_wrap_centers))
+            needs_wrap = self.np.logical_not(self.np.isnan(self.angle_wrap_centers))
 
-            wrapped_state[wrap_idxs] = \
-                ((wrapped_state[wrap_idxs] + np.pi) % (2 * np.pi)) - np.pi + self.angle_wrap_centers[wrap_idxs]
+            wrapped_state = ((state + np.pi) % (2 * np.pi)) - np.pi + self.angle_wrap_centers
 
-        return wrapped_state
+            output_state = self.np.where(needs_wrap, wrapped_state, state)
+        else:
+            output_state = state
+
+        return output_state
 
     @abc.abstractmethod
     def _step(self, step_size: float, state: np.ndarray, control: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
@@ -403,14 +432,17 @@ class BaseODESolverDynamics(BaseDynamics):
         raise NotImplementedError
 
     def _clip_state_dot_direct(self, state_dot):
-        return np.clip(state_dot, self.state_dot_min, self.state_dot_max)
+        return self.np.clip(state_dot, self.state_dot_min, self.state_dot_max)
 
     def _clip_state_dot_by_state_limits(self, state, state_dot):
         lower_bounded_states = state <= self.state_min
-        upper_bounded_state = state >= self.state_max
+        upper_bounded_states = state >= self.state_max
 
-        state_dot[lower_bounded_states] = np.clip(state_dot[lower_bounded_states], 0, np.inf)
-        state_dot[upper_bounded_state] = np.clip(state_dot[upper_bounded_state], -np.inf, 0)
+        lower_bounded_clipped = self.np.clip(state_dot, 0, np.inf)
+        upper_bounded_clipped = self.np.clip(state_dot, -np.inf, 0)
+
+        state_dot = self.np.where(lower_bounded_states, lower_bounded_clipped, state_dot)
+        state_dot = self.np.where(upper_bounded_states, upper_bounded_clipped, state_dot)
 
         return state_dot
 
@@ -506,6 +538,8 @@ class BaseLinearODESolverDynamics(BaseControlAffineODESolverDynamics):
     """
 
     def __init__(self, A: np.ndarray, B: np.ndarray, **kwargs):
+        super().__init__(**kwargs)
+
         assert len(A.shape) == 2, f"A must be square matrix. Instead got shape {A.shape}"
         assert len(B.shape) == 2, f"A must be square matrix. Instead got shape {B.shape}"
         assert A.shape[0] == A.shape[1], f"A must be a square matrix, not dimension {A.shape}"
@@ -513,10 +547,8 @@ class BaseLinearODESolverDynamics(BaseControlAffineODESolverDynamics):
             "number of columns in A must match the number of rows in B." + f" However, got shapes {A.shape} for A and {B.shape} for B"
         )
 
-        self.A = np.copy(A)
-        self.B = np.copy(B)
-
-        super().__init__(**kwargs)
+        self.A = self.np.copy(A)
+        self.B = self.np.copy(B)
 
     def state_transition_system(self, state: np.ndarray) -> np.ndarray:
         return self.A @ state
