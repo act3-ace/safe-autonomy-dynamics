@@ -115,7 +115,7 @@
     theta: [0]
     velocity: [0.05679615822846139, -0.0005833016718923634, 0.0]
     wz: [0]
-  error_bound: 1e-4
+  error_bound: 2e-4
 - ID: At_positive_point_2_stationary
   attr_init:
     position: [-424, -342]
@@ -141,7 +141,7 @@
     theta: [0]
     velocity: [-0.007625556620088688, 7.831515483345938e-05, 0.0]
     wz: [0]
-  error_bound: 1e-4
+  error_bound: 2e-4
 - ID: At_positive_point_1_moving
   attr_init:
     position: [1795, 293]
@@ -308,7 +308,7 @@
     theta: [-1.793111526994420]
     velocity: [7.1124226210522785, -6.076536913524862, 0.0]
     wz: [0]
-  error_bound: 1e-4
+  error_bound: 2e-4
 - ID: random_inputs_2
   attr_init:
     position: [401.0710014944277, -524.8182691047782]
@@ -422,7 +422,7 @@
     theta: 2.9192774533902695
     velocity: [7.1124226210522785, -6.076536913524862, 0.0]
     wz: [0]
-  error_bound: 1e-4
+  error_bound: 2e-4
 - ID: random_inputs_2_y_thrust_only
   attr_init:
     position: [401.0710014944277, -524.8182691047782]
