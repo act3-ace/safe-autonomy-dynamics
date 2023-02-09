@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.4.1...v0.5.0) (2023-02-09)
+
+
+### Features
+
+* optional jax version of dynamics with optional jax import. np is now a class member and can be set to either numy or jax.numpy ([3afa33e](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/3afa33ef1a9593d4c886cf1d47b35480717e3433))
+
 ## [0.4.1](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.4.0...v0.4.1) (2023-01-19)
 
 
