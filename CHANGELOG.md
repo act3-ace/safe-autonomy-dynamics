@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.5.0...v0.6.0) (2023-02-14)
+
+
+### Features
+
+* Jax ODE Solver ([6fa7307](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/6fa7307dfaf8b2f9492bc4e4cde3958e5f2f5911))
+
 # [0.5.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.4.1...v0.5.0) (2023-02-09)
 
 
