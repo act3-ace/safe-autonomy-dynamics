@@ -25,13 +25,16 @@ from pydantic import BaseModel
 if TYPE_CHECKING:
     import jax
     import jax.numpy as jnp
+    from jax.experimental.ode import odeint
 else:
     try:
         import jax
         import jax.numpy as jnp
+        from jax.experimental.ode import odeint
     except ImportError:
         jax = None
         jnp = None
+        odeint = None
 
 
 class BaseEntityValidator(BaseModel):
@@ -384,8 +387,9 @@ class BaseODESolverDynamics(BaseDynamics):
         When an ndarray, each element represents the limit to the corresponding state vector element.
         By default, +inf
     integration_method : string
-        Numerical integration method used by dynamics solver. One of ['RK45', 'Euler'].
+        Numerical integration method used by dynamics solver. One of ['RK45', 'RK45_JAX', 'Euler'].
         'RK45' is slow but very accurate.
+        'RK45_JAX' is very accurate, and fast when JIT compiled but otherwise very slow. 'use_jax' must be set to True.
         'Euler' is fast but very inaccurate.
     kwargs
         Additional keyword arguments passed to parent BaseDynamics constructor.
@@ -453,6 +457,15 @@ class BaseODESolverDynamics(BaseDynamics):
 
             next_state = sol.y[:, -1]  # save last timestep of integration solution
             state_dot = self.compute_state_dot(step_size, next_state, control)
+        elif self.integration_method == "RK45_JAX":
+            if not self.use_jax:
+                raise ValueError("use_jax must be set to True if using RK45_JAX")
+
+            sol = odeint(  # pylint: disable=used-before-assignment
+                self.compute_state_dot_jax, state, jnp.linspace(0., step_size, 11), control
+            )
+            next_state = sol[-1, :]  # save last timestep of integration solution
+            state_dot = self.compute_state_dot(step_size, next_state, control)
         elif self.integration_method == "Euler":
             state_dot = self.compute_state_dot(0, state, control)
             next_state = state + step_size * state_dot
@@ -460,6 +473,11 @@ class BaseODESolverDynamics(BaseDynamics):
             raise ValueError(f"invalid integration method '{self.integration_method}'")
 
         return next_state, state_dot
+
+    def compute_state_dot_jax(self, state, t, control):
+        """Compute state dot for jax odeint
+        """
+        return self._compute_state_dot(t, state, control)
 
 
 class BaseControlAffineODESolverDynamics(BaseODESolverDynamics):
