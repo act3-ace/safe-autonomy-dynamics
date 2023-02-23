@@ -131,7 +131,7 @@ class AeroBenchF16(BaseEntity):
             eq = (self.velocity == other.velocity).all()
             eq = eq and (self.position == other.position).all()
             eq = eq and (self.acceleration == other.acceleration).all()
-            eq = eq and (self.orientation.as_euler("zyx") == other.orientation.as_euler("zyx")).all()
+            eq = eq and (self.orientation.as_euler("ZYX") == other.orientation.as_euler("ZYX")).all()
             eq = eq and self.heading == other.heading
             eq = eq and self.roll == other.roll
             eq = eq and self.gamma == other.gamma

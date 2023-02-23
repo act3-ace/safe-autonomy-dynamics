@@ -74,7 +74,7 @@ class BaseDubinsAircraft(BaseEntity):
         if isinstance(other, BaseDubinsAircraft):
             eq = (self.velocity == other.velocity).all()
             eq = eq and (self.position == other.position).all()
-            eq = eq and (self.orientation.as_euler("zyx") == other.orientation.as_euler("zyx")).all()
+            eq = eq and (self.orientation.as_euler("ZYX") == other.orientation.as_euler("ZYX")).all()
             eq = eq and self.heading == other.heading
             return eq
         return False
@@ -102,25 +102,37 @@ class BaseDubinsAircraft(BaseEntity):
 
     @property
     def yaw(self):
-        """Get yaw. Equivalent to heading for Dubins model"""
+        """
+        Get yaw. Equivalent to heading for Dubins model
+
+        Intrinsic Euler Angle Z of ZYX
+        """
         return self.heading
 
     @property
     def pitch(self):
-        """Get pitch. Equivalent to gamma for Dubins model"""
+        """
+        Get pitch. Equivalent to gamma for Dubins model
+
+        Intrinsic Euler Angle Y of ZYX
+        """
         return self.gamma
 
     @property
     @abc.abstractmethod
     def roll(self):
-        """Get roll."""
+        """
+        Get roll.
+
+        Intrinsic Euler Angle X of ZYX
+        """
         raise NotImplementedError
 
     @property
     @abc.abstractmethod
     def heading(self):
         """
-        Get heading, the angle of velocity relative to the x-axis projected to the xy-plane.
+        Get heading, the angle of velocity vector projected to the xy-plane wrt the x-axis.
         Right hand rule sign convention.
         """
         raise NotImplementedError
@@ -161,7 +173,7 @@ class BaseDubinsAircraft(BaseEntity):
         Returns
         -------
         scipy.spatial.transform.Rotation
-            Rotation tranformation of the entity's local reference frame basis vectors in the global reference frame.
+            Rotation tranformation yielding the entity's local reference frame basis vectors in global reference frame coordinates.
             i.e. applying this rotation to [1, 0, 0] yields the entity's local x-axis (i.e. direction of nose) in the global frame.
             For Dubins, derived from yaw, pitch, roll attributes.
         """
@@ -226,7 +238,7 @@ class Dubins2dAircraft(BaseDubinsAircraft):
             eq = (self.velocity == other.velocity).all()
             eq = eq and (self.position == other.position).all()
             eq = eq and (self.acceleration == other.acceleration).all()
-            eq = eq and (self.orientation.as_euler("zyx") == other.orientation.as_euler("zyx")).all()
+            eq = eq and (self.orientation.as_euler("ZYX") == other.orientation.as_euler("ZYX")).all()
             eq = eq and self.heading == other.heading
             eq = eq and self.roll == other.roll
             eq = eq and self.gamma == other.gamma
@@ -402,7 +414,7 @@ class Dubins3dAircraft(BaseDubinsAircraft):
             eq = (self.velocity == other.velocity).all()
             eq = eq and (self.position == other.position).all()
             eq = eq and (self.acceleration == other.acceleration).all()
-            eq = eq and (self.orientation.as_euler("zyx") == other.orientation.as_euler("zyx")).all()
+            eq = eq and (self.orientation.as_euler("ZYX") == other.orientation.as_euler("ZYX")).all()
             eq = eq and self.heading == other.heading
             eq = eq and self.roll == other.roll
             eq = eq and self.gamma == other.gamma
@@ -480,10 +492,6 @@ class Dubins3dAircraft(BaseDubinsAircraft):
     def position(self):
         position = self._state[0:3].copy()
         return position
-
-    @property
-    def orientation(self):
-        return Rotation.from_euler("ZYX", [self.yaw, self.pitch, self.roll])
 
     @property
     def acceleration(self):

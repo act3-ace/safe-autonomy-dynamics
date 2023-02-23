@@ -108,7 +108,7 @@ class CWHSpacecraft(BaseEntity):
         if isinstance(other, CWHSpacecraft):
             eq = (self.velocity == other.velocity).all()
             eq = eq and (self.position == other.position).all()
-            eq = eq and (self.orientation.as_euler("zyx") == other.orientation.as_euler("zyx")).all()
+            eq = eq and (self.orientation.as_euler("ZYX") == other.orientation.as_euler("ZYX")).all()
             return eq
         return False
 
