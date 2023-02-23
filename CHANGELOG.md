@@ -1,3 +1,15 @@
+# [0.7.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.6.0...v0.7.0) (2023-02-23)
+
+
+### Bug Fixes
+
+* consistency on intrinsic orientation angles ([6abf89c](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/6abf89c679db265a33dacfd432766304bde91946))
+
+
+### Features
+
+* warning on action clipping ([aa74f3b](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/aa74f3b0b1acec56da83b489d7d3538954ccbdb0))
+
 # [0.6.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.5.0...v0.6.0) (2023-02-14)
 
 
