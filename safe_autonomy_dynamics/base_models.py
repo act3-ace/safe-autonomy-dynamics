@@ -14,6 +14,7 @@ This module provides base implementations for entities in the saferl simulator
 from __future__ import annotations
 
 import abc
+import warnings
 from types import ModuleType
 from typing import TYPE_CHECKING, Tuple, Union
 
@@ -134,6 +135,8 @@ class BaseEntity(abc.ABC):
                 raise ValueError("action must be type dict, list, np.ndarray or jnp.ndarray")
 
         # enforce control bounds
+        if (np.any(control < self.control_min) or np.any(control > self.control_max)):
+            warnings.warn(f"Control input exceeded limits. Clipping to range ({self.control_min}, {self.control_max})")
         control = np.clip(control, self.control_min, self.control_max)
 
         # compute new state if dynamics were applied
