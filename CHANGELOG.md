@@ -1,3 +1,10 @@
+# [0.8.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.7.0...v0.8.0) (2023-03-16)
+
+
+### Features
+
+* Pint units and constructor init params and attributes with units supported ([a5085db](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/a5085dbeff345912c79be2a5d51b3656b03ae5bf))
+
 # [0.7.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.6.0...v0.7.0) (2023-02-23)
 
 
