@@ -569,3 +569,53 @@
     roll: -1.0471975511965976
     v: 400
   proportional_error_bound: 0.005
+
+# Initialization with Units
+- ID: test pint init random state 1 native units
+  init_kwargs:
+    x: 
+      pint_quantity: [ -4271.301, 'ft']
+    y:
+      pint_quantity: [1795.0750, 'ft']
+    z:
+      pint_quantity: [4164.297, 'ft']
+    heading:
+      pint_quantity: [-2.604, 'rad']
+    gamma:
+      pint_quantity: [-0.34, 'rad']
+    roll:
+      pint_quantity: [-0.8, 'rad']
+    v:
+      pint_quantity: [324, 'ft/s']
+  num_steps: 0
+  attr_targets:
+    position: [ -4271.301, 1795.075, 4164.297 ]
+    heading: -2.604
+    gamma: -0.34
+    roll: -0.8
+    v: 324
+  proportional_error_bound: 0.005
+- ID: test pint init random state 1 alternate units
+  init_kwargs:
+    x: 
+      pint_quantity: [ -1301.8925448, 'm']
+    y:
+      pint_quantity: [54713.886, 'cm']
+    z:
+      pint_quantity: [0.7887, 'miles']
+    heading:
+      pint_quantity: [-149.19821, 'deg']
+    gamma:
+      pint_quantity: [-19.48, 'deg']
+    roll:
+      pint_quantity: [-45.8366, 'deg']
+    v:
+      pint_quantity: [220.909, 'mph']
+  num_steps: 0
+  attr_targets:
+    position: [ -4271.301, 1795.075, 4164.297 ]
+    heading: -2.604
+    gamma: -0.34
+    roll: -0.8
+    v: 324
+  proportional_error_bound: 0.005

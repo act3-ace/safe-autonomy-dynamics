@@ -17,9 +17,17 @@ motion and rotation about the z axis. 3D scenario is pending.
 from typing import Dict, Union
 
 import numpy as np
+import pint
+from pydantic import validator
 from scipy.spatial.transform import Rotation
 
-from safe_autonomy_dynamics.base_models import BaseControlAffineODESolverDynamics, BaseEntityValidator, BaseRotationEntity
+from safe_autonomy_dynamics.base_models import (
+    BaseControlAffineODESolverDynamics,
+    BaseEntityValidator,
+    BaseRotationEntity,
+    BaseUnits,
+    build_unit_conversion_validator_fn,
+)
 from safe_autonomy_dynamics.cwh import M_DEFAULT, N_DEFAULT, generate_cwh_matrices
 
 INERTIA_DEFAULT = 0.0573
@@ -36,17 +44,17 @@ class CWHRotation2dSpacecraftValidator(BaseEntityValidator):
 
     Parameters
     ----------
-    x: [float]
+    x: float or pint.Quantity
        Length 1, x position value. m
-    y: [float]
+    y: float or pint.Quantity
        Length 1, y position value. m
-    theta: [float]
+    theta: float or pint.Quantity
        Length 1, rotation angle value. rad
-    x_dot: [float]
+    x_dot: float or pint.Quantity
        Length 1, x velocity value. m/s
-    y_dot: [float]
+    y_dot: float or pint.Quantity
        Length 1, y velocity value. m/s
-    theta_dot: [float]
+    wz: float or pint.Quantity
        Length 1, rotation rate value. rad/s
 
     Raises
@@ -54,15 +62,21 @@ class CWHRotation2dSpacecraftValidator(BaseEntityValidator):
     ValueError
         Improper list lengths for parameters 'x', 'y', 'theta', 'x_dot', 'y_dot', 'theta_dot'
     """
-    x: float = 0
-    y: float = 0
-    theta: float = 0
-    x_dot: float = 0
-    y_dot: float = 0
-    wz: float = 0
+    x: Union[float, pint.Quantity] = 0
+    y: Union[float, pint.Quantity] = 0
+    theta: Union[float, pint.Quantity] = 0
+    x_dot: Union[float, pint.Quantity] = 0
+    y_dot: Union[float, pint.Quantity] = 0
+    wz: Union[float, pint.Quantity] = 0
+
+    # validators
+    _unit_validator_position = validator('x', 'y', allow_reuse=True)(build_unit_conversion_validator_fn('meters'))
+    _unit_validator_theta = validator('theta', allow_reuse=True)(build_unit_conversion_validator_fn('radians'))
+    _unit_validator_velocity = validator('x_dot', 'y_dot', allow_reuse=True)(build_unit_conversion_validator_fn('meters/second'))
+    _unit_validator_wz = validator('wz', allow_reuse=True)(build_unit_conversion_validator_fn('radians/second'))
 
 
-class CWHRotation2dSpacecraft(BaseRotationEntity):
+class CWHRotation2dSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-methods
     """
     Spacecraft with 2D translational Clohessy-Wiltshire dynamics in Hill's reference frame.
     In-plane motion (x,y) using +/- x thruster rotated to desired direction
@@ -110,6 +124,8 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
     kwargs:
         Additional keyword arguments passed to parent class BaseRotationEntity.
     """
+
+    base_units = BaseUnits("meters", "seconds", "radians")
 
     def __init__(
         self,
@@ -245,9 +261,19 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
         return self._state[3]
 
     @property
+    def x_dot_with_units(self):
+        """Get x_dot as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.x_dot, self.base_units.velocity)
+
+    @property
     def y_dot(self):
         """get y_dot, the velocity component in the y direction"""
         return self._state[4]
+
+    @property
+    def y_dot_with_units(self):
+        """Get y_dot as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.y_dot, self.base_units.velocity)
 
     @property
     def z_dot(self):
@@ -255,18 +281,20 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):
         return 0
 
     @property
+    def z_dot_with_units(self):
+        """Get z_dot as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.z_dot, self.base_units.velocity)
+
+    @property
     def wx(self):
-        """get wz_dot, the angular velocity component about the x axis"""
         return 0
 
     @property
     def wy(self):
-        """get wz_dot, the angular velocity component about the y axis"""
         return 0
 
     @property
     def wz(self):
-        """get wz_dot, the angular velocity component about the z axis"""
         return self._state[5]
 
     @property

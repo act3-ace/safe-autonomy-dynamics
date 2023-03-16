@@ -465,3 +465,47 @@
     velocity: [-0.6793547322876764, 6.467936621342318, 0.0]
     wz: [0.034919232994182356]
   error_bound: 1e-4
+
+# Initialization with Units
+- ID: test pint init random state 1 native units
+  init_kwargs:
+    x:
+      pint_quantity: [536.324, 'm']
+    y:
+      pint_quantity: [-738.112, 'm']
+    x_dot:
+      pint_quantity: [-3.7, 'm/s']
+    y_dot:
+      pint_quantity: [-17, 'm/s']
+    theta:
+      pint_quantity: [1.2, 'rad']
+    wz:
+      pint_quantity: [0.03, 'rad/s']
+  num_steps: 0
+  attr_targets:
+    position: [536.324, -738.112, 0]
+    velocity: [-3.7, -17, 0]
+    theta: 1.2
+    wz: 0.03
+  error_bound: 1e-4
+- ID: test pint init random state 1 alternate units
+  init_kwargs:
+    x:
+      pint_quantity: [0.33325628, 'mile']
+    y:
+      pint_quantity: [-0.45864153, 'mile']
+    x_dot:
+      pint_quantity: [-8.27666428, 'mph']
+    y_dot:
+      pint_quantity: [-38.02791696, 'mph']
+    theta:
+      pint_quantity: [68.7549, 'deg']
+    wz:
+      pint_quantity: [1.718873, 'deg/s']
+  num_steps: 0
+  attr_targets:
+    position: [536.324, -738.112, 0]
+    velocity: [-3.7, -17, 0]
+    theta: 1.2
+    wz: 0.03
+  error_bound: 1e-4

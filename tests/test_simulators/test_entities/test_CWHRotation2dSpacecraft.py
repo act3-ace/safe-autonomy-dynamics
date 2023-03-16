@@ -25,6 +25,7 @@ from tests.conftest import read_test_cases, delimiter
 # Define test assay
 test_cases_file_path = os.path.join(os.path.split(__file__)[0], "../../test_cases/CWHRotation2dSpacecraft_test_cases.yaml")
 parameterized_fixture_keywords = ["attr_init",
+                                  "init_kwargs",
                                   "control",
                                   "num_steps",
                                   "attr_targets",
@@ -37,8 +38,8 @@ IDs += [id + "_jax" for id in IDs]
 
 # override entity fixture
 @pytest.fixture
-def entity(initial_entity_state, use_jax):
-    entity = CWHRotation2dSpacecraft(name="tests", use_jax=use_jax)
+def entity(initial_entity_state, use_jax, init_kwargs):
+    entity = CWHRotation2dSpacecraft(name="tests", use_jax=use_jax, **init_kwargs)
     if initial_entity_state is not None:
         entity.state = initial_entity_state
 

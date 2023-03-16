@@ -25,6 +25,7 @@ from tests.conftest import read_test_cases, delimiter
 # Define test assay
 test_cases_file_path = os.path.join(os.path.split(__file__)[0], "../../test_cases/CWHSpacecraft_test_cases.yaml")
 parameterized_fixture_keywords = ["attr_init",
+                                  "init_kwargs",
                                   "control",
                                   "num_steps",
                                   "attr_targets",
@@ -34,8 +35,8 @@ test_configs, IDs = read_test_cases(test_cases_file_path, parameterized_fixture_
 
 # override entity fixture
 @pytest.fixture
-def entity(initial_entity_state):
-    entity = CWHSpacecraft(name="tests")
+def entity(initial_entity_state, init_kwargs):
+    entity = CWHSpacecraft(name="tests", **init_kwargs)
 
     if initial_entity_state is not None:
         entity.state = initial_entity_state

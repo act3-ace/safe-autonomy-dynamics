@@ -13,12 +13,20 @@ This module implements a 3D point mass spacecraft with Clohessy-Wilshire physics
 Hill's reference frame.
 """
 
-from typing import Tuple
+from typing import Tuple, Union
 
 import numpy as np
+import pint
+from pydantic import validator
 from scipy.spatial.transform import Rotation
 
-from safe_autonomy_dynamics.base_models import BaseEntity, BaseEntityValidator, BaseLinearODESolverDynamics
+from safe_autonomy_dynamics.base_models import (
+    BaseEntity,
+    BaseEntityValidator,
+    BaseLinearODESolverDynamics,
+    BaseUnits,
+    build_unit_conversion_validator_fn,
+)
 
 M_DEFAULT = 12
 N_DEFAULT = 0.001027
@@ -30,17 +38,17 @@ class CWHSpacecraftValidator(BaseEntityValidator):
 
     Parameters
     ----------
-    x: [float]
+    x: float or pint.Quantity
         Length 1, x position value
-    y: [float]
+    y: float or pint.Quantity
         Length 1, y position value
-    z: [float]
+    z: float or pint.Quantity
         Length 1, z position value
-    x_dot: [float]
+    x_dot: float or pint.Quantity
         Length 1, x velocity value
-    y_dot: [float]
+    y_dot: float or pint.Quantity
         Length 1, y velocity value
-    z_dot: [float]
+    z_dot: float or pint.Quantity
         Length 1, z velocity value
 
     Raises
@@ -48,12 +56,16 @@ class CWHSpacecraftValidator(BaseEntityValidator):
     ValueError
         Improper list lengths for parameters 'x', 'y', 'z', 'x_dot', 'y_dot', 'z_dot'
     """
-    x: float = 0
-    y: float = 0
-    z: float = 0
-    x_dot: float = 0
-    y_dot: float = 0
-    z_dot: float = 0
+    x: Union[float, pint.Quantity] = 0
+    y: Union[float, pint.Quantity] = 0
+    z: Union[float, pint.Quantity] = 0
+    x_dot: Union[float, pint.Quantity] = 0
+    y_dot: Union[float, pint.Quantity] = 0
+    z_dot: Union[float, pint.Quantity] = 0
+
+    # validators
+    _unit_validator_position = validator('x', 'y', 'z', allow_reuse=True)(build_unit_conversion_validator_fn('meters'))
+    _unit_validator_velocity = validator('x_dot', 'y_dot', 'z_dot', allow_reuse=True)(build_unit_conversion_validator_fn('meters/second'))
 
 
 class CWHSpacecraft(BaseEntity):
@@ -87,6 +99,8 @@ class CWHSpacecraft(BaseEntity):
     kwargs:
         Additional keyword arguments passed to CWHSpacecraftValidator.
     """
+
+    base_units = BaseUnits("meters", "seconds", "radians")
 
     def __init__(self, m=M_DEFAULT, n=N_DEFAULT, integration_method="RK45", **kwargs):
         dynamics = CWHDynamics(m=m, n=n, integration_method=integration_method)
@@ -140,14 +154,29 @@ class CWHSpacecraft(BaseEntity):
         return self._state[3]
 
     @property
+    def x_dot_with_units(self):
+        """Get x_dot as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.x_dot, self.base_units.velocity)
+
+    @property
     def y_dot(self):
         """get y_dot, the velocity component in the y direction"""
         return self._state[4]
 
     @property
+    def y_dot_with_units(self):
+        """Get y_dot as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.y_dot, self.base_units.velocity)
+
+    @property
     def z_dot(self):
         """get z_dot, the velocity component in the z direction"""
         return self._state[5]
+
+    @property
+    def z_dot_with_units(self):
+        """Get z_dot as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.z_dot, self.base_units.velocity)
 
     @property
     def position(self):

@@ -290,3 +290,45 @@
     v: 400
   error_bound: 0.00001
   proportional_error_bound: 0.001
+
+# Initialization with Units
+- ID: test pint init random state 1 native units
+  init_kwargs:
+    x:
+      pint_quantity: [420.54985883684327, 'ft']
+    y:
+      pint_quantity: [1438.2662616212865, 'ft']
+    heading:
+      pint_quantity: [0.2638053275159513, 'rad']
+    v:
+      pint_quantity: [400, 'ft/s']
+  control:
+    heading_rate: 0
+    acceleration: 10
+  num_steps: 0
+  attr_targets:
+    position: [420.54985883684327, 1438.2662616212865, 0]
+    heading: 0.2638053275159513
+    v: 400
+  error_bound: 0.00001
+  proportional_error_bound: 0.001
+- ID: test pint init random state 1 alternate units
+  init_kwargs:
+    x:
+      pint_quantity: [128.18360, 'm']
+    y:
+      pint_quantity: [438.38356, 'm']
+    heading:
+      pint_quantity: [15.11493, 'degrees']
+    v:
+      pint_quantity: [0.0757576, 'miles/s']
+  control:
+    heading_rate: 0
+    acceleration: 10
+  num_steps: 0
+  attr_targets:
+    position: [420.54985883684327, 1438.2662616212865, 0]
+    heading: 0.2638053275159513
+    v: 400
+  error_bound: 0.00001
+  proportional_error_bound: 0.001

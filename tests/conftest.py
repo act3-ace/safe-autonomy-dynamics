@@ -19,10 +19,13 @@ import yaml
 import math
 import numpy as np
 from scipy.spatial.transform import Rotation
+import pint
 
 
 # Define constants
 delimiter = ","
+
+ureg = pint.UnitRegistry()
 
 
 # Define functions
@@ -113,6 +116,18 @@ def preprocess_values(value, keyword, functions):
     return value
 
 
+def construct_pint_quantities(value, ureg: pint.UnitRegistry):
+    if isinstance(value, dict):
+        if 'pint_quantity' in value:
+            return ureg.Quantity(value['pint_quantity'][0], value['pint_quantity'][1])
+        else:
+            for k, v in value.items():
+                value[k] = construct_pint_quantities(v, ureg)
+            return value
+    else:
+        return value
+
+
 def read_test_cases(file_path, parameter_keywords):
     """
     A util function for parameterized tests which searches a YAML test case config file and constructs a list of
@@ -150,6 +165,7 @@ def read_test_cases(file_path, parameter_keywords):
 
         for test_case in file_contents:
             # iterate through read test cases
+            test_case = construct_pint_quantities(test_case, ureg)
             values = []
             for keyword in parameter_keywords:
                 # iteratively search for given keywords
