@@ -196,3 +196,43 @@
     position: [-328.6284534075677, -695.7220842229068, 436.38103194812163]
     velocity: [1.2873304959881975, -9.304165801081503, -6.490853904116064]
   error_bound: 1e-4
+
+# Initialization with Units
+- ID: test pint init random state 1 native units
+  init_kwargs:
+    x:
+      pint_quantity: [536.324, 'm']
+    y:
+      pint_quantity: [-738.112, 'm']
+    z:
+      pint_quantity: [995.99, 'm']
+    x_dot:
+      pint_quantity: [-3.7, 'm/s']
+    y_dot:
+      pint_quantity: [-17, 'm/s']
+    z_dot:
+      pint_quantity: [25.23, 'm/s']
+  num_steps: 0
+  attr_targets:
+    position: [536.324, -738.112, 995.99]
+    velocity: [-3.7, -17, 25.23]
+  error_bound: 1e-4
+- ID: test pint init random state 1 alternate units
+  init_kwargs:
+    x:
+      pint_quantity: [0.33325628, 'mile']
+    y:
+      pint_quantity: [-0.45864153, 'mile']
+    z:
+      pint_quantity: [0.61887949, 'mile']
+    x_dot:
+      pint_quantity: [-8.27666428, 'mph']
+    y_dot:
+      pint_quantity: [-38.02791696, 'mph']
+    z_dot:
+      pint_quantity: [56.43790265, 'mph']
+  num_steps: 0
+  attr_targets:
+    position: [536.324, -738.112, 995.99]
+    velocity: [-3.7, -17, 25.23]
+  error_bound: 1e-4

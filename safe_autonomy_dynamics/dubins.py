@@ -13,11 +13,20 @@ This module implements 2D and 3D Aircraft entities with Dubins physics dynamics 
 """
 
 import abc
+from typing import Union
 
 import numpy as np
+import pint
+from pydantic import validator
 from scipy.spatial.transform import Rotation
 
-from safe_autonomy_dynamics.base_models import BaseControlAffineODESolverDynamics, BaseEntity, BaseEntityValidator
+from safe_autonomy_dynamics.base_models import (
+    BaseControlAffineODESolverDynamics,
+    BaseEntity,
+    BaseEntityValidator,
+    BaseUnits,
+    build_unit_conversion_validator_fn,
+)
 
 
 class BaseDubinsAircraftValidator(BaseEntityValidator):
@@ -26,15 +35,15 @@ class BaseDubinsAircraftValidator(BaseEntityValidator):
 
     Parameters
     ----------
-    x : float
+    x : float or pint.Quantity
         Initial x position
-    y : float
+    y : float or pint.Quantity
         Initial y position
-    z : float
+    z : float or pint.Quantity
         Initial z position
-    heading : float
+    heading : float or pint.Quantity
         Initial angle of velocity vector relative to x-axis. Right hand rule sign convention.
-    v : float
+    v : float or pint.Quantity
         Initial velocity magnitude, aka speed, of dubins entity.
 
     Raises
@@ -43,17 +52,24 @@ class BaseDubinsAircraftValidator(BaseEntityValidator):
         Improper list length for parameter 'position'
     """
 
-    x: float = 0
-    y: float = 0
-    z: float = 0
-    heading: float = 0
-    v: float = 200
+    x: Union[float, pint.Quantity] = 0
+    y: Union[float, pint.Quantity] = 0
+    z: Union[float, pint.Quantity] = 0
+    heading: Union[float, pint.Quantity] = 0
+    v: Union[float, pint.Quantity] = 200
+
+    # validators
+    _unit_validator_position = validator('x', 'y', 'z', allow_reuse=True)(build_unit_conversion_validator_fn('feet'))
+    _unit_validator_heading = validator('heading', allow_reuse=True)(build_unit_conversion_validator_fn('radians'))
+    _unit_validator_velocity = validator('v', allow_reuse=True)(build_unit_conversion_validator_fn('ft/s'))
 
 
 class BaseDubinsAircraft(BaseEntity):
     """
     Base interface for Dubins Entities.
     """
+
+    base_units = BaseUnits("feet", "seconds", "radians")
 
     def __init__(self, dynamics, control_default, control_min=-np.inf, control_max=np.inf, control_map=None, **kwargs):
         super().__init__(
@@ -101,6 +117,11 @@ class BaseDubinsAircraft(BaseEntity):
         raise NotImplementedError
 
     @property
+    def v_with_units(self):
+        """Get v as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.v, self.base_units.velocity)
+
+    @property
     def yaw(self):
         """
         Get yaw. Equivalent to heading for Dubins model
@@ -110,6 +131,11 @@ class BaseDubinsAircraft(BaseEntity):
         return self.heading
 
     @property
+    def yaw_with_units(self):
+        """Get yaw as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.yaw, self.base_units.angle)
+
+    @property
     def pitch(self):
         """
         Get pitch. Equivalent to gamma for Dubins model
@@ -117,6 +143,11 @@ class BaseDubinsAircraft(BaseEntity):
         Intrinsic Euler Angle Y of ZYX
         """
         return self.gamma
+
+    @property
+    def pitch_with_units(self):
+        """Get pitch as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.pitch, self.base_units.angle)
 
     @property
     @abc.abstractmethod
@@ -129,6 +160,11 @@ class BaseDubinsAircraft(BaseEntity):
         raise NotImplementedError
 
     @property
+    def roll_with_units(self):
+        """Get roll as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.roll, self.base_units.angle)
+
+    @property
     @abc.abstractmethod
     def heading(self):
         """
@@ -136,6 +172,11 @@ class BaseDubinsAircraft(BaseEntity):
         Right hand rule sign convention.
         """
         raise NotImplementedError
+
+    @property
+    def heading_with_units(self):
+        """Get heading as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.heading, self.base_units.angle)
 
     @property
     @abc.abstractmethod
@@ -147,10 +188,20 @@ class BaseDubinsAircraft(BaseEntity):
         raise NotImplementedError
 
     @property
+    def gamma_with_units(self):
+        """Get gamma as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.gamma, self.base_units.angle)
+
+    @property
     @abc.abstractmethod
     def acceleration(self):
         """Get 3d acceleration vector"""
         raise NotImplementedError
+
+    @property
+    def acceleration_with_units(self):
+        """Get acceleration as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.acceleration, self.base_units.acceleration)
 
     @property
     def velocity(self):
@@ -344,13 +395,16 @@ class Dubins3dAircraftValidator(BaseDubinsAircraftValidator):
 
     Parameters
     ----------
-    gamma : float
+    gamma : float or pint.Quantity
         Initial gamma value of Dubins3dAircraft in radians
-    roll : float
+    roll : float or pint.Quantity
         Initial roll value of Dubins3dAircraft in radians
     """
-    gamma: float = 0
-    roll: float = 0
+    gamma: Union[float, pint.Quantity] = 0
+    roll: Union[float, pint.Quantity] = 0
+
+    # validators
+    _unit_validator_gamma_roll = validator('gamma', 'roll', allow_reuse=True)(build_unit_conversion_validator_fn('radians'))
 
 
 class Dubins3dAircraft(BaseDubinsAircraft):

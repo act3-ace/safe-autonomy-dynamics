@@ -16,9 +16,17 @@ Hill's reference frame along with 3D rotational dynamics using quaternions for a
 from typing import Union
 
 import numpy as np
+import pint
+from pydantic import validator
 from scipy.spatial.transform import Rotation
 
-from safe_autonomy_dynamics.base_models import BaseControlAffineODESolverDynamics, BaseEntityValidator, BaseRotationEntity
+from safe_autonomy_dynamics.base_models import (
+    BaseControlAffineODESolverDynamics,
+    BaseEntityValidator,
+    BaseRotationEntity,
+    BaseUnits,
+    build_unit_conversion_validator_fn,
+)
 from safe_autonomy_dynamics.cwh import generate_cwh_matrices
 from safe_autonomy_dynamics.utils import number_list_to_np
 
@@ -39,55 +47,60 @@ class SixDOFSpacecraftValidator(BaseEntityValidator):
 
     Parameters
     ----------
-    x: [float]
-       Length 1, x position value
-    y: [float]
-       Length 1, y position value
-    z: [float]
-       Length 1, z position value
-    x_dot: [float]
-       Length 1, x velocity value
-    y_dot: [float]
-       Length 1, y velocity value
-    z_dot: [float]
-       Length 1, z velocity value
-    q1: [float]
-       Length 1, first element of quaternion - rotation from body to Hill frame
-    q2: [float]
-       Length 1, second element of quaternion value - rotation from body to Hill frame
-    q3: [float]
-       Length 1, third element of quaternion value - rotation from body to Hill frame
-    q4: [float]
-       Length 1, fourth element of quaternion value (scalar) - rotation from body to Hill frame
+    x: float or pint.Quantity
+       x position value
+    y: float or pint.Quantity
+       y position value
+    z: float or pint.Quantity
+       z position value
+    x_dot: float or pint.Quantity
+       x velocity value
+    y_dot: float or pint.Quantity
+       y velocity value
+    z_dot: float or pint.Quantity
+       z velocity value
+    q1: float
+       first element of quaternion - rotation from body to Hill frame
+    q2: float
+       second element of quaternion value - rotation from body to Hill frame
+    q3: float
+       third element of quaternion value - rotation from body to Hill frame
+    q4: float
+       fourth element of quaternion value (scalar) - rotation from body to Hill frame
        Placing the scalar as the 4th element matches the convention used by scipy
-    wx: [float]
-       Length 1, x axis angular rate value
-    wy: [float]
-       Length 1, y axis angular rate value
-    wz: [float]
-       Length 1, z axis angular rate value
+    wx: float or pint.Quantity
+       x axis local body reference frame angular rate value
+    wy: float or pint.Quantity
+       y axis local body reference frame angular rate value
+    wz: float or pint.Quantity
+       z axis local body reference frame angular rate value
 
     Raises
     ------
     ValueError
         Improper list lengths for parameters 'x', 'y', 'z', 'x_dot', 'y_dot', 'z_dot', 'q1', 'q2', 'q3', 'q4', 'wx', 'wy', 'wz'
     """
-    x: float = 0
-    y: float = 0
-    z: float = 0
-    x_dot: float = 0
-    y_dot: float = 0
-    z_dot: float = 0
+    x: Union[float, pint.Quantity] = 0
+    y: Union[float, pint.Quantity] = 0
+    z: Union[float, pint.Quantity] = 0
+    x_dot: Union[float, pint.Quantity] = 0
+    y_dot: Union[float, pint.Quantity] = 0
+    z_dot: Union[float, pint.Quantity] = 0
     q1: float = 0
     q2: float = 0
     q3: float = 0
     q4: float = 0
-    wx: float = 0
-    wy: float = 0
-    wz: float = 0
+    wx: Union[float, pint.Quantity] = 0
+    wy: Union[float, pint.Quantity] = 0
+    wz: Union[float, pint.Quantity] = 0
+
+    # validators
+    _unit_validator_position = validator('x', 'y', 'z', allow_reuse=True)(build_unit_conversion_validator_fn('meters'))
+    _unit_validator_velocity = validator('x_dot', 'y_dot', 'z_dot', allow_reuse=True)(build_unit_conversion_validator_fn('meters/second'))
+    _unit_validator_wz = validator('wx', 'wy', 'wz', allow_reuse=True)(build_unit_conversion_validator_fn('radians/second'))
 
 
-class SixDOFSpacecraft(BaseRotationEntity):
+class SixDOFSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-methods
     """
     Spacecraft with 3D Clohessy-Wiltshire translational dynamics, in Hill's frame and 3D rotational dynamics
 
@@ -141,6 +154,8 @@ class SixDOFSpacecraft(BaseRotationEntity):
         body_frame_thrust: bool
             Flag indicating the reference frame for the control thrust vector: True- Body frame, False - Hill's frame
     """
+
+    base_units = BaseUnits("meters", "seconds", "radians")
 
     def __init__(
         self,
@@ -255,17 +270,14 @@ class SixDOFSpacecraft(BaseRotationEntity):
 
     @property
     def x(self):
-        """get x"""
         return self._state[0]
 
     @property
     def y(self):
-        """get y"""
         return self._state[1]
 
     @property
     def z(self):
-        """get z"""
         return self._state[2]
 
     @property
@@ -294,9 +306,19 @@ class SixDOFSpacecraft(BaseRotationEntity):
         return self._state[7]
 
     @property
+    def x_dot_with_units(self):
+        """Get x_dot as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.x_dot, self.base_units.velocity)
+
+    @property
     def y_dot(self):
         """get y_dot, the velocity component in the y direction"""
         return self._state[8]
+
+    @property
+    def y_dot_with_units(self):
+        """Get y_dot as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.y_dot, self.base_units.velocity)
 
     @property
     def z_dot(self):
@@ -304,18 +326,20 @@ class SixDOFSpacecraft(BaseRotationEntity):
         return self._state[9]
 
     @property
+    def z_dot_with_units(self):
+        """Get z_dot as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.z_dot, self.base_units.velocity)
+
+    @property
     def wx(self):
-        """get wz_dot, the angular velocity component about the x axis"""
         return self._state[10]
 
     @property
     def wy(self):
-        """get wz_dot, the angular velocity component about the y axis"""
         return self._state[11]
 
     @property
     def wz(self):
-        """get wz_dot, the angular velocity component about the z axis"""
         return self._state[12]
 
     @property

@@ -16,9 +16,10 @@ from __future__ import annotations
 import abc
 import warnings
 from types import ModuleType
-from typing import TYPE_CHECKING, Tuple, Union
+from typing import TYPE_CHECKING, Callable, Tuple, Union
 
 import numpy as np
+import pint
 import scipy.integrate
 import scipy.spatial
 from pydantic import BaseModel
@@ -49,6 +50,51 @@ class BaseEntityValidator(BaseModel):
     """
     name: str
 
+    class Config:  # pylint: disable=missing-class-docstring
+        arbitrary_types_allowed = True
+
+
+def build_unit_conversion_validator_fn(unit: Union[str, pint.Unit]) -> Callable[[Union[float, pint.Quantity]], float]:
+    """
+    Builds a function for optionally converting an arbitrary unit
+
+
+
+    Parameters
+    ----------
+    unit : Union[str, pint.Unit]
+        unit to convert value to in returned Callabe
+
+    Returns
+    -------
+    Callable[[Union[float, pint.Quantity]], float]
+        A function that converts pint.Quantity inputs to the specified unit and returns the magnitude as a float.
+        If the input is not a pint.Quantity, it is assumed to be a numeric type in the correct unit and simply cast as float
+    """
+
+    def fn(x: Union[float, pint.Quantity]) -> float:
+        if isinstance(x, pint.Quantity):
+            return float(x.to(unit).magnitude)
+        return float(x)
+
+    return fn
+
+
+class BaseUnits:
+    """Provides unit system definitions for entities
+    """
+
+    def __init__(self, length: Union[str, pint.Unit], time: Union[str, pint.Unit], angle: Union[str, pint.Unit]):
+        self.length: pint.Unit = pint.Unit(length)
+        self.time: pint.Unit = pint.Unit(time)
+        self.angle: pint.Unit = pint.Unit(angle)
+
+        self.velocity: pint.Unit = self.length / self.time
+        self.angular_velocity: pint.Unit = self.angle / self.time
+
+        self.acceleration: pint.Unit = self.length / (self.time**2)
+        self.angular_acceleration: pint.Unit = self.angle / (self.time**2)
+
 
 class BaseEntity(abc.ABC):
     """
@@ -69,6 +115,8 @@ class BaseEntity(abc.ABC):
         Allows dictionary action inputs in step().
     """
 
+    base_units = BaseUnits('meters', 'seconds', 'radians')
+
     def __init__(self, dynamics, control_default, control_min=-np.inf, control_max=np.inf, control_map=None, **kwargs):
         self.config = self._get_config_validator()(**kwargs)
         self.name = self.config.name
@@ -81,6 +129,8 @@ class BaseEntity(abc.ABC):
 
         self._state = self._build_state()
         self.state_dot = np.zeros_like(self._state)
+
+        self.ureg = pint.UnitRegistry()
 
     @classmethod
     def _get_config_validator(cls):
@@ -160,27 +210,47 @@ class BaseEntity(abc.ABC):
 
     @property
     @abc.abstractmethod
-    def x(self):
+    def x(self) -> float:
         """get x"""
         raise NotImplementedError
 
     @property
+    def x_with_units(self) -> pint.Quantity:
+        """get x as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.x, self.base_units.length)
+
+    @property
     @abc.abstractmethod
-    def y(self):
+    def y(self) -> float:
         """get y"""
         raise NotImplementedError
 
     @property
+    def y_with_units(self) -> pint.Quantity:
+        """get y as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.y, self.base_units.length)
+
+    @property
     @abc.abstractmethod
-    def z(self):
+    def z(self) -> float:
         """get z"""
         raise NotImplementedError
+
+    @property
+    def z_with_units(self) -> pint.Quantity:
+        """get z as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.z, self.base_units.length)
 
     @property
     @abc.abstractmethod
     def position(self) -> np.ndarray:
         """get 3d position vector"""
         raise NotImplementedError
+
+    @property
+    def position_with_units(self) -> pint.Quantity[np.ndarray]:
+        """get position as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.position, self.base_units.length)
 
     @property
     @abc.abstractmethod
@@ -198,9 +268,14 @@ class BaseEntity(abc.ABC):
 
     @property
     @abc.abstractmethod
-    def velocity(self):
+    def velocity(self) -> np.ndarray:
         """Get 3d velocity vector"""
         raise NotImplementedError
+
+    @property
+    def velocity_with_units(self) -> pint.Quantity[np.ndarray]:
+        """get velocity as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.velocity, self.base_units.velocity)
 
 
 class BaseRotationEntity(BaseEntity):
@@ -234,25 +309,25 @@ class BaseRotationEntity(BaseEntity):
 
     @property
     @abc.abstractmethod
-    def q1(self):
+    def q1(self) -> float:
         """get first element of quaternion"""
         raise NotImplementedError
 
     @property
     @abc.abstractmethod
-    def q2(self):
+    def q2(self) -> float:
         """get second element of quaternion"""
         raise NotImplementedError
 
     @property
     @abc.abstractmethod
-    def q3(self):
+    def q3(self) -> float:
         """get third element of quaternion"""
         raise NotImplementedError
 
     @property
     @abc.abstractmethod
-    def q4(self):
+    def q4(self) -> float:
         """get fourth element of quaternion (scalar)"""
         raise NotImplementedError
 
@@ -264,27 +339,47 @@ class BaseRotationEntity(BaseEntity):
 
     @property
     @abc.abstractmethod
-    def wx(self):
-        """get wx"""
+    def wx(self) -> float:
+        """get wx, the angular velocity component about the local body frame x axis"""
         raise NotImplementedError
 
     @property
-    @abc.abstractmethod
-    def wy(self):
-        """get wy"""
-        raise NotImplementedError
+    def wx_with_unit(self) -> pint.Quantity:
+        """get wx as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.wx, self.base_units.angular_velocity)
 
     @property
     @abc.abstractmethod
-    def wz(self):
-        """get wz"""
+    def wy(self) -> float:
+        """get wy, the angular velocity component about the local body frame y axis"""
         raise NotImplementedError
+
+    @property
+    def wy_with_unit(self) -> pint.Quantity:
+        """get wy as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.wy, self.base_units.angular_velocity)
+
+    @property
+    @abc.abstractmethod
+    def wz(self) -> float:
+        """get wz, the angular velocity component about the local body frame z axis"""
+        raise NotImplementedError
+
+    @property
+    def wz_with_unit(self) -> pint.Quantity:
+        """get wz as a pint.Quantity with units"""
+        return self.ureg.Quantity(self.wz, self.base_units.angular_velocity)
 
     @property
     @abc.abstractmethod
     def angular_velocity(self) -> np.ndarray:
         """get 3d angular velocity vector"""
         raise NotImplementedError
+
+    @property
+    def angular_velocity_with_units(self) -> pint.Quantity[np.ndarray]:
+        """get 3d angular velocity vector as pint.Quantity with units"""
+        return self.ureg.Quantity(self.angular_velocity, self.base_units.angular_velocity)
 
 
 class BaseDynamics(abc.ABC):
