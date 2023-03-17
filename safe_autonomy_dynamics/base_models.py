@@ -474,6 +474,8 @@ class BaseODESolverDynamics(BaseDynamics):
 
     Parameters
     ----------
+    trajectory_samples : int
+        number of trajectory samples the generate and store on steps
     state_dot_min : float or np.ndarray
         Minimum allowable value for the state time derivative. State derivative values that exceed this are clipped.
         When a float, represents single limit applied to entire state vector.
@@ -495,6 +497,7 @@ class BaseODESolverDynamics(BaseDynamics):
 
     def __init__(
         self,
+        trajectory_samples: int = 0,
         state_dot_min: Union[float, np.ndarray] = -np.inf,
         state_dot_max: Union[float, np.ndarray] = np.inf,
         integration_method="RK45",
@@ -503,6 +506,13 @@ class BaseODESolverDynamics(BaseDynamics):
         self.integration_method = integration_method
         self.state_dot_min = state_dot_min
         self.state_dot_max = state_dot_max
+
+        assert isinstance(trajectory_samples, int), "trajectory_samples must be an integer"
+        self.trajectory_samples = trajectory_samples
+
+        self.trajectory = None
+        self.trajectory_t = None
+
         super().__init__(**kwargs)
 
     def compute_state_dot(self, t: float, state: np.ndarray, control: np.ndarray) -> np.ndarray:
@@ -551,7 +561,15 @@ class BaseODESolverDynamics(BaseDynamics):
     def _step(self, step_size, state, control):
 
         if self.integration_method == "RK45":
-            sol = scipy.integrate.solve_ivp(self.compute_state_dot, (0, step_size), state, args=(control, ))
+
+            t_eval = None
+            if self.trajectory_samples > 0:
+                t_eval = np.linspace(0, step_size, self.trajectory_samples + 1)[1:]
+
+            sol = scipy.integrate.solve_ivp(self.compute_state_dot, (0, step_size), state, args=(control, ), t_eval=t_eval)
+
+            self.trajectory = sol.y.T
+            self.trajectory_t = sol.t
 
             next_state = sol.y[:, -1]  # save last timestep of integration solution
             state_dot = self.compute_state_dot(step_size, next_state, control)
@@ -559,12 +577,15 @@ class BaseODESolverDynamics(BaseDynamics):
             if not self.use_jax:
                 raise ValueError("use_jax must be set to True if using RK45_JAX")
 
+            assert self.trajectory_samples <= 0, "trajectory sampling not currently supported with rk45 jax integration"
+
             sol = odeint(  # pylint: disable=used-before-assignment
                 self.compute_state_dot_jax, state, jnp.linspace(0., step_size, 11), control
             )
             next_state = sol[-1, :]  # save last timestep of integration solution
             state_dot = self.compute_state_dot(step_size, next_state, control)
         elif self.integration_method == "Euler":
+            assert self.trajectory_samples <= 0, "trajectory sampling not currently supported with euler integration"
             state_dot = self.compute_state_dot(0, state, control)
             next_state = state + step_size * state_dot
         else:

@@ -147,6 +147,8 @@ class SixDOFSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-m
         by default, True
     n: float
         Orbital mean motion of Hill's reference frame's circular orbit in rad/s, by default 0.001027.
+    trajectory_samples : int
+        number of trajectory samples the generate and store on steps
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics.
     kwargs:
@@ -169,6 +171,7 @@ class SixDOFSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-m
         thrust_control_limit=THRUST_CONTROL_LIMIT_DEFAULT,
         body_frame_thrust=True,
         n=N_DEFAULT,
+        trajectory_samples=0,
         integration_method="RK45",
         **kwargs
     ):
@@ -206,7 +209,8 @@ class SixDOFSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-m
             ang_vel_limit=vel_limit_combined,
             n=n,
             body_frame_thrust=body_frame_thrust,
-            integration_method=integration_method
+            trajectory_samples=trajectory_samples,
+            integration_method=integration_method,
         )
         self.lead = None
         self.partner = {}

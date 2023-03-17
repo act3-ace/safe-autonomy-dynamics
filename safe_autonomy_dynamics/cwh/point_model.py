@@ -94,6 +94,8 @@ class CWHSpacecraft(BaseEntity):
         Mass of spacecraft in kilograms, by default 12.
     n: float
         Orbital mean motion of Hill's reference frame's circular orbit in rad/s, by default 0.001027.
+    trajectory_samples : int
+        number of trajectory samples the generate and store on steps
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics.
     kwargs:
@@ -102,8 +104,8 @@ class CWHSpacecraft(BaseEntity):
 
     base_units = BaseUnits("meters", "seconds", "radians")
 
-    def __init__(self, m=M_DEFAULT, n=N_DEFAULT, integration_method="RK45", **kwargs):
-        dynamics = CWHDynamics(m=m, n=n, integration_method=integration_method)
+    def __init__(self, m=M_DEFAULT, n=N_DEFAULT, trajectory_samples=0, integration_method="RK45", **kwargs):
+        dynamics = CWHDynamics(m=m, n=n, trajectory_samples=trajectory_samples, integration_method=integration_method)
         self._state = np.array([])
 
         control_map = {
