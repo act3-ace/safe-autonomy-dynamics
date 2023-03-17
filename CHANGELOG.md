@@ -1,3 +1,10 @@
+# [0.9.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.8.0...v0.9.0) (2023-03-17)
+
+
+### Features
+
+* Optional trajectory of intermediate points sampled along dynamics step ([1a53d46](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/1a53d469dd06f05ca3cdea7b38001ee5edcd11a5))
+
 # [0.8.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.7.0...v0.8.0) (2023-03-16)
 
 
