@@ -102,14 +102,18 @@ class Integrator1d(BaseIntegrator):
     ----------
     m: float
         Mass of integrator, by default 1.
+    trajectory_samples : int
+        number of trajectory samples the generate and store on steps
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics.
     kwargs:
         Additional keyword arguments passed to BaseIntegrator.
     """
 
-    def __init__(self, m=M_DEFAULT, damping=DAMPING_DEFAULT, integration_method="RK45", **kwargs):
-        dynamics = IntegratorDynamics(m=m, damping=damping, mode='1d', integration_method=integration_method)
+    def __init__(self, m=M_DEFAULT, damping=DAMPING_DEFAULT, trajectory_samples=0, integration_method="RK45", **kwargs):
+        dynamics = IntegratorDynamics(
+            m=m, damping=damping, mode='1d', trajectory_samples=trajectory_samples, integration_method=integration_method
+        )
         self._state = np.array([])
 
         control_map = {
@@ -191,14 +195,18 @@ class Integrator2d(BaseIntegrator):
     ----------
     m: float
         Mass of integrator, by default 1.
+    trajectory_samples : int
+        number of trajectory samples the generate and store on steps
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics.
     kwargs:
         Additional keyword arguments passed to BaseIntegrator.
     """
 
-    def __init__(self, m=M_DEFAULT, damping=DAMPING_DEFAULT, integration_method="RK45", **kwargs):
-        dynamics = IntegratorDynamics(m=m, damping=damping, mode='2d', integration_method=integration_method)
+    def __init__(self, m=M_DEFAULT, damping=DAMPING_DEFAULT, trajectory_samples=0, integration_method="RK45", **kwargs):
+        dynamics = IntegratorDynamics(
+            m=m, damping=damping, mode='2d', trajectory_samples=trajectory_samples, integration_method=integration_method
+        )
         self._state = np.array([])
 
         control_map = {
@@ -285,14 +293,18 @@ class Integrator3d(BaseIntegrator):
     ----------
     m: float
         Mass of integrator, by default 1.
+    trajectory_samples : int
+        number of trajectory samples the generate and store on steps
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics.
     kwargs:
         Additional keyword arguments passed to BaseIntegrator.
     """
 
-    def __init__(self, m=M_DEFAULT, damping=DAMPING_DEFAULT, integration_method="RK45", **kwargs):
-        dynamics = IntegratorDynamics(m=m, damping=damping, mode='3d', integration_method=integration_method)
+    def __init__(self, m=M_DEFAULT, damping=DAMPING_DEFAULT, trajectory_samples=0, integration_method="RK45", **kwargs):
+        dynamics = IntegratorDynamics(
+            m=m, damping=damping, mode='3d', trajectory_samples=trajectory_samples, integration_method=integration_method
+        )
         self._state = np.array([])
 
         control_map = {

@@ -256,13 +256,15 @@ class Dubins2dAircraft(BaseDubinsAircraft):
 
     Parameters
     ----------
+    trajectory_samples : int
+        number of trajectory samples the generate and store on steps
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics
     kwargs
         Additional keyword args passed to BaseDubinsAircraftValidator
     """
 
-    def __init__(self, integration_method="RK45", **kwargs):
+    def __init__(self, trajectory_samples=0, integration_method="RK45", **kwargs):
 
         state_min = np.array([-np.inf, -np.inf, -np.inf, 200], dtype=np.float32)
         state_max = np.array([np.inf, np.inf, np.inf, 400], dtype=np.float32)
@@ -277,7 +279,11 @@ class Dubins2dAircraft(BaseDubinsAircraft):
         }
 
         dynamics = Dubins2dDynamics(
-            state_min=state_min, state_max=state_max, angle_wrap_centers=angle_wrap_centers, integration_method=integration_method
+            trajectory_samples=trajectory_samples,
+            state_min=state_min,
+            state_max=state_max,
+            angle_wrap_centers=angle_wrap_centers,
+            integration_method=integration_method,
         )
 
         super().__init__(
@@ -434,13 +440,15 @@ class Dubins3dAircraft(BaseDubinsAircraft):
 
     Parameters
     ----------
+    trajectory_samples : int
+        number of trajectory samples the generate and store on steps
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics
     kwargs
         Additional keyword args passed to BaseDubinsAircraftValidator
     """
 
-    def __init__(self, integration_method='RK45', **kwargs):
+    def __init__(self, trajectory_samples=0, integration_method='RK45', **kwargs):
 
         state_min = np.array([-np.inf, -np.inf, -np.inf, -np.inf, -np.pi / 9, -np.pi / 3, 200], dtype=np.float32)
         state_max = np.array([np.inf, np.inf, np.inf, np.inf, np.pi / 9, np.pi / 3, 400], dtype=np.float32)
@@ -456,7 +464,11 @@ class Dubins3dAircraft(BaseDubinsAircraft):
         }
 
         dynamics = Dubins3dDynamics(
-            state_min=state_min, state_max=state_max, angle_wrap_centers=angle_wrap_centers, integration_method=integration_method
+            trajectory_samples=trajectory_samples,
+            state_min=state_min,
+            state_max=state_max,
+            angle_wrap_centers=angle_wrap_centers,
+            integration_method=integration_method,
         )
 
         super().__init__(

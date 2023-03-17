@@ -78,7 +78,7 @@ class AeroBenchF16(BaseEntity):
     Base interface for AeroBench Entities.
     """
 
-    def __init__(self, integration_method='RK45', model_str='morelli', v2_integrators=False, **kwargs):
+    def __init__(self, model_str='morelli', v2_integrators=False, trajectory_samples=0, integration_method='RK45', **kwargs):
         self.partner = None
 
         # state = [vt, alpha, beta, phi, theta, psi, P, Q, R, pn, pe, h, pow]
@@ -92,6 +92,7 @@ class AeroBenchF16(BaseEntity):
         control_default = np.array([0] * 4, dtype=np.float32)
 
         dynamics = AeroBenchF16Dynamics(
+            trajectory_samples=trajectory_samples,
             state_min=state_min,
             state_max=state_max,
             angle_wrap_centers=angle_wrap_centers,
