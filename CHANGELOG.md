@@ -1,3 +1,10 @@
+# [0.10.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.9.0...v0.10.0) (2023-03-18)
+
+
+### Features
+
+* Entity validators no longer allow unexpected parameters ([9bd22ef](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/9bd22efa8a1ea8a8e4a5cb95bb48ddf557155811))
+
 # [0.9.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.8.0...v0.9.0) (2023-03-17)
 
 
