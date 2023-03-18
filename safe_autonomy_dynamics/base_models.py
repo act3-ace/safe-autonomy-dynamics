@@ -22,7 +22,7 @@ import numpy as np
 import pint
 import scipy.integrate
 import scipy.spatial
-from pydantic import BaseModel
+from pydantic import BaseModel, Extra
 
 if TYPE_CHECKING:
     import jax
@@ -52,6 +52,7 @@ class BaseEntityValidator(BaseModel):
 
     class Config:  # pylint: disable=missing-class-docstring
         arbitrary_types_allowed = True
+        extra = Extra.forbid
 
 
 def build_unit_conversion_validator_fn(unit: Union[str, pint.Unit]) -> Callable[[Union[float, pint.Quantity]], float]:
