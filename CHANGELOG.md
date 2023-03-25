@@ -1,3 +1,10 @@
+# [0.11.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.10.0...v0.11.0) (2023-03-25)
+
+
+### Features
+
+* dubins custom state and control limits ([5a3f9da](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/5a3f9da9144eec05af42d0eae6604dfe2c56f265))
+
 # [0.10.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.9.0...v0.10.0) (2023-03-18)
 
 
