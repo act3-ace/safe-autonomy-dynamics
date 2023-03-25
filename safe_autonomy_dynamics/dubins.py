@@ -246,13 +246,13 @@ class Dubins2dAircraft(BaseDubinsAircraft):
         heading
             range = [-pi, pi] rad
         v
-            range = [200, 400] ft/s
+            default range = [200, 400] ft/s
 
     Controls
         heading_rate
-            range = [-pi/18, pi/18] rad/s (i.e. +/- 10 deg/s)
+            default range = [-pi/18, pi/18] rad/s (i.e. +/- 10 deg/s)
         acceleration
-            range = [-96.5, 96.5] ft/s^2
+            default range = [-96.5, 96.5] ft/s^2
 
     Parameters
     ----------
@@ -260,19 +260,48 @@ class Dubins2dAircraft(BaseDubinsAircraft):
         number of trajectory samples the generate and store on steps
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics
+    v_min : float
+        min velocity state value, by default 200
+        ft/s
+    v_max : float
+        max velocity state value, by default 400
+        ft/s
+    heading_rate_control_min : float
+        min heading rate control value. Control Values outside this bound will be clipped, by default -pi/18 (-10 deg / s)
+        radians / s
+    heading_rate_control_max : float
+        max heading rate control value. Control Values outside this bound will be clipped, by default pi/18 (10 deg / s)
+        radians / s
+    acceleration_control_min : float
+        min acceleration control value. Control Values outside this bound will be clipped, by default -96.5
+        ft / s^2
+    acceleration_control_max : float
+        max acceleration control value. Control Values outside this bound will be clipped, by default 96.5
+        ft / s^2
     kwargs
         Additional keyword args passed to BaseDubinsAircraftValidator
     """
 
-    def __init__(self, trajectory_samples=0, integration_method="RK45", **kwargs):
+    def __init__(
+        self,
+        trajectory_samples=0,
+        integration_method="RK45",
+        v_min=200,
+        v_max=400,
+        heading_rate_control_min=-0.174533,
+        heading_rate_control_max=0.174533,
+        acceleration_control_min=-96.5,
+        acceleration_control_max=96.5,
+        **kwargs
+    ):
 
-        state_min = np.array([-np.inf, -np.inf, -np.inf, 200], dtype=np.float32)
-        state_max = np.array([np.inf, np.inf, np.inf, 400], dtype=np.float32)
+        state_min = np.array([-np.inf, -np.inf, -np.inf, v_min], dtype=np.float32)
+        state_max = np.array([np.inf, np.inf, np.inf, v_max], dtype=np.float32)
         angle_wrap_centers = np.array([None, None, 0, None], dtype=np.float32)
 
         control_default = np.zeros((2, ))
-        control_min = np.array([-np.deg2rad(10), -96.5])
-        control_max = np.array([np.deg2rad(10), 96.5])
+        control_min = np.array([heading_rate_control_min, acceleration_control_min])
+        control_max = np.array([heading_rate_control_max, acceleration_control_max])
         control_map = {
             'heading_rate': 0,
             'acceleration': 1,
@@ -424,19 +453,19 @@ class Dubins3dAircraft(BaseDubinsAircraft):
         heading
             range = [-pi, pi] rad
         gamma
-            range = [-pi/9, pi/9] rad
+            default range = [-pi/9, pi/9] rad
         roll
-            range = [-pi/3, pi/3] rad
+            default range = [-pi/3, pi/3] rad
         v
-            range = [200, 400] ft/s
+            default range = [200, 400] ft/s
 
     Controls
         gamma_rate
-            range = [-pi/18, pi/18] rad/s (i.e. +/- 10 deg/s)
+            default range = [-pi/18, pi/18] rad/s (i.e. +/- 10 deg/s)
         roll_rate
-            range = [-pi/36, pi/36] rad/s (i.e. +/- 5 deg/s)
+            default range = [-pi/36, pi/36] rad/s (i.e. +/- 5 deg/s)
         acceleration
-            range = [-96.5, 96.5] ft/s^2
+            default range = [-96.5, 96.5] ft/s^2
 
     Parameters
     ----------
@@ -444,19 +473,76 @@ class Dubins3dAircraft(BaseDubinsAircraft):
         number of trajectory samples the generate and store on steps
     integration_method: str
         Numerical integration method passed to dynamics model. See BaseODESolverDynamics
+    v_min : float
+        min velocity state value, by default 200
+        ft/s
+    v_max : float
+        max velocity state value, by default 400
+        ft/s
+    gamma_min : float
+        min gamma state value allowed by dynamical system equation. System state flow outside of this bound will be clipped.
+        By default, -pi/9 (-20 deg)
+        radians
+    gamma_max : float
+        max gamma state value allowed by dynamical system equation. System state flow outside of this bound will be clipped.
+        By default, pi/9 (20 deg)
+        radians
+    roll_min : float
+        min roll state value allowed by dynamical system equation. System state flow outside of this bound will be clipped.
+        By default, -pi/3 (-60 deg)
+        radians
+    roll_max : float
+        max roll state value allowed by dynamical system equation. System state flow outside of this bound will be clipped.
+        By default, pi/3 (60 deg)
+        radians
+    gamma_rate_control_min : float
+        min gamma rate control value. Control Values outside this bound will be clipped, by default -pi/18 (-10 deg / s)
+        radians / s
+    gamma_rate_control_max : float
+        max gamma rate control value. Control Values outside this bound will be clipped, by default pi/18 (10 deg / s)
+        radians / s
+    roll_rate_control_min : float
+        min roll rate control value. Control Values outside this bound will be clipped, by default -pi/36 (-5 deg / s)
+        radians / s
+    roll_rate_control_max : float
+        max roll rate control value. Control Values outside this bound will be clipped, by default pi/36 (5 deg / s)
+        radians / s
+    acceleration_control_min : float
+        min acceleration control value. Control Values outside this bound will be clipped, by default -96.5
+        ft / s^2
+    acceleration_control_max : float
+        max acceleration control value. Control Values outside this bound will be clipped, by default 96/5
+        ft / s^2
     kwargs
         Additional keyword args passed to BaseDubinsAircraftValidator
     """
 
-    def __init__(self, trajectory_samples=0, integration_method='RK45', **kwargs):
+    def __init__(
+        self,
+        trajectory_samples=0,
+        integration_method='RK45',
+        v_min=200,
+        v_max=400,
+        gamma_min=-0.349066,
+        gamma_max=0.349066,
+        roll_min=-1.047198,
+        roll_max=1.047198,
+        gamma_rate_control_min=-0.174533,
+        gamma_rate_control_max=0.174533,
+        roll_rate_control_min=-0.087266,
+        roll_rate_control_max=0.087266,
+        acceleration_control_min=-96.5,
+        acceleration_control_max=96.5,
+        **kwargs
+    ):
 
-        state_min = np.array([-np.inf, -np.inf, -np.inf, -np.inf, -np.pi / 9, -np.pi / 3, 200], dtype=np.float32)
-        state_max = np.array([np.inf, np.inf, np.inf, np.inf, np.pi / 9, np.pi / 3, 400], dtype=np.float32)
+        state_min = np.array([-np.inf, -np.inf, -np.inf, -np.inf, gamma_min, roll_min, v_min], dtype=np.float32)
+        state_max = np.array([np.inf, np.inf, np.inf, np.inf, gamma_max, roll_max, v_max], dtype=np.float32)
         angle_wrap_centers = np.array([None, None, None, 0, 0, 0, None], dtype=np.float32)
 
         control_default = np.zeros((3, ))
-        control_min = np.array([-np.deg2rad(10), -np.deg2rad(5), -96.5])
-        control_max = np.array([np.deg2rad(10), np.deg2rad(5), 96.5])
+        control_min = np.array([gamma_rate_control_min, roll_rate_control_min, acceleration_control_min])
+        control_max = np.array([gamma_rate_control_max, roll_rate_control_max, acceleration_control_max])
         control_map = {
             'gamma_rate': 0,
             'roll_rate': 1,

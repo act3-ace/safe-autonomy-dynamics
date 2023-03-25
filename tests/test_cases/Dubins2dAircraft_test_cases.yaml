@@ -290,6 +290,126 @@
     v: 400
   error_bound: 0.00001
   proportional_error_bound: 0.001
+- ID: velocity upper limit custom less than default
+  init_kwargs:
+    v: 300
+    v_max: 350
+  control:
+    acceleration: 50
+  num_steps: 10
+  attr_targets:
+    v: 350
+  proportional_error_bound: 0.005
+- ID: velocity upper limit custom greater than default
+  init_kwargs:
+    v: 300
+    v_max: 600
+  control:
+    acceleration: 50
+  num_steps: 100
+  attr_targets:
+    v: 600
+  proportional_error_bound: 0.005
+- ID: velocity lower limit custom less than default
+  init_kwargs:
+    v: 300
+    v_min: 100
+  control:
+    acceleration: -50
+  num_steps: 10
+  attr_targets:
+    v: 100
+  proportional_error_bound: 0.005
+- ID: velocity lower limit custom greater than default
+  init_kwargs:
+    v: 300
+    v_min: 250
+  control:
+    acceleration: -50
+  num_steps: 100
+  attr_targets:
+    v: 250
+  proportional_error_bound: 0.005
+- ID: heading rate upper limit custom less than default
+  init_kwargs:
+    heading: 0
+    heading_rate_control_max: 0.1
+  control:
+    heading_rate: 10
+  num_steps: 10
+  attr_targets:
+    heading: 1
+  proportional_error_bound: 0.005
+- ID: heading rate upper limit custom greater than default
+  init_kwargs:
+    heading: 0
+    heading_rate_control_max: 1
+  control:
+    heading_rate: 10
+  num_steps: 2
+  attr_targets:
+    heading: 2
+  proportional_error_bound: 0.005
+- ID: heading rate lower limit custom less than default
+  init_kwargs:
+    heading: 0
+    heading_rate_control_min: -1
+  control:
+    heading_rate: -10
+  num_steps: 2
+  attr_targets:
+    heading: -2
+  proportional_error_bound: 0.005
+- ID: heading rate lower limit custom greater than default
+  init_kwargs:
+    heading: 0
+    heading_rate_control_min: -0.1
+  control:
+    heading_rate: -10
+  num_steps: 10
+  attr_targets:
+    heading: -1
+  proportional_error_bound: 0.005
+- ID: acceleration upper limit custom less than default
+  init_kwargs:
+    v: 300
+    acceleration_control_max: 10
+  control:
+    acceleration: 500
+  num_steps: 5
+  attr_targets:
+    v: 350
+  proportional_error_bound: 0.005
+- ID: acceleration upper limit custom greater than default
+  init_kwargs:
+    v: 200
+    acceleration_control_max: 195
+  control:
+    acceleration: 500
+  num_steps: 1
+  attr_targets:
+    v: 395
+  proportional_error_bound: 0.005
+- ID: acceleration lower limit custom greater than default
+  init_kwargs:
+    v: 300
+    acceleration_control_min: -10
+  control:
+    acceleration: -500
+  num_steps: 5
+  attr_targets:
+    v: 250
+  proportional_error_bound: 0.005
+- ID: acceleration lower limit custom less than default
+  init_kwargs:
+    v: 400
+    acceleration_control_min: -195
+  control:
+    acceleration: -500
+  num_steps: 1
+  attr_targets:
+    v: 205
+  proportional_error_bound: 0.005
 
 # Initialization with Units
 - ID: test pint init random state 1 native units
