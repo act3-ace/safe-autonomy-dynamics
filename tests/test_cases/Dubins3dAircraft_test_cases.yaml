@@ -2,6 +2,7 @@
 - ID: defaults
   defaults:
     error_bound: 0.0001
+    proportional_error_bound: 0.0001
     angles:
       heading: True               # currently requiring all angle bools to be lists
 
@@ -418,6 +419,46 @@
     gamma: 0.2165764665440848
     roll: -0.13088936735306703
     v: 200
+- ID: velocity upper limit custom less than default
+  init_kwargs:
+    v: 300
+    v_max: 350
+  control:
+    acceleration: 50
+  num_steps: 10
+  attr_targets:
+    v: 350
+  proportional_error_bound: 0.005
+- ID: velocity upper limit custom greater than default
+  init_kwargs:
+    v: 300
+    v_max: 600
+  control:
+    acceleration: 50
+  num_steps: 100
+  attr_targets:
+    v: 600
+  proportional_error_bound: 0.005
+- ID: velocity lower limit custom less than default
+  init_kwargs:
+    v: 300
+    v_min: 100
+  control:
+    acceleration: -50
+  num_steps: 10
+  attr_targets:
+    v: 100
+  proportional_error_bound: 0.005
+- ID: velocity lower limit custom greater than default
+  init_kwargs:
+    v: 300
+    v_min: 250
+  control:
+    acceleration: -50
+  num_steps: 100
+  attr_targets:
+    v: 250
+  proportional_error_bound: 0.005
 - ID: gamma upper limit from origin
   attr_init:
     position: [ 0, 0, 0 ]
@@ -492,6 +533,46 @@
     gamma: -0.3490658503988659
     roll: -1.0471975511965976
     v: 400
+  proportional_error_bound: 0.005
+- ID: gamma upper limit custom less than default
+  init_kwargs:
+    gamma: 0
+    gamma_max: 0.1
+  control:
+    gamma_rate: np.pi/36
+  num_steps: 10
+  attr_targets:
+    gamma: 0.1
+  proportional_error_bound: 0.005
+- ID: gamma upper limit custom greater than default
+  init_kwargs:
+    gamma: 0
+    gamma_max: 1.0
+  control:
+    gamma_rate: np.pi/36
+  num_steps: 100
+  attr_targets:
+    gamma: 1.0
+  proportional_error_bound: 0.005
+- ID: gamma lower limit custom greater than default
+  init_kwargs:
+    gamma: 0
+    gamma_min: -0.1
+  control:
+    gamma_rate: -np.pi/36
+  num_steps: 10
+  attr_targets:
+    gamma: -0.1
+  proportional_error_bound: 0.005
+- ID: gamma lower limit custom less than default
+  init_kwargs:
+    gamma: 0
+    gamma_min: -1.0
+  control:
+    gamma_rate: -np.pi/36
+  num_steps: 100
+  attr_targets:
+    gamma: -1.0
   proportional_error_bound: 0.005
 - ID: roll upper limit from origin
   attr_init:
@@ -568,6 +649,167 @@
     gamma: -0.00535204774206656
     roll: -1.0471975511965976
     v: 400
+  proportional_error_bound: 0.005
+- ID: roll upper limit custom less than default
+  init_kwargs:
+    roll: 0
+    roll_max: 0.1
+  control:
+    roll_rate: np.pi/36
+  num_steps: 10
+  attr_targets:
+    roll: 0.1
+  proportional_error_bound: 0.005
+- ID: roll upper limit custom greater than default
+  init_kwargs:
+    roll: 0
+    roll_max: 3
+  control:
+    roll_rate: np.pi/36
+  num_steps: 100
+  attr_targets:
+    roll: 3
+  proportional_error_bound: 0.005
+- ID: roll lower limit custom greater than default
+  init_kwargs:
+    roll: 0
+    roll_min: -0.1
+  control:
+    roll_rate: -np.pi/36
+  num_steps: 10
+  attr_targets:
+    roll: -0.1
+  proportional_error_bound: 0.005
+- ID: roll lower limit custom less than default
+  init_kwargs:
+    roll: 0
+    roll_min: -3
+  control:
+    roll_rate: -np.pi/36
+  num_steps: 100
+  attr_targets:
+    roll: -3
+  proportional_error_bound: 0.005
+
+- ID: gamma rate upper limit custom less than default
+  init_kwargs:
+    gamma: 0
+    gamma_rate_control_max: 0.1
+  control:
+    gamma_rate: 10
+  num_steps: 2
+  attr_targets:
+    gamma: 0.2
+  proportional_error_bound: 0.005
+- ID: gamma rate upper limit custom greater than default
+  init_kwargs:
+    gamma: 0
+    gamma_rate_control_max: 0.3
+  control:
+    gamma_rate: 10
+  num_steps: 1
+  attr_targets:
+    gamma: 0.3
+  proportional_error_bound: 0.005
+- ID: gamma rate lower limit custom less than default
+  init_kwargs:
+    gamma: 0
+    gamma_rate_control_min: -0.1
+  control:
+    gamma_rate: -10
+  num_steps: 2
+  attr_targets:
+    gamma: -0.2
+  proportional_error_bound: 0.005
+- ID: gamma rate lower limit custom greater than default
+  init_kwargs:
+    gamma: 0
+    gamma_rate_control_min: -0.01
+  control:
+    gamma_rate: -10
+  num_steps: 10
+  attr_targets:
+    gamma: -0.1
+  proportional_error_bound: 0.005
+- ID: roll rate upper limit custom less than default
+  init_kwargs:
+    roll: 0
+    roll_rate_control_max: 0.01
+  control:
+    roll_rate: 10
+  num_steps: 10
+  attr_targets:
+    roll: 0.1
+  proportional_error_bound: 0.005
+- ID: roll rate upper limit custom greater than default
+  init_kwargs:
+    roll: 0
+    roll_rate_control_max: 0.5
+  control:
+    roll_rate: 10
+  num_steps: 2
+  attr_targets:
+    roll: 1
+  proportional_error_bound: 0.005
+- ID: roll rate lower limit custom less than default
+  init_kwargs:
+    roll: 0
+    roll_rate_control_min: -0.5
+  control:
+    roll_rate: -10
+  num_steps: 2
+  attr_targets:
+    roll: -1
+  proportional_error_bound: 0.005
+- ID: roll rate lower limit custom greater than default
+  init_kwargs:
+    roll: 0
+    roll_rate_control_min: -0.01
+  control:
+    roll_rate: -10
+  num_steps: 10
+  attr_targets:
+    roll: -0.1
+  proportional_error_bound: 0.005
+- ID: acceleration upper limit custom less than default
+  init_kwargs:
+    v: 300
+    acceleration_control_max: 10
+  control:
+    acceleration: 500
+  num_steps: 5
+  attr_targets:
+    v: 350
+  proportional_error_bound: 0.005
+- ID: acceleration upper limit custom greater than default
+  init_kwargs:
+    v: 200
+    acceleration_control_max: 195
+  control:
+    acceleration: 500
+  num_steps: 1
+  attr_targets:
+    v: 395
+  proportional_error_bound: 0.005
+- ID: acceleration lower limit custom greater than default
+  init_kwargs:
+    v: 300
+    acceleration_control_min: -10
+  control:
+    acceleration: -500
+  num_steps: 5
+  attr_targets:
+    v: 250
+  proportional_error_bound: 0.005
+- ID: acceleration lower limit custom less than default
+  init_kwargs:
+    v: 400
+    acceleration_control_min: -195
+  control:
+    acceleration: -500
+  num_steps: 1
+  attr_targets:
+    v: 205
   proportional_error_bound: 0.005
 
 # Initialization with Units
