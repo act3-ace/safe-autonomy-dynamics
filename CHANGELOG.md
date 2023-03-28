@@ -1,3 +1,10 @@
+## [0.11.1](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.11.0...v0.11.1) (2023-03-28)
+
+
+### Bug Fixes
+
+* Use jax 0.4.3 ([5024b89](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/5024b8978ccf68cd06a49aff4ca8f9b30772ed81))
+
 # [0.11.0](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.10.0...v0.11.0) (2023-03-25)
 
 
