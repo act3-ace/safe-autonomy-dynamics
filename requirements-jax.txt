@@ -1,1 +1,1 @@
-jax[cpu]
+jax[cpu]==0.4.3
