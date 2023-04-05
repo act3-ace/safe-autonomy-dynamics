@@ -1,3 +1,10 @@
+## [0.11.2](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.11.1...v0.11.2) (2023-04-05)
+
+
+### Bug Fixes
+
+* Remove partners ([1bffad1](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/commit/1bffad17531df1bc1b728bdcd50779efe53188cd))
+
 ## [0.11.1](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.11.0...v0.11.1) (2023-03-28)
 
 
