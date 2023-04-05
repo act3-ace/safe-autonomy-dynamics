@@ -1,3 +1,10 @@
+## 0.11.3 (2023-04-05)
+
+
+### Bug Fixes
+
+* removed url components of semantic release commit 012ae8a
+
 ## [0.11.2](https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics/compare/v0.11.1...v0.11.2) (2023-04-05)
 
 
