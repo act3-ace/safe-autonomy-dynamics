@@ -4,7 +4,13 @@
    ],
    "plugins":[
       "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/release-notes-generator",
+          {
+            "linkCompare": false,
+            "linkReferences": false
+          }
+      ],
       "@semantic-release/changelog",
       ["@semantic-release/exec", {
         "prepareCmd": "/bin/bash scripts/update-version-python.sh ${nextRelease.version} version.py"
