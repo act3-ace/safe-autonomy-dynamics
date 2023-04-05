@@ -213,7 +213,6 @@ class SixDOFSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-m
             integration_method=integration_method,
         )
         self.lead = None
-        self.partner = {}
 
         super().__init__(
             dynamics, control_default=control_default, control_min=control_min, control_max=control_max, control_map=control_map, **kwargs
@@ -246,21 +245,6 @@ class SixDOFSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-m
         None
         """
         self.lead = lead
-
-    def register_partner(self, partner: BaseRotationEntity):
-        """
-        Register another entity as this entity's partner. Defines line of communication between entities.
-
-        Parameters
-        ----------
-        partner: BaseRotationEntity
-            Entity with line of communication to this entity.
-
-        Returns
-        -------
-        None
-        """
-        self.partner[partner.name] = partner
 
     def _build_state(self):
         """form state vector"""
