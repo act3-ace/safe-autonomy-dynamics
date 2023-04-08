@@ -11,7 +11,7 @@
 #
 site_name: Safe Autonomy Dynamics
 site_author: Safe Autonomy Team
-repo_url: https://github.com/act3-ace/rta/safe-autonomy-dynamics
+repo_url: https://github.com/act3-ace/safe-autonomy-dynamics
 docs_dir: "docs"
 site_url: https://github.com/act3-ace/
 edit_uri: blob/main/docs/

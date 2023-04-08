@@ -10,11 +10,11 @@ environment.
 Clone a copy of the safe-autonomy-dynamics repo onto your local
 machine via SSH (recommended):
 ```shell
-git clone git@github.com/act3-ace:rta/safe-autonomy-dynamics.git
+git clone git@github.com:act3-ace/safe-autonomy-dynamics.git
 ```
 or HTTPS:
 ```shell
-git clone https://github.com/act3-ace/rta/safe-autonomy-dynamics.git
+git clone https://github.com/act3-ace/safe-autonomy-dynamics.git
 ```
 
 Install the safe-autonomy-sims module into your local
@@ -37,7 +37,7 @@ source to persist.
 ## Questions or Issues?
 If you have any trouble installing the safe-autonomy-dynamics
 package in your local environment, please feel free to
-submit an [issue](https://github.com/act3-ace/rta/safe-autonomy-dynamics/-/issues).
+submit an [issue](https://github.com/act3-ace/safe-autonomy-dynamics/issues).
 
 For more information on what's available in safe-autonomy-dynamics,
 see our [API](api/index.md).

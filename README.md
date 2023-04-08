@@ -13,15 +13,15 @@ It is recommended to install the python modules within
 a [virtualenv](https://virtualenv.pypa.io/en/stable/#)
 or [conda](https://docs.conda.io/projects/conda/en/latest/index.html) environment.
 
-### Installing safe-autonomy-dynamics
-Clone a copy of the safe-autonomy-dynamics source code 
-onto your local machine via SSH:
+## Installing safe-autonomy-dynamics
+Clone a copy of the safe-autonomy-dynamics repo onto your local
+machine via SSH (recommended):
 ```shell
-git clone git@github.com/act3-ace:rta/safe-autonomy-stack/safe-autonomy-dynamics.git
+git clone git@github.com:act3-ace/safe-autonomy-dynamics.git
 ```
 or HTTPS:
 ```shell
-git clone https://github.com/act3-ace/rta/safe-autonomy-stack/safe-autonomy-dynamics.git
+git clone https://github.com/act3-ace/safe-autonomy-dynamics.git
 ```
 
 Install the safe-autonomy-dynamics module into your 

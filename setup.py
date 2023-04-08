@@ -48,7 +48,7 @@ if __name__ == '__main__':
         long_description=Path("README.md").read_text(),
         long_description_content_type="text/markdown",
 
-        url="https://github.com/act3-ace/rta/safe-autonomy-dynamics",
+        url="https://github.com/act3-ace/safe-autonomy-dynamics",
 
         license="",
 
