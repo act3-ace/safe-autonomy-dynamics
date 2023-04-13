@@ -25,7 +25,7 @@ import pint
 # Define constants
 delimiter = ","
 
-ureg = pint.UnitRegistry()
+ureg: pint.UnitRegistry = pint.get_application_registry()
 
 
 # Define functions
