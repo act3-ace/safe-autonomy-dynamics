@@ -104,7 +104,7 @@ class CWHSpacecraft(BaseEntity):
 
     base_units = BaseUnits("meters", "seconds", "radians")
 
-    def __init__(self, m=M_DEFAULT, n=N_DEFAULT, trajectory_samples=0, integration_method="RK45", **kwargs):
+    def __init__(self, sim=None, m=M_DEFAULT, n=N_DEFAULT, trajectory_samples=0, integration_method="RK45", **kwargs):
         dynamics = CWHDynamics(m=m, n=n, trajectory_samples=trajectory_samples, integration_method=integration_method)
         self._state = np.array([])
 
@@ -115,6 +115,7 @@ class CWHSpacecraft(BaseEntity):
         }
 
         super().__init__(dynamics, control_default=np.zeros((3, )), control_min=-1, control_max=1, control_map=control_map, **kwargs)
+        self._sim = sim
 
     @classmethod
     def _get_config_validator(cls):
@@ -203,6 +204,48 @@ class CWHSpacecraft(BaseEntity):
     def velocity(self):
         """Get 3d velocity vector"""
         return self._state[3:6].copy()
+    
+    def set_sim(self, sim):
+        """sets internal sim reference
+
+        Parameters
+        ----------
+        sim
+            sim to set internal sim reference to
+        """
+        self._sim = sim
+    
+    def entity_relative_position(self, entity_name) -> np.ndarray:
+        """Returns the position of another entitiy relative to this entities position
+
+        Parameters
+        ----------
+        entity_name: str
+            name of entity to get relative position of
+
+        Returns
+        -------
+        np.ndarray
+            3d relative position of other entity
+        """
+        other_entity = self._sim.sim_entities[entity_name]
+        return other_entity.position - self.position
+
+    def entity_relative_velocity(self, entity_name) -> np.ndarray:
+        """Returns the position of another entitiy relative to this entities position
+
+        Parameters
+        ----------
+        entity_name: str
+            name of entity to get relative position of
+
+        Returns
+        -------
+        np.ndarray
+            3d relative position of other entity
+        """
+        other_entity = self._sim.sim_entities[entity_name]
+        return other_entity.velocity - self.velocity
 
 
 class CWHDynamics(BaseLinearODESolverDynamics):
