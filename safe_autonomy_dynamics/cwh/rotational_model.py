@@ -322,7 +322,7 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-p
     def angular_velocity(self):
         """Get 3d angular velocity vector"""
         return np.array([self.wx, self.wy, self.wz])
-    
+
     def set_sim(self, sim):
         """sets internal sim reference
 
@@ -332,7 +332,7 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-p
             sim to set internal sim reference to
         """
         self._sim = sim
-    
+
     def entity_relative_position(self, entity_name) -> np.ndarray:
         """Returns the position of another entitiy relative to this entities position
 

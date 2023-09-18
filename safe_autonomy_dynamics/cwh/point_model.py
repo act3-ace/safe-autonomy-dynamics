@@ -204,7 +204,7 @@ class CWHSpacecraft(BaseEntity):
     def velocity(self):
         """Get 3d velocity vector"""
         return self._state[3:6].copy()
-    
+
     def set_sim(self, sim):
         """sets internal sim reference
 
@@ -214,7 +214,7 @@ class CWHSpacecraft(BaseEntity):
             sim to set internal sim reference to
         """
         self._sim = sim
-    
+
     def entity_relative_position(self, entity_name) -> np.ndarray:
         """Returns the position of another entitiy relative to this entities position
 
