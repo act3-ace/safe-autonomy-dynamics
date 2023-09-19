@@ -46,8 +46,11 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.cover
+*.py,cover
 .hypothesis/
 .pytest_cache/
+cover/
+/junit.xml
 
 # Translations
 *.mo
@@ -69,6 +72,7 @@ instance/
 docs/_build/
 
 # PyBuilder
+.pybuilder/
 target/
 
 # Jupyter Notebook
@@ -117,3 +121,19 @@ dmypy.json
 # PyCharm
 .idea/
 .idea.bak/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+.devcontainer/.ssh/
+docs/corl/
+
+# Ray logs
+ray_logs/
+docker-compose-di2e.yml
+docker-compose-kr.yml
+
+# VSCode
+.vscode

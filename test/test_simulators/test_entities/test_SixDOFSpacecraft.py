@@ -9,38 +9,34 @@
 # limitation or restriction. See accompanying README and LICENSE for details.
 # -------------------------------------------------------------------------------
 
-This module defines tests for the Dubins3dAircraft entity.
+This module defines tests for the SixDOFSpacecraft entity.
 
-Author: John McCarroll
+Author: John McCarroll, Andy Barth
 """
 
 import pytest
 import os
 
-from safe_autonomy_dynamics.dubins import Dubins3dAircraft
-from tests.test_simulators.test_entities.conftest import evaluate
-from tests.conftest import read_test_cases, delimiter
+from safe_autonomy_dynamics.cwh.sixdof_model import SixDOFSpacecraft
+from test.test_simulators.test_entities.conftest import evaluate
+from test.conftest import read_test_cases, delimiter
 
 
 # Define test assay
-test_cases_file_path = os.path.join(os.path.split(__file__)[0], "../../test_cases/Dubins3dAircraft_test_cases.yaml")
-# TODO: parameterized_fixture_keywords have become common...
+test_cases_file_path = os.path.join(os.path.split(__file__)[0], "../../test_cases/SixDOFSpacecraft_test_cases.yaml")
 parameterized_fixture_keywords = ["attr_init",
                                   "init_kwargs",
                                   "control",
                                   "num_steps",
                                   "attr_targets",
-                                  "error_bound",
-                                  "proportional_error_bound",
-                                  "angles"]
+                                  "error_bound"]
 test_configs, IDs = read_test_cases(test_cases_file_path, parameterized_fixture_keywords)
 
 
 # override entity fixture
 @pytest.fixture
 def entity(initial_entity_state, init_kwargs):
-    entity = Dubins3dAircraft(name="tests", **init_kwargs)
-
+    entity = SixDOFSpacecraft(name="tests", **init_kwargs)
     if initial_entity_state is not None:
         entity.state = initial_entity_state
 
@@ -48,7 +44,5 @@ def entity(initial_entity_state, init_kwargs):
 
 
 @pytest.mark.parametrize(delimiter.join(parameterized_fixture_keywords), test_configs, indirect=True, ids=IDs)
-def test_Dubins3dAircraft(acted_entity, control, num_steps, attr_targets, error_bound, proportional_error_bound, angles):
-    if proportional_error_bound is None:
-        proportional_error_bound = 0
-    evaluate(acted_entity, attr_targets, angles=angles, error_bound=error_bound, proportional_error_bound=proportional_error_bound)
+def test_SixDOFSpacecraft(acted_entity, control, num_steps, attr_targets, error_bound):
+    evaluate(acted_entity, attr_targets, error_bound=error_bound)

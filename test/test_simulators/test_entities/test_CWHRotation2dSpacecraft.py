@@ -14,12 +14,13 @@ This module defines tests for the CWHRotationSpacecraft entity.
 Author: John McCarroll, Andy Barth
 """
 
+import importlib
 import pytest
 import os
 
 from safe_autonomy_dynamics.cwh import CWHRotation2dSpacecraft
-from tests.test_simulators.test_entities.conftest import evaluate
-from tests.conftest import read_test_cases, delimiter
+from test.test_simulators.test_entities.conftest import evaluate
+from test.conftest import read_test_cases, delimiter
 
 
 # Define test assay
@@ -32,9 +33,15 @@ parameterized_fixture_keywords = ["attr_init",
                                   "error_bound"]
 test_configs, IDs = read_test_cases(test_cases_file_path, parameterized_fixture_keywords)
 
+jax_loader = importlib.find_loader("jax")
+
 parameterized_fixture_keywords.append("use_jax")
-test_configs =  [config.copy() + [False] for config in test_configs] + [config.copy() + [True] for config in test_configs]
-IDs += [id + "_jax" for id in IDs]
+
+if jax_loader is not None:
+    test_configs =  [config.copy() + [False] for config in test_configs] + [config.copy() + [True] for config in test_configs]
+    IDs += [id + "_jax" for id in IDs]
+else:
+    test_configs =  [config.copy() + [False] for config in test_configs]
 
 # override entity fixture
 @pytest.fixture

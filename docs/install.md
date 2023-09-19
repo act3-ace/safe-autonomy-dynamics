@@ -1,38 +1,43 @@
-# Installation
-The following instructions detail how to install 
+## Installation
+
+The following instructions detail how to install
 the safe-autonomy-dynamics library on your local system.
-It is recommended to install python modules within 
+It is recommended to install the python modules within
 a [virtualenv](https://virtualenv.pypa.io/en/stable/#)
-or [conda](https://docs.conda.io/projects/conda/en/latest/index.html)
-environment.
+or [conda](https://docs.conda.io/projects/conda/en/latest/index.html) environment.
+safe-autonomy-dynamics utilizes [Poetry](https://python-poetry.org/) to handle installation.
+Poetry can install safe-autonomy-dynamics into an auto-generated virtualenv or within the currently active environment.
 
 ## Installing safe-autonomy-dynamics
+
 Clone a copy of the safe-autonomy-dynamics repo onto your local
 machine via SSH (recommended):
+
 ```shell
 git clone git@github.com:act3-ace/safe-autonomy-dynamics.git
 ```
+
 or HTTPS:
+
 ```shell
 git clone https://github.com/act3-ace/safe-autonomy-dynamics.git
 ```
 
-Install the safe-autonomy-sims module into your local
-environment using `pip`:
+Install the safe-autonomy-dynamics module into your
+environment using `poetry`:
+
 ```shell
-pip install path/to/safe-autonomy-dynamics/
+cd safe-autonomy-dynamics
+poetry install
 ```
 
-## Development
-For a local development version, you can install the
-safe-autonomy-dynamics package using `pip`'s 
-`-e, --editable` option:
+Poetry will handle installing appropriate versions of the dependencies for safe-autonomy-dynamics into your environment, if they aren't already installed.  Poetry will install an editable version of safe-autonomy-dynamics to the environment.
+
+If you'd like jax support, specify the jax extra:
+
 ```shell
-pip install -e path/to/safe-autonomy-dynamics/
+poetry install -E jax
 ```
-This will install the package in an editable mode within
-your environment, allowing any changes you make to the
-source to persist.
 
 ## Questions or Issues?
 If you have any trouble installing the safe-autonomy-dynamics

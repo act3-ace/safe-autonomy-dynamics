@@ -18,8 +18,8 @@ import pytest
 import os
 
 from safe_autonomy_dynamics.cwh import CWHSpacecraft
-from tests.test_simulators.test_entities.conftest import evaluate
-from tests.conftest import read_test_cases, delimiter
+from test.test_simulators.test_entities.conftest import evaluate
+from test.conftest import read_test_cases, delimiter
 
 
 # Define test assay
