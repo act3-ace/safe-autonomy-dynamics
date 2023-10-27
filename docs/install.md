@@ -1,4 +1,4 @@
-## Installation
+# Installation
 
 The following instructions detail how to install
 the safe-autonomy-dynamics library on your local system.
@@ -23,6 +23,31 @@ or HTTPS:
 git clone https://github.com/act3-ace/safe-autonomy-dynamics.git
 ```
 
+### Installing safe-autonomy-dynamics with pip
+
+To install the safe-autonomy-dynamics module into your
+environment using `pip`:
+
+```shell
+cd safe-autonomy-dynamics
+pip install .
+```
+
+For a local development version, please install
+using the `-e, --editable` option:
+
+```shell
+pip install -e .
+```
+
+If you'd like jax support, specify the jax extra:
+
+```shell
+pip install .[jax]
+```
+
+### Installing safe-autonomy-dynamics with Poetry
+
 Install the safe-autonomy-dynamics module into your
 environment using `poetry`:
 
@@ -40,6 +65,7 @@ poetry install -E jax
 ```
 
 ## Questions or Issues?
+
 If you have any trouble installing the safe-autonomy-dynamics
 package in your local environment, please feel free to
 submit an [issue](https://github.com/act3-ace/safe-autonomy-dynamics/issues).

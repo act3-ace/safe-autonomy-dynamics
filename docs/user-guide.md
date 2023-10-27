@@ -1,40 +1,29 @@
-# safe-autonomy-dynamics User Guide
+# User Guide
 
 ## Purpose
 
-<!--This section should begin with a purpose statement that clearly defines the intended user and their purpose for using the ACT3 project or product. The purpose statement should be as clear and succinct as possible.-->
-
-safe-autonomy-dynamics is the primary way for \<person or process> to \<complete action>.
-
-<!--Example of a well written Purpose statement:
-Project Tool is the primary way for ACT3 developers to generate new projects and update existing projects by adopting ACT3's best practices. Project Tool is also the primary way for ACT3 developers to begin using the ACT3 pipeline.-->
-
-<!-- If applicable, include this sentence: All (related products or processes) use (product/process/feature), so to (summary of related actions) it is crucial/important/necessary to understand (this product/process/feature name). -->
-
-On this page:
-
-<!-- Provide a Table of Contents to help users jump directly to a desired section -->
-- [Overview](#overview)
-- [Concepts](#concepts)
-- [Usage](#usage)
+The safe-autonomy-dynamics package provides an API for dynamic systems supported by a library of common functions used to access and update system dynamics. These dynamics are used to build simulated environments which behave like real-world systems for the purpose of safe autonomy research and development (though their use is not limited to the safety domain). The package also includes a zoo of air and space domain dynamics modules tailored for simulating aerospace systems. The team intends to grow the zoo as new dynamic systems are studied or simulation requirements change.
 
 ## Overview
 
-<!-- This section should provide a high level overview that helps the user construct a mental model of what the project/product is and how it works. The goal of this section is to prepare the reader for understanding the concepts defined and described in the section below. Diagrams and flow charts can be integrated here when appropriate.  -->
-
-## Concepts
-
-<!-- The Concepts section helps readers learn about the parts of the ACT3 project/product and the abstractions ACT3 uses to represent key concepts. 
-
-This section of the User Guide should help readers obtain a deeper understanding of how this particular project/product leverages key concepts to accomplish the user's end-goal(s).
-
-Related concepts from other projects or products may need to be included in this section to help the user develop a mental model of this project/product.-->
+safe-autonomy-dynamics is designed around the concept of an entity.  An entity has a state and exhibits dynamics that modifies that state over time.  Entities can also have actions that they perform that will effect the state transition over time.  Entities can be used as representation of an agent in a simulation.
 
 ## Usage
 
-<!-- This section should be used to build on the key concepts described above and help the user understand how to practically apply the concepts to accomplish their objective(s). Refrain, if possible, from getting into specific commands or detailed discussion of functionality. Those items should be documented separately and linked from the Documentation section of the README file  -->
+The following is an example of how to utilize safe-autonomy-dynamics in your own software.
+
+```python
+from safe_autonomy_dynamics.dubins import Dubins2dAircraft
+
+# Create entity w/ initial state
+aircraft = Dubins2dAircraft(name="trainer", v=200)
+
+# Transition the state over a time step w/ a given action
+aircraft.step(200, {'acceleration': 2})
+
+```
 
 ## Additional Resources
 
-- [Documentation](../README.md#documentation)
-- [Support](../README.md#support)
+- [Developers Guide](developer-guide.md)
+- [API](api/index.md)

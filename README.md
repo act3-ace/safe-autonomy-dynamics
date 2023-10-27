@@ -18,7 +18,7 @@ or [conda](https://docs.conda.io/projects/conda/en/latest/index.html) environmen
 safe-autonomy-dynamics utilizes [Poetry](https://python-poetry.org/) to handle installation.
 Poetry can install safe-autonomy-dynamics into an auto-generated virtualenv or within the currently active environment.
 
-## Installing safe-autonomy-dynamics
+### Installing safe-autonomy-dynamics
 
 Clone a copy of the safe-autonomy-dynamics repo onto your local
 machine via SSH (recommended):
@@ -32,6 +32,31 @@ or HTTPS:
 ```shell
 git clone https://github.com/act3-ace/safe-autonomy-dynamics.git
 ```
+
+#### Installing safe-autonomy-dynamics with pip
+
+To install the safe-autonomy-dynamics module into your
+environment using `pip`:
+
+```shell
+cd safe-autonomy-dynamics
+pip install .
+```
+
+For a local development version, please install
+using the `-e, --editable` option:
+
+```shell
+pip install -e .
+```
+
+If you'd like jax support, specify the jax extra:
+
+```shell
+pip install .[jax]
+```
+
+#### Installing safe-autonomy-dynamics with Poetry
 
 Install the safe-autonomy-dynamics module into your
 environment using `poetry`:

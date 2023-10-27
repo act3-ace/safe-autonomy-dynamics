@@ -18,6 +18,9 @@ edit_uri: blob/main/docs/
 site_dir: site
 site_description: "The following python project provides various dynamics models in the air and space domain."
 
+exclude_docs:
+  __init__.md
+
 plugins:
   - search
   - mkdocstrings:
@@ -96,58 +99,50 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
-handlers:
-  python:
-    setup_commands:
-    - import sys
-    - sys.path.append("docs")
-    selection:
-      new_path_syntax: yes
-    import:  # demonstration purpose in the docs
-      - https://docs.python-requests.org/en/master/objects.inv
-
 nav:
   - "Introduction": index.md
-  - "Install": install.md
-##  - "Changelog": change_log.md
-##  - "License": license.md
+  - "Installation": install.md
+  - "Users Guide": user-guide.md
+  - "Developers Guide": developer-guide.md
   - "API":
       - api/index.md
       - "external":
           - api/external/index.md
           - "aerobench":
               - api/external/aerobench/index.md
-              - "controlled_f16": reference/external/aerobench/controlled_f16.md
-              - "util": reference/external/aerobench/util.md
+              - "controlled_f16": api/external/aerobench/controlled_f16.md
+              - "util": api/external/aerobench/util.md
               - "lowlevel":
                   - api/external/aerobench/lowlevel/index.md
-                  - "adc": reference/external/aerobench/lowlevel/adc.md
-                  - "cl": reference/external/aerobench/lowlevel/cl.md
-                  - "clf16": reference/external/aerobench/lowlevel/clf16.md
-                  - "cm": reference/external/aerobench/lowlevel/cm.md
-                  - "cn": reference/external/aerobench/lowlevel/cn.md
-                  - "conf16": reference/external/aerobench/lowlevel/conf16.md
-                  - "cx": reference/external/aerobench/lowlevel/cx.md
-                  - "cy": reference/external/aerobench/lowlevel/cy.md
-                  - "cz": reference/external/aerobench/lowlevel/cz.md
-                  - "dampp": reference/external/aerobench/lowlevel/dampp.md
-                  - "dlda": reference/external/aerobench/lowlevel/dlda.md
-                  - "dldr": reference/external/aerobench/lowlevel/dldr.md
-                  - "dnda": reference/external/aerobench/lowlevel/dnda.md
-                  - "dndr": reference/external/aerobench/lowlevel/dndr.md
-                  - "low_level_controller": reference/external/aerobench/lowlevel/low_level_controller.md
-                  - "morellif16": reference/external/aerobench/lowlevel/morellif16.md
-                  - "pdot": reference/external/aerobench/lowlevel/pdot.md
-                  - "rtau": reference/external/aerobench/lowlevel/rtau.md
-                  - "subf16_model": reference/external/aerobench/lowlevel/subf16_model.md
-                  - "tgear": reference/external/aerobench/lowlevel/tgear.md
-                  - "thrust": reference/external/aerobench/lowlevel/thrust.md
-      - "base models": reference/base_models.md
+                  - "adc": api/external/aerobench/lowlevel/adc.md
+                  - "cl": api/external/aerobench/lowlevel/cl.md
+                  - "clf16": api/external/aerobench/lowlevel/clf16.md
+                  - "cm": api/external/aerobench/lowlevel/cm.md
+                  - "cn": api/external/aerobench/lowlevel/cn.md
+                  - "conf16": api/external/aerobench/lowlevel/conf16.md
+                  - "cx": api/external/aerobench/lowlevel/cx.md
+                  - "cy": api/external/aerobench/lowlevel/cy.md
+                  - "cz": api/external/aerobench/lowlevel/cz.md
+                  - "dampp": api/external/aerobench/lowlevel/dampp.md
+                  - "dlda": api/external/aerobench/lowlevel/dlda.md
+                  - "dldr": api/external/aerobench/lowlevel/dldr.md
+                  - "dnda": api/external/aerobench/lowlevel/dnda.md
+                  - "dndr": api/external/aerobench/lowlevel/dndr.md
+                  - "low_level_controller": api/external/aerobench/lowlevel/low_level_controller.md
+                  - "morellif16": api/external/aerobench/lowlevel/morellif16.md
+                  - "pdot": api/external/aerobench/lowlevel/pdot.md
+                  - "rtau": api/external/aerobench/lowlevel/rtau.md
+                  - "subf16_model": api/external/aerobench/lowlevel/subf16_model.md
+                  - "tgear": api/external/aerobench/lowlevel/tgear.md
+                  - "thrust": api/external/aerobench/lowlevel/thrust.md
+      - "base models": api/base_models.md
       - "cwh":
           - api/cwh/index.md
-          - "point_model": reference/cwh/point_model.md
-          - "rotational_model": reference/cwh/rotational_model.md
-          - "sixdof_model": reference/cwh/sixdof_model.md
-      - "dubins": reference/dubins.md
-#      - reference/SUMMARY.md  # API "Table of Contents"
+          - "point_model": api/cwh/point_model.md
+          - "rotational_model": api/cwh/rotational_model.md
+          - "sixdof_model": api/cwh/sixdof_model.md
+          - "sun_model": api/cwh/sun_model.md
+      - "dubins": api/dubins.md
+      - "integrators": api/integrators.md
+      - "utils": api/utils.md
 
