@@ -93,6 +93,8 @@ poetry run mkdocs serve
 
 ## Public Release
 
+Approved for public release; distribution is unlimited. Case Number: AFRL-2023-6155
+
 A prior version of this repository was approved for public release. Case Number: AFRL-2022-3202
 
 ## Team
