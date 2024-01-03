@@ -52,7 +52,7 @@ jobs:
         run: poetry install --no-interaction --only-root
       - name: Run tests
         run: |
-          pytest test --cov=${{ env.SRC_DIR }}
+          pytest tests --cov=${{ env.SRC_DIR }}
       - name: Package
         run: poetry build
       - name: Store Package
