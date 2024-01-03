@@ -8,7 +8,7 @@ on:
 
 env:
   SRC_DIR: safe_autonomy_dynamics
-  PY_VER: 3.10
+  PY_VER: "3.10"
 
 jobs:
   lint:
