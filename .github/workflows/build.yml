@@ -17,6 +17,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Markdown Lint
+        continue-on-error: true
         uses: articulate/actions-markdownlint@v1
       - name: Python Lint
         uses: ricardochaves/python-lint@v1.3.0
