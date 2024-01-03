@@ -47,7 +47,7 @@ jobs:
           version: 1.7.1
           virtualenvs-create: false
       - name: Install Dependencies
-        run: poetry install --no-interaction --no-root --with=test
+        run: poetry install --no-interaction --no-root -E jax --with=test
       - name: Install Project
         run: poetry install --no-interaction --only-root
       - name: Run tests
