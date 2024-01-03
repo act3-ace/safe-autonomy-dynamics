@@ -50,8 +50,8 @@ jobs:
           gh release upload
           ${{ steps.ver.outputs.version }} dist/**
           --repo '${{ github.repository }}'
-  publish-to-testpypi:
-    name: Publish Python distribution to TestPyPI
+  publish-to-pypi:
+    name: Publish Python distribution to PyPI
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && startsWith(github.event.workflow_run.head_commit.message, 'chore(release):') }}
     environment:
