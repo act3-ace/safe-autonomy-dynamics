@@ -94,7 +94,7 @@ jobs:
     needs: [lint, test]
     if: ${{ github.ref_name == 'main' && needs.test.result == 'success' && !startsWith(github.event.head_commit.message, 'chore(release):') }}
     environment:
-      name: Release
+      name: release
     permissions:
       contents: write
     steps:
