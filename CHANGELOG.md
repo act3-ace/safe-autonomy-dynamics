@@ -1,3 +1,26 @@
+# 1.1.0 (2024-01-05)
+
+
+### Bug Fixes
+
+* consistency on intrinsic orientation angles 67c1074
+* **dependencies:** moved developer dependencies out of main requirements file 5df4d06, closes #23
+* Remove partners 331d445
+* removed url components of semantic release commit 569b4c6
+* Use jax 0.4.3 5e4e9a9
+
+
+### Features
+
+* dubins custom state and control limits e82f462
+* Entity validators no longer allow unexpected parameters ee9cadd
+* initial aerobench dynamics implementation 92c8c03
+* Jax ODE Solver 2260360
+* optional jax version of dynamics with optional jax import. np is now a class member and can be set to either numy or jax.numpy 0e5c88e
+* Optional trajectory of intermediate points sampled along dynamics step 36e6cab
+* Pint units and constructor init params and attributes with units supported 9d47f3b
+* warning on action clipping f3760ca
+
 ## 0.11.3 (2023-04-05)
 
 
