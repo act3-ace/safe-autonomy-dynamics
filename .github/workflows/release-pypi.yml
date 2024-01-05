@@ -34,13 +34,14 @@ jobs:
             ./dist/*.whl
       - name: Get Version
         id: ver
-        run: echo "version=v$(cat version.py | grep '^__version__ = ".*"' | grep -o '[0-9][.0-9]*')" >> $GITHUB_OUTPUT
+        run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
       - name: Create Github Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: >-
           gh release create
-          ${{ steps.ver.outputs.version }}
+          v${{ steps.ver.outputs.version }}
+          -t ${{ steps.ver.outputs.version }}
           --repo '${{ github.repository }}'
           --notes-file ./CHANGELOG.md
       - name: Upload artifacts for Github Release
