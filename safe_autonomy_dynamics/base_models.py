@@ -131,7 +131,7 @@ class BaseEntity(abc.ABC):
         self._state = self._build_state()
         self.state_dot = np.zeros_like(self._state)
 
-        self.ureg = pint.UnitRegistry()
+        self.ureg: pint.UnitRegistry = pint.get_application_registry()
 
     @classmethod
     def _get_config_validator(cls):

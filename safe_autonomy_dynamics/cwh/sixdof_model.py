@@ -161,6 +161,7 @@ class SixDOFSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-m
 
     def __init__(
         self,
+        sim=None,
         m=M_DEFAULT,
         inertia_matrix=INERTIA_MATRIX_DEFAULT,
         ang_acc_limit=ANG_ACC_LIMIT_DEFAULT,
@@ -217,6 +218,7 @@ class SixDOFSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-m
         super().__init__(
             dynamics, control_default=control_default, control_min=control_min, control_max=control_max, control_map=control_map, **kwargs
         )
+        self._sim = sim
 
     @classmethod
     def _get_config_validator(cls):
@@ -366,6 +368,48 @@ class SixDOFSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-m
     def angular_velocity(self):
         """Get 3d angular velocity vector"""
         return np.array([self.wx, self.wy, self.wz])
+
+    def set_sim(self, sim):
+        """sets internal sim reference
+
+        Parameters
+        ----------
+        sim
+            sim to set internal sim reference to
+        """
+        self._sim = sim
+
+    def entity_relative_position(self, entity_name) -> np.ndarray:
+        """Returns the position of another entitiy relative to this entities position
+
+        Parameters
+        ----------
+        entity_name: str
+            name of entity to get relative position of
+
+        Returns
+        -------
+        np.ndarray
+            3d relative position of other entity
+        """
+        other_entity = self._sim.sim_entities[entity_name]
+        return other_entity.position - self.position
+
+    def entity_relative_velocity(self, entity_name) -> np.ndarray:
+        """Returns the position of another entitiy relative to this entities position
+
+        Parameters
+        ----------
+        entity_name: str
+            name of entity to get relative position of
+
+        Returns
+        -------
+        np.ndarray
+            3d relative position of other entity
+        """
+        other_entity = self._sim.sim_entities[entity_name]
+        return other_entity.velocity - self.velocity
 
 
 class SixDOFDynamics(BaseControlAffineODESolverDynamics):
