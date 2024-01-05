@@ -1,3 +1,20 @@
+# [1.2.0](https://github.com/act3-ace/safe-autonomy-dynamics/compare/v1.1.0...v1.2.0) (2024-01-05)
+
+
+### Bug Fixes
+
+* **dependencies:** Expanded dependency version requirements to a range that includes versions of common dependencies needed by CoRL 2.9.0 ([ce46983](https://github.com/act3-ace/safe-autonomy-dynamics/commit/ce46983bfbae42b312d0143729b42fb535157815))
+* **release:** Removed non-existant dependency groups from release.sh ([66f1e02](https://github.com/act3-ace/safe-autonomy-dynamics/commit/66f1e02c0230839c433206d87f08b6d1c78abf32))
+* **release:** test release ([b1e48b6](https://github.com/act3-ace/safe-autonomy-dynamics/commit/b1e48b6aac33dae2793643e32d93393cbbba8b06))
+* **release:** test release ([3a72e10](https://github.com/act3-ace/safe-autonomy-dynamics/commit/3a72e10afd5a5d3e0085588ff9f84f88d43054f5))
+* **release:** updated permissions on release.sh to allow execution ([98c6d7b](https://github.com/act3-ace/safe-autonomy-dynamics/commit/98c6d7bf96523764dd6ca2ec0ea855b8a664e7e0))
+* use pint application registry ([116611f](https://github.com/act3-ace/safe-autonomy-dynamics/commit/116611f12938d9dc05a412889769501b377d3296))
+
+
+### Features
+
+* Add sun entity ([3406bee](https://github.com/act3-ace/safe-autonomy-dynamics/commit/3406beee877fd9fe99780bec0aaafa4e7d460264))
+
 # 1.1.0 (2024-01-05)
 
 
