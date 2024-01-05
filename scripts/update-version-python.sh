@@ -8,3 +8,4 @@
 NEXT_RELEASE="$1"
 PATH_TO_PYTHON_SCRIPT="$2"
 sed -i 's/^__version__\s*=\s*["'"'"'][[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+["'"'"']/__version__ = '"\"${NEXT_RELEASE}\"/" "$PATH_TO_PYTHON_SCRIPT"
+poetry version "${NEXT_RELEASE}"
