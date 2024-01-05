@@ -18,7 +18,7 @@
       [
         "@semantic-release/git", 
         {
-          "assets": ["CHANGELOG.md","version.py"],
+          "assets": ["CHANGELOG.md","version.py","pyproject.toml"],
           "message": "chore(release): ${nextRelease.version}  \n\n${nextRelease.notes}"
         }
       ]
