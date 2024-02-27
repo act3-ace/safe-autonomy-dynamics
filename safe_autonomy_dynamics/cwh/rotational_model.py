@@ -192,7 +192,7 @@ class CWHRotation2dSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-p
         if isinstance(other, CWHRotation2dSpacecraft):
             eq = (self.velocity == other.velocity).all()
             eq = eq and (self.position == other.position).all()
-            eq = eq and (self.orientation.as_quat == other.orientation.as_quat).all()
+            eq = eq and (self.orientation.as_quat() == other.orientation.as_quat()).all()
             eq = eq and (self.angular_velocity == other.angular_velocity).all()
             return eq
         return False
