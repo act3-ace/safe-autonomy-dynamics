@@ -22,7 +22,7 @@ import numpy as np
 import pint
 import scipy.integrate
 import scipy.spatial
-from pydantic import BaseModel, Extra
+from pydantic import ConfigDict, BaseModel
 
 if TYPE_CHECKING:
     import jax
@@ -49,10 +49,7 @@ class BaseEntityValidator(BaseModel):
         Name of entity
     """
     name: str
-
-    class Config:  # pylint: disable=missing-class-docstring
-        arbitrary_types_allowed = True
-        extra = Extra.forbid
+    model_config = ConfigDict(arbitrary_types_allowed=True, extra="forbid")
 
 
 def build_unit_conversion_validator_fn(unit: Union[str, pint.Unit]) -> Callable[[Union[float, pint.Quantity]], float]:
@@ -75,7 +72,12 @@ def build_unit_conversion_validator_fn(unit: Union[str, pint.Unit]) -> Callable[
 
     def fn(x: Union[float, pint.Quantity]) -> float:
         if isinstance(x, pint.Quantity):
-            return float(x.to(unit).magnitude)
+            try:
+                return float(x.to(unit).magnitude)
+            except pint.errors.DimensionalityError as e:
+                # Convert to an error type handled by Pydantic so that conversion issues show up as a Pydantic
+                # validation error for easier debugging rather than an error originating here
+                raise ValueError(e)
         return float(x)
 
     return fn
