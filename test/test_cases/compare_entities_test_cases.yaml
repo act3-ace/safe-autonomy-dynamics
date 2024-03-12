@@ -77,6 +77,11 @@
         pint_quantity: [25.23, 'm/s']
   other_entity:
     entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+    init_state:
+      position: [536.324, -738.112]
+      theta: 0.0
+      velocity: [-3.7, -17]
+      wz: 0.0
   expect_equal: False
 - ID: CWHRotation2dSpacecraft_equals
   this_entity:
@@ -171,11 +176,16 @@
     entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
     init_state:
       position: [536.324, -738.112]
-      theta: 1.2
+      theta: 0.
       velocity: [-3.7, -17]
       wz: 0.03
   other_entity:
     entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+    init_state:
+      position: [536.324, -738.112, 0.]
+      quaternion: [1., 0., 0., 0.]
+      velocity: [-3.7, -17, 0.]
+      angular_velocity: [0., 0., 0.03]
   expect_equal: False
 - ID: SixDOFSpacecraft_equals
   this_entity:
@@ -280,9 +290,186 @@
     entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
     init_state:
       position: [0.0, 0.0, -4.1666300442734014]
-      quaternion: [0, 0, -0.1564348248516, 0.9876882836065]
+      quaternion: [0, 0, 0, 1]
       velocity: [0.0, 0.0, -0.8333186843966979]
       angular_velocity: [0, 0, -0.03500]
   other_entity:
     entity_class: safe_autonomy_dynamics.cwh.CWHSpacecraft
+    init_state:
+      position: [0.0, 0.0, -4.1666300442734014]
+      velocity: [0.0, 0.0, -0.8333186843966979]
+  expect_equal: False
+- ID: Dubins2dAircraft_equals
+  this_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins2dAircraft
+    init_kwargs:
+      x:
+        pint_quantity: [420.54985883684327, 'ft']
+      y:
+        pint_quantity: [1438.2662616212865, 'ft']
+      heading:
+        pint_quantity: [0.2638053275159513, 'rad']
+      v:
+        pint_quantity: [400, 'ft/s']
+  other_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins2dAircraft
+    init_state:
+      position: [420.54985883684327, 1438.2662616212865]
+      heading: 0.2638053275159513
+      v: 400
+  expect_equal: True
+- ID: Dubins2dAircraft_not_equals_position
+  this_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins2dAircraft
+    init_state:
+      position: [420.54985883684327, 1438.2662616212865]
+      heading: 0.2638053275159513
+      v: 400
+  other_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins2dAircraft
+    init_state:
+      position: [420.54985883684327, 0.]
+      heading: 0.2638053275159513
+      v: 400
+  expect_equal: False
+- ID: Dubins2dAircraft_not_equals_velocity
+  this_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins2dAircraft
+    init_state:
+      position: [420.54985883684327, 0.]
+      heading: 0.2638053275159513
+      v: 400
+  other_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins2dAircraft
+    init_state:
+      position: [420.54985883684327, 0.]
+      heading: 0.2638053275159513
+      v: -400.
+  expect_equal: False
+- ID: Dubins2dAircraft_not_equals_orientation
+  this_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins2dAircraft
+    init_state:
+      position: [420.54985883684327, 0.]
+      heading: 0.
+      v: 400
+  other_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins2dAircraft
+    init_state:
+      position: [420.54985883684327, 0.]
+      heading: 0.2638053275159513
+      v: 400
+  expect_equal: False
+- ID: Dubins2dAircraft_not_equals_class
+  this_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins2dAircraft
+    init_state:
+      position: [420.54985883684327, 0.]
+      heading: 0.2638053275159513
+      v: 400
+  other_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins3dAircraft
+    init_state:
+      position: [420.54985883684327, 0.]
+      heading: 0.2638053275159513
+      gamma: 0.
+      roll: 0.
+      v: 400
+  expect_equal: False
+- ID: Dubins3dAircraft_equals
+  this_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins3dAircraft
+    init_kwargs:
+      x: 
+        pint_quantity: [ -4271.301, 'ft']
+      y:
+        pint_quantity: [1795.0750, 'ft']
+      z:
+        pint_quantity: [4164.297, 'ft']
+      heading:
+        pint_quantity: [-2.604, 'rad']
+      gamma:
+        pint_quantity: [-0.34, 'rad']
+      roll:
+        pint_quantity: [-0.8, 'rad']
+      v:
+        pint_quantity: [324, 'ft/s']
+  other_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins3dAircraft
+    init_state:
+      position: [ -4271.301, 1795.075, 4164.297 ]
+      heading: -2.604
+      gamma: -0.34
+      roll: -0.8
+      v: 324
+  expect_equal: True
+- ID: Dubins3dAircraft_not_equals_position
+  this_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins3dAircraft
+    init_state:
+      position: [ -4271.301, 1795.075, 4164.297 ]
+      heading: -2.604
+      gamma: -0.34
+      roll: -0.8
+      v: 324
+  other_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins3dAircraft
+    init_state:
+      position: [ -4271.301, 0., 0. ]
+      heading: -2.604
+      gamma: -0.34
+      roll: -0.8
+      v: 324
+  expect_equal: False
+- ID: Dubins3dAircraft_not_equals_velocity
+  this_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins3dAircraft
+    init_state:
+      position: [ -4271.301, 1795.075, 4164.297 ]
+      heading: -2.604
+      gamma: -0.34
+      roll: -0.8
+      v: 324
+  other_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins3dAircraft
+    init_state:
+      position: [ -4271.301, 1795.075, 4164.297 ]
+      heading: -2.604
+      gamma: -0.34
+      roll: -0.8
+      v: -0.324
+  expect_equal: False
+- ID: Dubins3dAircraft_not_equals_orientation
+  this_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins3dAircraft
+    init_state:
+      position: [ -4271.301, 1795.075, 4164.297 ]
+      heading: -2.604
+      gamma: -0.34
+      roll: -0.8
+      v: 324
+  other_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins3dAircraft
+    init_state:
+      position: [ -4271.301, 1795.075, 4164.297 ]
+      heading: 2.604
+      gamma: 0.34
+      roll: 0.8
+      v: 324
+  expect_equal: False
+- ID: Dubins3dAircraft_not_equals_class
+  this_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins3dAircraft
+    init_state:
+      position: [ -4271.301, 1795.075, 4164.297 ]
+      heading: -2.604
+      gamma: -0.34
+      roll: -0.8
+      v: 324
+  other_entity:
+    entity_class: safe_autonomy_dynamics.dubins.Dubins2dAircraft
+    init_state:
+      position: [ -4271.301, 1795.075]
+      heading: -2.604
+      v: 324
   expect_equal: False
