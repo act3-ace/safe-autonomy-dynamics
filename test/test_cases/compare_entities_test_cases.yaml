@@ -1,0 +1,288 @@
+- ID: SunEntity_equals
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.sun_model.SunEntity
+    init_kwargs: {}
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.sun_model.SunEntity
+    init_kwargs:
+      n: 0.1234
+  expect_equal: True
+- ID: SunEntity_not_equals
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.sun_model.SunEntity
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHSpacecraft
+  expect_equal: False
+- ID: CWHSpacecraft_equals
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHSpacecraft
+    init_kwargs:
+      x:
+        pint_quantity: [536.324, 'm']
+      y:
+        pint_quantity: [-738.112, 'm']
+      z:
+        pint_quantity: [995.99, 'm']
+      x_dot:
+        pint_quantity: [-3.7, 'm/s']
+      y_dot:
+        pint_quantity: [-17, 'm/s']
+      z_dot:
+        pint_quantity: [25.23, 'm/s']
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHSpacecraft
+    init_state:
+      position: [536.324, -738.112, 995.99]
+      velocity: [-3.7, -17, 25.23]
+  expect_equal: True
+- ID: CWHSpacecraft_not_equals_position
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHSpacecraft
+    init_state:
+      position: [536.324, -738.112, 995.99]
+      velocity: [-3.7, -17, 25.23]
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHSpacecraft
+    init_state:
+      position: [536.324, -738.112, 0.]
+      velocity: [-3.7, -17, 25.23]
+  expect_equal: False
+- ID: CWHSpacecraft_not_equals_velocity
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHSpacecraft
+    init_state:
+      position: [536.324, -738.112, 995.99]
+      velocity: [-3.7, -17, 25.23]
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHSpacecraft
+    init_state:
+      position: [536.324, -738.112, 995.99]
+      velocity: [0., 0., 25.23]
+  expect_equal: False
+- ID: CWHSpacecraft_not_equals_class
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHSpacecraft
+    init_kwargs:
+      x:
+        pint_quantity: [536.324, 'm']
+      y:
+        pint_quantity: [-738.112, 'm']
+      z:
+        pint_quantity: [995.99, 'm']
+      x_dot:
+        pint_quantity: [-3.7, 'm/s']
+      y_dot:
+        pint_quantity: [-17, 'm/s']
+      z_dot:
+        pint_quantity: [25.23, 'm/s']
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+  expect_equal: False
+- ID: CWHRotation2dSpacecraft_equals
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+    init_kwargs:
+      x:
+        pint_quantity: [536.324, 'm']
+      y:
+        pint_quantity: [-738.112, 'm']
+      x_dot:
+        pint_quantity: [-3.7, 'm/s']
+      y_dot:
+        pint_quantity: [-17, 'm/s']
+      theta:
+        pint_quantity: [1.2, 'rad']
+      wz:
+        pint_quantity: [0.03, 'rad/s']
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+    init_state:
+      position: [536.324, -738.112]
+      theta: 1.2
+      velocity: [-3.7, -17]
+      wz: 0.03
+  expect_equal: True
+- ID: CWHRotation2dSpacecraft_not_equals_position
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+    init_state:
+      position: [536.324, -738.112]
+      theta: 1.2
+      velocity: [-3.7, -17]
+      wz: 0.03
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+    init_state:
+      position: [0., 0.]
+      theta: 1.2
+      velocity: [-3.7, -17]
+      wz: 0.03
+  expect_equal: False
+- ID: CWHRotation2dSpacecraft_not_equals_velocity
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+    init_state:
+      position: [536.324, -738.112]
+      theta: 1.2
+      velocity: [0., 0.]
+      wz: 0.03
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+    init_state:
+      position: [536.324, -738.112]
+      theta: 1.2
+      velocity: [-3.7, -17]
+      wz: 0.03
+  expect_equal: False
+- ID: CWHRotation2dSpacecraft_not_equals_angular_velocity
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+    init_state:
+      position: [536.324, -738.112]
+      theta: 1.2
+      velocity: [0., 0.]
+      wz: 0.03
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+    init_state:
+      position: [536.324, -738.112]
+      theta: 1.2
+      velocity: [-3.7, -17]
+      wz: 0.
+  expect_equal: False
+- ID: CWHRotation2dSpacecraft_not_equals_rotation
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+    init_state:
+      position: [536.324, -738.112]
+      theta: 1.2
+      velocity: [0., 0.]
+      wz: 0.03
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+    init_state:
+      position: [536.324, -738.112]
+      theta: 0.
+      velocity: [-3.7, -17]
+      wz: 0.03
+  expect_equal: False
+- ID: CWHRotation2dSpacecraft_not_equals_class
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHRotation2dSpacecraft
+    init_state:
+      position: [536.324, -738.112]
+      theta: 1.2
+      velocity: [-3.7, -17]
+      wz: 0.03
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+  expect_equal: False
+- ID: SixDOFSpacecraft_equals
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+    init_kwargs:
+      x:
+        pint_quantity: [536.324, 'm']
+      y:
+        pint_quantity: [-738.112, 'm']
+      z:
+        pint_quantity: [995.99, 'm']
+      x_dot:
+        pint_quantity: [-3.7, 'm/s']
+      y_dot:
+        pint_quantity: [-17, 'm/s']
+      z_dot:
+        pint_quantity: [25.23, 'm/s']
+      q1: 0
+      q2: 0
+      q3: -0.156
+      q4: 0.988
+      wx:
+        pint_quantity: [0.0123, 'rad/s']
+      wy:
+        pint_quantity: [-0.0065, 'rad/s']
+      wz:
+        pint_quantity: [0.03, 'rad/s']
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+    init_state:
+      position: [536.324, -738.112, 995.99]
+      quaternion: [0, 0, -0.156, 0.988]
+      velocity: [-3.7, -17, 25.23]
+      angular_velocity: [0.01230, -0.0065, 0.03]
+  expect_equal: True
+- ID: SixDOFSpacecraft_not_equals_position
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+    init_state:
+      position: [536.324, -738.112, 995.99]
+      quaternion: [0, 0, -0.156, 0.988]
+      velocity: [-3.7, -17, 25.23]
+      angular_velocity: [0.01230, -0.0065, 0.03]
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+    init_state:
+      position: [536.324, 0., 995.99]
+      quaternion: [0, 0, -0.156, 0.988]
+      velocity: [-3.7, -17, 25.23]
+      angular_velocity: [0.01230, -0.0065, 0.03]
+  expect_equal: False
+- ID: SixDOFSpacecraft_not_equals_velocity
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+    init_state:
+      position: [536.324, -738.112, 995.99]
+      quaternion: [0, 0, -0.156, 0.988]
+      velocity: [-3.7, -17, 25.23]
+      angular_velocity: [0.01230, -0.0065, 0.03]
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+    init_state:
+      position: [536.324, -738.112, 995.99]
+      quaternion: [0, 0, -0.156, 0.988]
+      velocity: [-3.7, 0., 0.]
+      angular_velocity: [0.01230, -0.0065, 0.03]
+  expect_equal: False
+- ID: SixDOFSpacecraft_not_equals_angular_velocity
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+    init_state:
+      position: [536.324, -738.112, 995.99]
+      quaternion: [0, 0, -0.156, 0.988]
+      velocity: [-3.7, -17, 25.23]
+      angular_velocity: [0.01230, -0.0065, 0.03]
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+    init_state:
+      position: [536.324, -738.112, 995.99]
+      quaternion: [0, 0, -0.156, 0.988]
+      velocity: [-3.7, -17, 25.23]
+      angular_velocity: [0.01230, 0., 0.]
+  expect_equal: False
+- ID: SixDOFSpacecraft_not_equals_orientation
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+    init_state:
+      position: [536.324, -738.112, 995.99]
+      quaternion: [0, 0, -0.156, 0.988]
+      velocity: [-3.7, -17, 25.23]
+      angular_velocity: [0.01230, -0.0065, 0.03]
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+    init_state:
+      position: [536.324, -738.112, 995.99]
+      quaternion: [0, 0, 0, 1.]
+      velocity: [-3.7, -17, 25.23]
+      angular_velocity: [0.01230, -0.0065, 0.03]
+  expect_equal: False
+- ID: SixDOFSpacecraft_not_equals_class
+  this_entity:
+    entity_class: safe_autonomy_dynamics.cwh.SixDOFSpacecraft
+    init_state:
+      position: [0.0, 0.0, -4.1666300442734014]
+      quaternion: [0, 0, -0.1564348248516, 0.9876882836065]
+      velocity: [0.0, 0.0, -0.8333186843966979]
+      angular_velocity: [0, 0, -0.03500]
+  other_entity:
+    entity_class: safe_autonomy_dynamics.cwh.CWHSpacecraft
+  expect_equal: False
