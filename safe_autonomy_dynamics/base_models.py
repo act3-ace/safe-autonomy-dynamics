@@ -20,9 +20,9 @@ from typing import TYPE_CHECKING, Callable, Tuple, Union
 
 import numpy as np
 import pint
-from pint import _typing as pintt
 import scipy.integrate
 import scipy.spatial
+from pint import _typing as pintt
 from pydantic import BaseModel, ConfigDict
 
 if TYPE_CHECKING:
@@ -78,7 +78,7 @@ def build_unit_conversion_validator_fn(unit: Union[str, pint.Unit]) -> Callable[
             except pint.errors.DimensionalityError as e:
                 # Convert to an error type handled by Pydantic so that conversion issues show up as a Pydantic
                 # validation error for easier debugging rather than an error originating here
-                raise ValueError(e)
+                raise ValueError from e
         return float(x)
 
     return fn
