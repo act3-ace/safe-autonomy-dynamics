@@ -95,6 +95,7 @@ class SixDOFSpacecraftValidator(BaseEntityValidator):
     wy: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('radians/second'))] = 0
     wz: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('radians/second'))] = 0
 
+
 class SixDOFSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-methods
     """
     Spacecraft with 3D Clohessy-Wiltshire translational dynamics, in Hill's frame and 3D rotational dynamics
