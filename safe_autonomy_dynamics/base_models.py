@@ -22,7 +22,7 @@ import numpy as np
 import pint
 import scipy.integrate
 import scipy.spatial
-from pydantic import ConfigDict, BaseModel
+from pydantic import BaseModel, ConfigDict
 
 if TYPE_CHECKING:
     import jax
