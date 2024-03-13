@@ -20,6 +20,7 @@ from typing import TYPE_CHECKING, Callable, Tuple, Union
 
 import numpy as np
 import pint
+from pint import _typing as pintt
 import scipy.integrate
 import scipy.spatial
 from pydantic import BaseModel, ConfigDict
@@ -251,7 +252,7 @@ class BaseEntity(abc.ABC):
         raise NotImplementedError
 
     @property
-    def position_with_units(self) -> pint.Quantity[np.ndarray]:
+    def position_with_units(self) -> pintt.Quantity[np.ndarray]:
         """get position as a pint.Quantity with units"""
         return self.ureg.Quantity(self.position, self.base_units.length)
 
@@ -276,7 +277,7 @@ class BaseEntity(abc.ABC):
         raise NotImplementedError
 
     @property
-    def velocity_with_units(self) -> pint.Quantity[np.ndarray]:
+    def velocity_with_units(self) -> pintt.Quantity[np.ndarray]:
         """get velocity as a pint.Quantity with units"""
         return self.ureg.Quantity(self.velocity, self.base_units.velocity)
 
@@ -380,7 +381,7 @@ class BaseRotationEntity(BaseEntity):
         raise NotImplementedError
 
     @property
-    def angular_velocity_with_units(self) -> pint.Quantity[np.ndarray]:
+    def angular_velocity_with_units(self) -> pintt.Quantity[np.ndarray]:
         """get 3d angular velocity vector as pint.Quantity with units"""
         return self.ureg.Quantity(self.angular_velocity, self.base_units.angular_velocity)
 
@@ -414,7 +415,7 @@ class BaseDynamics(abc.ABC):
         self,
         state_min: Union[float, np.ndarray] = -np.inf,
         state_max: Union[float, np.ndarray] = np.inf,
-        angle_wrap_centers: np.ndarray = None,
+        angle_wrap_centers: Union[np.ndarray, None] = None,
         use_jax: bool = False,
     ):
         self.state_min = state_min

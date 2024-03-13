@@ -441,9 +441,9 @@ class SixDOFDynamics(BaseControlAffineODESolverDynamics):
         ang_vel_limit=ANG_VEL_LIMIT_DEFAULT,
         n=N_DEFAULT,
         body_frame_thrust=True,
-        state_max: Union[float, np.ndarray] = None,
-        state_min: Union[float, np.ndarray] = None,
-        angle_wrap_centers: np.ndarray = None,
+        state_max: Union[float, np.ndarray, None] = None,
+        state_min: Union[float, np.ndarray, None] = None,
+        angle_wrap_centers: Union[np.ndarray, None] = None,
         **kwargs
     ):
         self.m = m  # kg
