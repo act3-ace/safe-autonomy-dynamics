@@ -1,0 +1,36 @@
+- ID: CWHSpacecraft_to_CWHRotation2dSpacecraft
+  this_entity_name: cwh
+  other_entity_name: rot2d
+  expected_relative_pos: [536.324, -738.112, 0]
+  expected_relative_vel: [-3.7, -17, 0]
+  error_bound: 1e-4
+- ID: CWHRotation2dSpacecraft_to_CWHSpacecraft
+  this_entity_name: rot2d
+  other_entity_name: cwh
+  expected_relative_pos: [-536.324, 738.112, 0]
+  expected_relative_vel: [3.7, 17, 0]
+  error_bound: 1e-4
+- ID: CWHSpacecraft_to_SixDOFSpacecraft
+  this_entity_name: cwh
+  other_entity_name: sixdof
+  expected_relative_pos: [-995.99, -536.324, 738.112]
+  expected_relative_vel: [17, -25.3, 3.7]
+  error_bound: 1e-4
+- ID: SixDOFSpacecraft_to_CWHSpacecraft
+  this_entity_name: sixdof
+  other_entity_name: cwh
+  expected_relative_pos: [995.99, 536.324, -738.112]
+  expected_relative_vel: [-17, 25.3, -3.7]
+  error_bound: 1e-4
+- ID: CWHRotation2dSpacecraft_to_SixDOFSpacecraft
+  this_entity_name: rot2d
+  other_entity_name: sixdof
+  expected_relative_pos: [-1532.314, 201.788, 738.112]
+  expected_relative_vel: [20.7, -8.3, 3.7]
+  error_bound: 1e-4
+- ID: SixDOFSpacecraft_to_CWHRotation2dSpacecraft
+  this_entity_name: sixdof
+  other_entity_name: rot2d
+  expected_relative_pos: [1532.314, -201.788, -738.112]
+  expected_relative_vel: [-20.7, 8.3, -3.7]
+  error_bound: 1e-4

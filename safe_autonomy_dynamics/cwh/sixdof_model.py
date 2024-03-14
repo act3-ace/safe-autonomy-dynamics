@@ -228,7 +228,7 @@ class SixDOFSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-m
         if isinstance(other, SixDOFSpacecraft):
             eq = (self.velocity == other.velocity).all()
             eq = eq and (self.position == other.position).all()
-            eq = eq and (self.orientation.as_quat == other.orientation.as_quat).all()
+            eq = eq and (self.quaternion == other.quaternion).all()
             eq = eq and (self.angular_velocity == other.angular_velocity).all()
             return eq
         return False
