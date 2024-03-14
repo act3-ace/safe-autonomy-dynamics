@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: poetry install --no-interaction --no-root -E jax --with=test
       - name: Markdown Lint
         continue-on-error: true
         uses: articulate/actions-markdownlint@v1
