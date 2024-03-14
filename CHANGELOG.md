@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/act3-ace/safe-autonomy-dynamics/compare/v1.2.0...v1.2.1) (2024-03-14)
+
+
+### Bug Fixes
+
+* proper equality check of quaternions in CWHRotation2dSpacecraft ([5477bdd](https://github.com/act3-ace/safe-autonomy-dynamics/commit/5477bddc822844b7ba63211a9a34cba087b7e068))
+* sixdof quat comparison + add unit tests ([e81d717](https://github.com/act3-ace/safe-autonomy-dynamics/commit/e81d717d253fa80c0397a8b8020129e39ae28ce4))
+
 # [1.2.0](https://github.com/act3-ace/safe-autonomy-dynamics/compare/v1.1.0...v1.2.0) (2024-01-05)
 
 
