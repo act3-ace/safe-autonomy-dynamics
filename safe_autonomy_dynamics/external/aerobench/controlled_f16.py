@@ -30,7 +30,7 @@ def controlled_f16(x_f16, u_ref, llc, f16_model='morelli', v2_integrators=False)
     assert isinstance(llc, LowLevelController)
     assert u_ref.size == 4
 
-    assert f16_model in ['stevens', 'morelli'], 'Unknown F16_model: {}'.format(f16_model)
+    assert f16_model in ['stevens', 'morelli'], f'Unknown F16_model: {f16_model}'
 
     x_ctrl, u_deg = llc.get_u_deg(u_ref, x_f16)
 
