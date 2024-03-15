@@ -42,6 +42,8 @@ jobs:
       - name: Yapf Formatting
         continue-on-error: true
         uses: AlexanderMelde/yapf-action@v1.0
+        with:
+          args: --exclude '**/test/**'
 
   test:
     runs-on: ubuntu-latest
