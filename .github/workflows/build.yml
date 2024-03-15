@@ -26,7 +26,9 @@ jobs:
           version: 1.7.1
           virtualenvs-create: false
       - name: Install Dependencies
-        run: poetry install --no-interaction --no-root -E jax --with=test
+        run: poetry install --no-interaction --no-root -E jax
+      - name: Install Project
+        run: poetry install --no-interaction -E jax --only-root
       - name: Markdown Lint
         continue-on-error: true
         uses: articulate/actions-markdownlint@v1
