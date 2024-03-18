@@ -1,3 +1,17 @@
+## [1.2.2](https://github.com/act3-ace/safe-autonomy-dynamics/compare/v1.2.1...v1.2.2) (2024-03-18)
+
+
+### Bug Fixes
+
+* **deps:** updated to Pydantic V2 ([18f53fa](https://github.com/act3-ace/safe-autonomy-dynamics/commit/18f53fafd2f70080f74c5bad836184a06964bac8))
+* **lint:** adjust order of imports to resolve issue reported by isort ([4b2fa55](https://github.com/act3-ace/safe-autonomy-dynamics/commit/4b2fa55ad191c3917f6df0a57d26e177c9c78421))
+* **lint:** resolved isort import ordering issue and pylint issues ([2d25335](https://github.com/act3-ace/safe-autonomy-dynamics/commit/2d2533501bb88cba3042bf4e36dc79818d465fec))
+* **lint:** resolved mypy issues ([ac0664d](https://github.com/act3-ace/safe-autonomy-dynamics/commit/ac0664d4b6496f8901f5a745503abe6e3760258b))
+* **lint:** resolved pylint identified issues ([dedf441](https://github.com/act3-ace/safe-autonomy-dynamics/commit/dedf441ebf6a23f5839f9c26f2e94ccc59f70669))
+* **lint:** resolved yapf issues ([2184477](https://github.com/act3-ace/safe-autonomy-dynamics/commit/21844778aaeb393e6f2b67ee84c79168ae38846a))
+* **precommit:** removed forced Python version to allow a wider range of versions to be used ([3934974](https://github.com/act3-ace/safe-autonomy-dynamics/commit/3934974d5adb1c14380b01d77529314fac487520))
+* **test:** Added unit test to verify unit conversion validator functionality ([e05c9d4](https://github.com/act3-ace/safe-autonomy-dynamics/commit/e05c9d4cbe18c8abb49b19faf4e404c338e67bf4))
+
 ## [1.2.1](https://github.com/act3-ace/safe-autonomy-dynamics/compare/v1.2.0...v1.2.1) (2024-03-14)
 
 
