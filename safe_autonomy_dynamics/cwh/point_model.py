@@ -17,8 +17,9 @@ from typing import Tuple, Union
 
 import numpy as np
 import pint
-from pydantic import validator
+from pydantic import AfterValidator
 from scipy.spatial.transform import Rotation
+from typing_extensions import Annotated
 
 from safe_autonomy_dynamics.base_models import (
     BaseEntity,
@@ -56,16 +57,12 @@ class CWHSpacecraftValidator(BaseEntityValidator):
     ValueError
         Improper list lengths for parameters 'x', 'y', 'z', 'x_dot', 'y_dot', 'z_dot'
     """
-    x: Union[float, pint.Quantity] = 0
-    y: Union[float, pint.Quantity] = 0
-    z: Union[float, pint.Quantity] = 0
-    x_dot: Union[float, pint.Quantity] = 0
-    y_dot: Union[float, pint.Quantity] = 0
-    z_dot: Union[float, pint.Quantity] = 0
-
-    # validators
-    _unit_validator_position = validator('x', 'y', 'z', allow_reuse=True)(build_unit_conversion_validator_fn('meters'))
-    _unit_validator_velocity = validator('x_dot', 'y_dot', 'z_dot', allow_reuse=True)(build_unit_conversion_validator_fn('meters/second'))
+    x: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters'))] = 0
+    y: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters'))] = 0
+    z: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters'))] = 0
+    x_dot: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters/second'))] = 0
+    y_dot: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters/second'))] = 0
+    z_dot: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters/second'))] = 0
 
 
 class CWHSpacecraft(BaseEntity):

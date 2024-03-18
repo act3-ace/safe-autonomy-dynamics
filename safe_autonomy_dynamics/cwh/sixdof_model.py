@@ -17,8 +17,9 @@ from typing import Union
 
 import numpy as np
 import pint
-from pydantic import validator
+from pydantic import AfterValidator
 from scipy.spatial.transform import Rotation
+from typing_extensions import Annotated
 
 from safe_autonomy_dynamics.base_models import (
     BaseControlAffineODESolverDynamics,
@@ -80,24 +81,19 @@ class SixDOFSpacecraftValidator(BaseEntityValidator):
     ValueError
         Improper list lengths for parameters 'x', 'y', 'z', 'x_dot', 'y_dot', 'z_dot', 'q1', 'q2', 'q3', 'q4', 'wx', 'wy', 'wz'
     """
-    x: Union[float, pint.Quantity] = 0
-    y: Union[float, pint.Quantity] = 0
-    z: Union[float, pint.Quantity] = 0
-    x_dot: Union[float, pint.Quantity] = 0
-    y_dot: Union[float, pint.Quantity] = 0
-    z_dot: Union[float, pint.Quantity] = 0
+    x: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters'))] = 0
+    y: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters'))] = 0
+    z: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters'))] = 0
+    x_dot: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters/second'))] = 0
+    y_dot: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters/second'))] = 0
+    z_dot: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters/second'))] = 0
     q1: float = 0
     q2: float = 0
     q3: float = 0
     q4: float = 0
-    wx: Union[float, pint.Quantity] = 0
-    wy: Union[float, pint.Quantity] = 0
-    wz: Union[float, pint.Quantity] = 0
-
-    # validators
-    _unit_validator_position = validator('x', 'y', 'z', allow_reuse=True)(build_unit_conversion_validator_fn('meters'))
-    _unit_validator_velocity = validator('x_dot', 'y_dot', 'z_dot', allow_reuse=True)(build_unit_conversion_validator_fn('meters/second'))
-    _unit_validator_wz = validator('wx', 'wy', 'wz', allow_reuse=True)(build_unit_conversion_validator_fn('radians/second'))
+    wx: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('radians/second'))] = 0
+    wy: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('radians/second'))] = 0
+    wz: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('radians/second'))] = 0
 
 
 class SixDOFSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-methods
@@ -445,9 +441,9 @@ class SixDOFDynamics(BaseControlAffineODESolverDynamics):
         ang_vel_limit=ANG_VEL_LIMIT_DEFAULT,
         n=N_DEFAULT,
         body_frame_thrust=True,
-        state_max: Union[float, np.ndarray] = None,
-        state_min: Union[float, np.ndarray] = None,
-        angle_wrap_centers: np.ndarray = None,
+        state_max: Union[float, np.ndarray, None] = None,
+        state_min: Union[float, np.ndarray, None] = None,
+        angle_wrap_centers: Union[np.ndarray, None] = None,
         **kwargs
     ):
         self.m = m  # kg

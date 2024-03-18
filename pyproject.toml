@@ -25,7 +25,7 @@ python = ">=3.9, <3.13"
 numpy = "^1.23.5"
 jax = { version = "0.4.3", extras = ["cpu"], optional = true }
 scipy = ">=1.10.0"
-pydantic = "^1.9.2"
+pydantic = "^2.6.2"
 pint = "^0.22"
 
 [tool.poetry.extras]
@@ -35,7 +35,7 @@ jax = ["jax"]
 pylint = "2.15.4"
 flake8 = "3.9.2"
 yapf = "^0.40.0"
-mypy = "0.930"
+mypy = "^1.8.0"
 isort = "5.9.3"
 bashate = "^2.1.0"
 velin = "^0.0.11"

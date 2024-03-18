@@ -52,10 +52,7 @@ def clf16(s, x, u, const, model='stevens', adjust_cy=True):
     x[12] = tgear(u[0])
     [x, u] = conf16(x, u, const)
 
-    # we just want the derivative
-    subf16 = lambda x, u: subf16_model(x, u, model, adjust_cy)[0]  # noqa: E731
-
-    xd = subf16(x, u)
+    xd = subf16_model(x, u, model, adjust_cy)[0]  # noqa: E731
 
     #
     # Steady Level flight

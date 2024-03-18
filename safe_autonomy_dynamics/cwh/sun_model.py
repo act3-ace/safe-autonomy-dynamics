@@ -17,7 +17,8 @@ from typing import Union
 import numpy as np
 import pint
 import scipy
-from pydantic import validator
+from pydantic import AfterValidator
+from typing_extensions import Annotated
 
 from safe_autonomy_dynamics.base_models import (
     BaseEntity,
@@ -43,10 +44,7 @@ class SunEntityValidator(BaseEntityValidator):
     ValueError
         Improper list lengths for parameter 'theta'
     """
-    theta: Union[float, pint.Quantity] = 0
-
-    # validators
-    _unit_validator_theta = validator('theta', allow_reuse=True)(build_unit_conversion_validator_fn('radians'))
+    theta: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('radians'))] = 0
 
 
 class SunEntity(BaseEntity):

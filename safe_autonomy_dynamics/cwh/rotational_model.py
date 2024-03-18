@@ -18,8 +18,9 @@ from typing import Union
 
 import numpy as np
 import pint
-from pydantic import validator
+from pydantic import AfterValidator
 from scipy.spatial.transform import Rotation
+from typing_extensions import Annotated
 
 from safe_autonomy_dynamics.base_models import (
     BaseControlAffineODESolverDynamics,
@@ -62,18 +63,12 @@ class CWHRotation2dSpacecraftValidator(BaseEntityValidator):
     ValueError
         Improper list lengths for parameters 'x', 'y', 'theta', 'x_dot', 'y_dot', 'theta_dot'
     """
-    x: Union[float, pint.Quantity] = 0
-    y: Union[float, pint.Quantity] = 0
-    theta: Union[float, pint.Quantity] = 0
-    x_dot: Union[float, pint.Quantity] = 0
-    y_dot: Union[float, pint.Quantity] = 0
-    wz: Union[float, pint.Quantity] = 0
-
-    # validators
-    _unit_validator_position = validator('x', 'y', allow_reuse=True)(build_unit_conversion_validator_fn('meters'))
-    _unit_validator_theta = validator('theta', allow_reuse=True)(build_unit_conversion_validator_fn('radians'))
-    _unit_validator_velocity = validator('x_dot', 'y_dot', allow_reuse=True)(build_unit_conversion_validator_fn('meters/second'))
-    _unit_validator_wz = validator('wz', allow_reuse=True)(build_unit_conversion_validator_fn('radians/second'))
+    x: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters'))] = 0
+    y: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters'))] = 0
+    theta: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('radians'))] = 0
+    x_dot: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters/second'))] = 0
+    y_dot: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('meters/second'))] = 0
+    wz: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('radians/second'))] = 0
 
 
 class CWHRotation2dSpacecraft(BaseRotationEntity):  # pylint: disable=too-many-public-methods
@@ -393,11 +388,11 @@ class CWHRotation2dDynamics(BaseControlAffineODESolverDynamics):
         ang_acc_limit=ANG_ACC_LIMIT_DEFAULT,
         ang_vel_limit=ANG_VEL_LIMIT_DEFAULT,
         n=N_DEFAULT,
-        state_min: Union[float, np.ndarray] = None,
-        state_max: Union[float, np.ndarray] = None,
-        state_dot_min: Union[float, np.ndarray] = None,
-        state_dot_max: Union[float, np.ndarray] = None,
-        angle_wrap_centers: np.ndarray = None,
+        state_min: Union[float, np.ndarray, None] = None,
+        state_max: Union[float, np.ndarray, None] = None,
+        state_dot_min: Union[float, np.ndarray, None] = None,
+        state_dot_max: Union[float, np.ndarray, None] = None,
+        angle_wrap_centers: Union[np.ndarray, None] = None,
         **kwargs
     ):
         self.m = m  # kg

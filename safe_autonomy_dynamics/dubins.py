@@ -17,8 +17,9 @@ from typing import Union
 
 import numpy as np
 import pint
-from pydantic import validator
+from pydantic import AfterValidator
 from scipy.spatial.transform import Rotation
+from typing_extensions import Annotated
 
 from safe_autonomy_dynamics.base_models import (
     BaseControlAffineODESolverDynamics,
@@ -52,16 +53,11 @@ class BaseDubinsAircraftValidator(BaseEntityValidator):
         Improper list length for parameter 'position'
     """
 
-    x: Union[float, pint.Quantity] = 0
-    y: Union[float, pint.Quantity] = 0
-    z: Union[float, pint.Quantity] = 0
-    heading: Union[float, pint.Quantity] = 0
-    v: Union[float, pint.Quantity] = 200
-
-    # validators
-    _unit_validator_position = validator('x', 'y', 'z', allow_reuse=True)(build_unit_conversion_validator_fn('feet'))
-    _unit_validator_heading = validator('heading', allow_reuse=True)(build_unit_conversion_validator_fn('radians'))
-    _unit_validator_velocity = validator('v', allow_reuse=True)(build_unit_conversion_validator_fn('ft/s'))
+    x: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('feet'))] = 0
+    y: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('feet'))] = 0
+    z: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('feet'))] = 0
+    heading: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('radians'))] = 0
+    v: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('ft/s'))] = 200
 
 
 class BaseDubinsAircraft(BaseEntity):
@@ -435,11 +431,8 @@ class Dubins3dAircraftValidator(BaseDubinsAircraftValidator):
     roll : float or pint.Quantity
         Initial roll value of Dubins3dAircraft in radians
     """
-    gamma: Union[float, pint.Quantity] = 0
-    roll: Union[float, pint.Quantity] = 0
-
-    # validators
-    _unit_validator_gamma_roll = validator('gamma', 'roll', allow_reuse=True)(build_unit_conversion_validator_fn('radians'))
+    gamma: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('radians'))] = 0
+    roll: Annotated[Union[float, pint.Quantity], AfterValidator(build_unit_conversion_validator_fn('radians'))] = 0
 
 
 class Dubins3dAircraft(BaseDubinsAircraft):

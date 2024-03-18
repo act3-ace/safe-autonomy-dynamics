@@ -58,7 +58,7 @@ class Freezable:
 
     def __setattr__(self, key, value):
         if self._frozen and not hasattr(self, key):
-            raise TypeError("{} does not contain attribute '{}' (object was frozen)".format(self, key))
+            raise TypeError(f"{self} does not contain attribute '{key}' (object was frozen)")
 
         object.__setattr__(self, key, value)
 
@@ -153,30 +153,29 @@ def printmat(mat, main_label, row_label_str, col_label_str):
 
     width = 7
 
-    width = max(width, max([len(l) for l in col_labels]))  # noqa: E741
+    width = max(width, max(len(l) for l in col_labels))  # noqa: E741
 
     if row_labels is not None:
-        width = max(width, max([len(l) for l in row_labels]))  # noqa: E741
+        width = max(width, max(len(l) for l in row_labels))  # noqa: E741
 
     width += 1
 
     # add blank space for row labels
     if row_labels is not None:
-        print("{: <{}}".format('', width), end='')
+        print(f"{'': <{width}}", end='')
 
     # print col lables
     for col_label in col_labels:
         if len(col_label) > width:
             col_label = col_label[:width]
 
-        print("{: >{}}".format(col_label, width), end='')
+        print(f"{col_label: >{width}}", end='')
 
     print('')
 
     if row_labels is not None:
         assert len(row_labels) == mat.shape[0], \
-            "row labels (len={}) expected one element for each row of the matrix ({})".format(
-            len(row_labels), mat.shape[0])
+            f"row labels (len={len(row_labels)}) expected one element for each row of the matrix ({mat.shape[0]})"
 
     for r in range(mat.shape[0]):
         row = mat[r]
@@ -187,11 +186,11 @@ def printmat(mat, main_label, row_label_str, col_label_str):
             if len(label) > width:
                 label = label[:width]
 
-            print("{:<{}}".format(label, width), end='')
+            print(f"{label:<{width}}", end='')
 
         for num in row:
             # print("{:#<{}}".format(num, width), end='')
-            print("{:{}.{}g}".format(num, width, width - 3), end='')
+            print(f"{num:{width}.{width - 3}g}", end='')
 
         print('')
 
@@ -301,18 +300,18 @@ class SafetyLimitsVerifier(Freezable):
 
             if self.safety_limits.altitude is not None:
                 assert self.safety_limits.altitude[0] <= alt <= self.safety_limits.altitude[1], \
-                    "Altitude ({}) is not within the specified limits ({}, {}).".format(
-                        alt, self.safety_limits.altitude[0], self.safety_limits.altitude[1])
+                    f"Altitude ({alt}) is not within the specified limits \
+                        ({self.safety_limits.altitude[0]}, {self.safety_limits.altitude[1]})."
 
             if self.safety_limits.Nz is not None:
                 assert self.safety_limits.Nz[0] <= nz <= self.safety_limits.Nz[1], \
-                    "Nz ({}) is not within the specified limits ({}, {}).".format(
-                        nz, self.safety_limits.Nz[0], self.safety_limits.Nz[1])
+                    f"Nz ({nz}) is not within the specified limits \
+                        ({self.safety_limits.Nz[0]}, {self.safety_limits.Nz[1]})."
 
             if self.safety_limits.alpha is not None:
                 assert self.safety_limits.alpha[0] <= alpha <= self.safety_limits.alpha[1], \
-                    "alpha ({}) is not within the specified limits ({}, {}).".format(
-                        nz, self.safety_limits.alpha[0], self.safety_limits.alpha[1])
+                    f"alpha ({nz}) is not within the specified limits \
+                        ({self.safety_limits.alpha[0]}, {self.safety_limits.alpha[1]})."
 
             if self.safety_limits.psMaxAccelDeg is not None:
                 assert ps <= self.safety_limits.psMaxAccelDeg, "Ps is not less than the specified max."
