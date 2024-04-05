@@ -23,7 +23,7 @@ packages = [
 [tool.poetry.dependencies]
 python = ">=3.9, <3.13"
 numpy = "^1.23.5"
-jax = { version = "0.4.3", extras = ["cpu"], optional = true }
+jax = { version = "0.4.26", extras = ["cpu"], optional = true }
 scipy = ">=1.10.0"
 pydantic = "^2.6.2"
 pint = "^0.22"
