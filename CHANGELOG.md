@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/act3-ace/safe-autonomy-dynamics/compare/v1.2.2...v1.2.3) (2024-04-05)
+
+
+### Bug Fixes
+
+* **dependencies:** Update jax from unavailbale 0.4.3 to 0.4.26 ([4656d5b](https://github.com/act3-ace/safe-autonomy-dynamics/commit/4656d5b32e0fe8b25db9a79343fc9d3cd84f384d))
+
 ## [1.2.2](https://github.com/act3-ace/safe-autonomy-dynamics/compare/v1.2.1...v1.2.2) (2024-03-18)
 
 
