@@ -9,6 +9,7 @@ on:
 env:
   SRC_DIR: safe_autonomy_dynamics
   PY_VER: "3.10"
+  POETRY_VERSION: "1.7.1"
 
 jobs:
   lint:
@@ -23,7 +24,7 @@ jobs:
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
-          version: 1.7.1
+          version: ${{ env.POETRY_VERSION }}
           virtualenvs-create: false
       - name: Install Dependencies
         run: poetry install --no-interaction -E jax
@@ -53,7 +54,7 @@ jobs:
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
-          version: 1.7.1
+          version: ${{ env.POETRY_VERSION }}
           virtualenvs-create: false
       - name: Install Dependencies
         run: poetry install --no-interaction --no-root -E jax --with=test
@@ -85,7 +86,7 @@ jobs:
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
-          version: 1.7.1
+          version: ${{ env.POETRY_VERSION }}
           virtualenvs-create: false
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v4
@@ -118,7 +119,7 @@ jobs:
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
-          version: 1.7.1
+          version: ${{ env.POETRY_VERSION }}
           virtualenvs-create: false
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v4
